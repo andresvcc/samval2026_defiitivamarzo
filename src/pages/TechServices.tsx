@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Code, Smartphone, Cpu, Cloud, CheckCircle, ArrowRight, BarChart3, ShieldCheck, Zap } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import SEO from '../components/SEO';
+import { sendQuote } from '../services/quote';
 
 const TechServices: React.FC = () => {
   const { t } = useTranslation();
@@ -15,13 +16,45 @@ const TechServices: React.FC = () => {
     message: ''
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert(t('tech_services_page.form_success'));
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      await sendQuote(formData);
+      setSubmitStatus('success');
+      // Limpiar el formulario
+      setFormData({
+        name: '',
+        company: '',
+        email: '',
+        serviceType: 'web',
+        message: ''
+      });
+
+      // Mostrar mensaje de éxito por 5 segundos
+      setTimeout(() => {
+        setSubmitStatus('idle');
+      }, 5000);
+    } catch (error) {
+      console.error('Error:', error);
+      setSubmitStatus('error');
+
+      // Ocultar mensaje de error después de 5 segundos
+      setTimeout(() => {
+        setSubmitStatus('idle');
+      }, 5000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const services = [
@@ -288,8 +321,41 @@ const TechServices: React.FC = () => {
               </div>
 
               <div className="text-center pt-4">
-                <button type="submit" className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold rounded-lg hover:from-blue-700 hover:to-blue-600 transition-all shadow-lg transform hover:-translate-y-1 w-full md:w-auto">
-                  {t('tech_services_page.form_labels.submit_btn')} <ArrowRight size={20} className="ml-2" />
+                {submitStatus === 'success' && (
+                  <div className="mb-4 p-4 bg-green-500/20 border border-green-500 rounded-lg text-green-100">
+                    <p className="font-semibold">✅ ¡Cotización enviada exitosamente!</p>
+                    <p className="text-sm mt-1">Te contactaremos pronto.</p>
+                  </div>
+                )}
+
+                {submitStatus === 'error' && (
+                  <div className="mb-4 p-4 bg-red-500/20 border border-red-500 rounded-lg text-red-100">
+                    <p className="font-semibold">❌ Error al enviar la cotización</p>
+                    <p className="text-sm mt-1">Por favor, intenta nuevamente o contáctanos directamente.</p>
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className={`inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold rounded-lg transition-all shadow-lg transform w-full md:w-auto ${isSubmitting
+                      ? 'opacity-50 cursor-not-allowed'
+                      : 'hover:from-blue-700 hover:to-blue-600 hover:-translate-y-1'
+                    }`}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Enviando...
+                    </>
+                  ) : (
+                    <>
+                      {t('tech_services_page.form_labels.submit_btn')} <ArrowRight size={20} className="ml-2" />
+                    </>
+                  )}
                 </button>
               </div>
             </form>
