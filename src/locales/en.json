@@ -1,0 +1,497 @@
+{
+    "seo": {
+        "home": {
+            "title": "SAMVAL Foundation | Tech Innovation with Social Impact",
+            "description": "Empowering vulnerable territories through STEAM education, robotics, and AI. Discover our social projects in the Sierra Nevada."
+        },
+        "about": {
+            "title": "About Us | SAMVAL Foundation - Territorial Technology",
+            "description": "Learn about the history, mission, and vision of the SAMVAL Foundation. Senior engineering serving the community."
+        },
+        "projects": {
+            "title": "Social Projects | SAMVAL Impact Ecosystem",
+            "description": "Explore our initiatives: International Medical Mission, Arhuaco Robotics, and BiblioBurro 2.0. Territorial innovation."
+        },
+        "services": {
+            "title": "Tech Services | Purpose-Driven Software Engineering",
+            "description": "Web development, AI, and senior consulting. By hiring us, you directly fund digital inclusion in Colombia."
+        },
+        "contact": {
+            "title": "Contact | Join the SAMVAL Transformation",
+            "description": "Contact us for partnerships, donations, or tech services. Based in Barranquilla, impacting all of Colombia."
+        }
+    },
+    "navbar": {
+        "title": "SAMVAL FOUNDATION",
+        "tagline": "Technology that respects the territory",
+        "home": "Home",
+        "about": "About Us",
+        "projects": "Social Projects",
+        "services": "Tech Services",
+        "contact": "Contact",
+        "request_software": "Request Software",
+        "donate": "Donate"
+    },
+    "social_feed": {
+        "tag": "@fundacionsamval",
+        "title": "Follow our impact <1>in real time</1>",
+        "subtitle": "Join our community and witness how technology transforms lives in every corner of Colombia.",
+        "view_profile": "View Profile",
+        "posts": {
+            "p1": "Transforming the future through robotics in the Sierra Nevada.",
+            "p2": "Our STEAM labs reaching the most remote areas.",
+            "p3": "Territorial education: Respecting our roots.",
+            "p4": "Partnerships that change lives. Thanks to all our partners."
+        }
+    },
+    "home": {
+        "hero_tagline": "STEAM EDUCATION AND INNOVATION FOR TERRITORIAL PEACE",
+        "hero_title": "Technology that respects the territory",
+        "hero_desc": "We are facilitators of change, transforming realities through consulting, engineering, and education projects.",
+        "hero_bold": "We work for the digital inclusion of vulnerable communities.",
+        "cta_invest": "Invest in Impact",
+        "cta_services": "Tech Solutions",
+        "mission_title": "Our Essence",
+        "mission_subtitle": "The Samval Foundation bridges high-level engineering with sustainable community development.",
+        "mission_card_title": "Educational Purpose",
+        "mission_card_desc": "Democratize access to STEAM education through contextualized programs that strengthen local capacities and generate sustainable development opportunities in vulnerable territories.",
+        "vision_card_title": "Vision",
+        "vision_card_desc": "To be recognized as leaders in transformative education connecting innovation, territory, and peace, positively impacting more than 100,000 people by 2030.",
+        "values_card_title": "Social Commitment",
+        "values_card_desc": "Each software developed funds robotics and programming programs in the Sierra Nevada.",
+        "impact_title": "Impact that can be measured",
+        "impact_desc": "We don't just write code, we build futures. These are our accumulated social impact figures.",
+        "impact_stats": {
+            "kids": "Impacted Students",
+            "families": "Benefited Families",
+            "projects": "Deployed Projects",
+            "volunteers": "Active Volunteers"
+        },
+        "services_title": "Purpose-Driven Engineering",
+        "services_desc": "We offer cutting-edge technological services for companies seeking excellence and social responsibility.",
+        "services_list": {
+            "web": "Web Platform Development",
+            "mobile": "Mobile Applications",
+            "ai": "AI & Automation",
+            "consulting": "Strategic Consulting"
+        },
+        "view_details": "View Details",
+        "cta_bottom_title": "Every line of code supports a dream in the Sierra Nevada",
+        "cta_bottom_desc": "Ready to be part of the digital transformation with social impact?",
+        "cta_donate_now": "Donate Now",
+        "cta_volunteer": "Be a Volunteer"
+    },
+    "about_page": {
+        "hero_tag": "OUR DNA",
+        "hero_title": "More than a foundation,<br /><1>a technological bridge</1>",
+        "hero_desc": "We were born with the conviction that <1>Software Engineering</1> can be the engine of transformation for Colombia's most remote communities.",
+        "cta_schedule": "Schedule Consulting",
+        "cta_call": "Consulting Call",
+        "cta_response": "Quick response via WhatsApp",
+        "stats": {
+            "territories": "Territories Reached",
+            "weeks": "Weeks of Impact",
+            "included": "Included Communities",
+            "ready": "Technology Ready"
+        },
+        "how_title": "Territorial Essence",
+        "how_desc": "We co-design challenges with local leaders that integrate regional languages, histories, and trades, prioritizing the local environment before introducing digital tools.",
+        "cards": {
+            "culture_title": "Cultural Relevance",
+            "culture_desc": "We adapt technology to local languages and sociocultural contexts. Innovation should not erase identity; it must enhance it.",
+            "measure_title": "SAMVAL Methodology",
+            "measure_desc": "Based on computational thinking from age 5, with tangible robotics to foster purpose-driven creation.",
+            "support_title": "Installed Capacity",
+            "support_desc": "We train local teachers and facilitators to ensure technology remains and evolves within the community."
+        },
+        "evolution_title": "Institutional Information",
+        "evolution_desc": "Fundación SAMVAL - NIT: 901.036.033-0 | Entity dedicated to science, technology, and innovation in Barranquilla and vulnerable territories.",
+        "timeline": {
+            "2019_title": "First Steps",
+            "2019_desc": "Start of basic robotics workshops in rural schools.",
+            "2021_title": "Consolidation",
+            "2021_desc": "Alliances with the private sector for technical scholarships.",
+            "2024_title": "SAMVAL Milestone",
+            "2024_desc": "Launch of the tech services platform to fund the impact."
+        },
+        "cta_final_title": "Want to know more?",
+        "cta_final_desc": "We are ready to tell you how your company can be an ally of technology with a soul.",
+        "cta_final_btn": "Talk to us"
+    },
+    "social_programs_page": {
+        "tag": "IMPACT ECOSYSTEM",
+        "title": "Projects that <1>respect</1> the territory",
+        "subtitle": "We combine ancestral knowledge and cutting-edge technology for social transformation in Colombia.",
+        "projects": {
+            "p1_title": "International Medical Mission",
+            "p1_cat": "COMMUNITY HEALTH",
+            "p1_desc": "We manage visits from medical students from US universities on missions across the country. We provide preventive care and basic medicines to vulnerable communities.",
+            "p1_impact": "Integral care in territory",
+            "p2_title": "Arhuaco Robotics",
+            "p2_cat": "ANCESTRAL EDUCATION",
+            "p2_desc": "We bring technology to the Sierra Nevada de Santa Marta. We use Thymio robots to teach programming while respecting culture and territory.",
+            "p2_impact": "Rural STEAM education",
+            "p3_title": "BiblioBurro 2.0",
+            "p3_cat": "OFFLINE AI",
+            "p3_desc": "We install servers with offline multimodal AI models that act as intelligent tutors in areas without internet access.",
+            "p3_impact": "AI at the service of the field"
+        },
+        "testimonials_title": "Voices of the Territory",
+        "testimonials": {
+            "t1_quote": "Seeing our children program Thymio robots in the middle of the mountains is a dream. Technology doesn't take away who we are; it helps us show it.",
+            "t1_author": "Arhuaco Leader",
+            "t1_role": "Sierra Nevada",
+            "t2_quote": "BiblioBurro's offline AI has allowed youth without internet to interact with global knowledge instantly.",
+            "t2_author": "Rural Teacher",
+            "t2_role": "Magdalena"
+        }
+    },
+    "tech_services_page": {
+        "hero_title": "Senior Technological Solutions",
+        "hero_desc": "We develop world-class software that funds the social development of Colombia.",
+        "why_title": "Why choose us?",
+        "why_list": {
+            "senior_team": "Senior engineering team with experience in US and European markets.",
+            "social_impact": "100% of our profits are reinvested in social projects.",
+            "agile_methodology": "Continuous delivery, transparent communication, and high-quality code.",
+            "tax_benefits": "Donation certifications for hiring social impact services."
+        },
+        "excellence_quote": "Technical excellence is our language; social impact is our purpose.",
+        "solutions_title": "Our Solutions",
+        "solutions": {
+            "web_title": "Web Development",
+            "web_desc": "Scalable platforms, custom CRMs, and progressive web applications.",
+            "web_features": [
+                "React/Next.js",
+                "Cloud Architectures",
+                "SEO & Performance"
+            ],
+            "mobile_title": "Mobile Apps",
+            "mobile_desc": "Native and hybrid experiences with a high focus on UX/UI.",
+            "mobile_features": [
+                "React Native",
+                "iOS / Android",
+                "Offline Mode"
+            ],
+            "ai_title": "AI & Data Science",
+            "ai_desc": "Predictive models and intelligent process automation.",
+            "ai_features": [
+                "Python / TensorFlow",
+                "NLP",
+                "Data Visualization"
+            ],
+            "cloud_title": "Cloud & DevOps",
+            "cloud_desc": "Secure, resilient, and high-availability infrastructure.",
+            "cloud_features": [
+                "AWS / GCP / Azure",
+                "Kubernetes",
+                "Automated CI/CD"
+            ]
+        },
+        "cases_tag": "Success Stories",
+        "cases_title": "Our Technological Footprint",
+        "cases_desc": "Learn how we've helped local and global companies reach their technological goals.",
+        "cases": {
+            "tirrty_title": "Tirrty Marketplace",
+            "tirrty_amount": "Project: $25k USD",
+            "tirrty_desc": "Scalable platform for international commerce with complex payment integration.",
+            "tirrty_impact_tech": "SOLUTION:",
+            "tirrty_tech_list": [
+                "Web Architecture",
+                "Payment Gateway",
+                "Admin Dashboard"
+            ],
+            "tirrty_benefit": "We optimized load time by 40%, increasing sales.",
+            "agro_title": "Cattle Ally",
+            "agro_tag": "Cattle Ally",
+            "agro_desc": "Mobile app for inventory control and animal health without the need for constant internet.",
+            "agro_impact_eng": "ENGINEERING:",
+            "agro_tech_list": [
+                "React Native",
+                "Offline Sync",
+                "Geolocation"
+            ],
+            "agro_impact": "+1200 cattle monitored in real-time in rural areas.",
+            "robotics_title": "Barranquilla Robotics",
+            "robotics_tag": "Barranquilla District",
+            "robotics_desc": "Management software for the largest educational innovation program in the district.",
+            "robotics_impact_social": "SOCIAL IMPACT:",
+            "robotics_tech_list": [
+                "Educational Management",
+                "Analytics",
+                "Student Portal"
+            ],
+            "robotics_goal": "We ensure the learning traceability of 45,000 children."
+        },
+        "form_title": "Request a Quote",
+        "form_success": "Message sent successfully! We will contact you soon.",
+        "form_labels": {
+            "name": "Contact Name",
+            "name_placeholder": "Your name...",
+            "company": "Company",
+            "company_placeholder": "Your company name...",
+            "email": "Email Address",
+            "email_placeholder": "email@company.com",
+            "service_type": "Service Type",
+            "service_options": {
+                "web": "Web Development",
+                "mobile": "Mobile App",
+                "ai": "AI / Data",
+                "custom": "Other / Consulting"
+            },
+            "project_desc": "Project Description",
+            "project_desc_placeholder": "Briefly tell us what you need to develop...",
+            "submit_btn": "Send Request"
+        }
+    },
+    "get_involved_page": {
+        "esal_tag": "SPECIAL TAX REGIME (ESAL)",
+        "hero_title": "Investment and Social Support",
+        "hero_desc": "As a <1>Special Regime</1> entity, we certify your contribution so you obtain legal tax benefits while we transform the territory.",
+        "tabs": {
+            "donate": "Companies and Individuals",
+            "volunteer": "Be a Volunteer"
+        },
+        "invest_project": {
+            "tag": "PURPOSE-DRIVEN INVESTMENT 2026",
+            "title": "STEAM Training Project: Arhuaco Community",
+            "description": "A comprehensive <1>12-week</1> program designed to strengthen competencies in Science, Technology, Engineering, Arts, and Mathematics for 30 children in the Sierra Nevada (Vereda Don Diego).",
+            "details": {
+                "equipment": "<0>Equipment:</0> 30 Thymio Wireless robots.",
+                "capacity": "<0>Capacity:</0> 3 localized trained teachers.",
+                "sustainability": "<0>Sustainability:</0> Permanent equipment.",
+                "impact": "<0>Impact:</0> 3 public schools benefited."
+            },
+            "why_invest_title": "WHY INVEST IN THIS PROJECT?",
+            "reasons": [
+                "Reputational Return (CSR)",
+                "SDG Alignment (Quality Education)",
+                "Operational Viability and Transparency"
+            ]
+        },
+        "budget_card": {
+            "total_investment": "TOTAL INVESTMENT",
+            "total_amount": "$240M COP",
+            "description": "Consolidated budget covering technology, specialized human talent, and logistics.",
+            "tax_savings": "TAX SAVINGS (ART. 257 ET)",
+            "discount": "25% OFF",
+            "net_cost": "NET ECONOMIC COST",
+            "net_amount": "$180M COP",
+            "cta_button": "Request Technical Proposal"
+        },
+        "breakdown": {
+            "tech": {
+                "title": "TECHNOLOGY ($63M)",
+                "desc": "30 Thymio robots, expansion kits, and permanent construction materials."
+            },
+            "talent": {
+                "title": "TALENT ($105M)",
+                "desc": "STEAM specialists, training of 3 local teachers, and academic management."
+            },
+            "logistics": {
+                "title": "LOGISTICS ($25M)",
+                "desc": "Space conditioning, transportation, and 12-week catering."
+            },
+            "eval": {
+                "title": "EVALUATION ($7M)",
+                "desc": "Monitoring with success indicators and 12-month post-project follow-up."
+            }
+        },
+        "personal_contributions": {
+            "title": "Personal Contributions",
+            "description": "You can also be part of it. We invite individuals to fund <1>advanced education in IA and technology</1> for groups the world has left behind.",
+            "groups": [
+                "Afro and Raizal Communities",
+                "Single Mothers / Female heads of household",
+                "LGBTQ+ Collectives",
+                "Seniors (New Skills in AI)"
+            ],
+            "monthly_btn": "Donate Monthly",
+            "monthly_note": "Your monthly contribution provides a scholarship for a local talent."
+        },
+        "impact_collection": {
+            "title": "Impact by Collection",
+            "description": "We fund high-level AI labs and intensive bootcamps. Global contributions are used for the purchase of servers and licenses for offline learning.",
+            "items": [
+                "Training in LLMs and Generative AI",
+                "Web Development Certification",
+                "Robotics Kits for Youth"
+            ],
+            "global_btn": "Make a Global Gift"
+        },
+        "legal_note": "<0>Legal Note:</0> Samval Foundation is a non-profit entity qualified in the <2>Special Tax Regime</2>. All donors receive the respective donation certificate valid before DIAN for the use of legal benefits (Art. 125 and 257 E.T.).",
+        "volunteer_form": {
+            "title": "Join as a Volunteer",
+            "subtitle": "Your knowledge can change a life. Tell us what you know how to do.",
+            "area_label": "Area of Interest",
+            "area_options": {
+                "eng": "Engineering / Code",
+                "edu": "Education / Workshops",
+                "soc": "Social Work",
+                "health": "Health / Well-being",
+                "comms": "Communications / Design"
+            },
+            "name_label": "Full Name",
+            "name_placeholder": "John Doe",
+            "contact_label": "WhatsApp / Phone",
+            "contact_placeholder": "+57 300...",
+            "availability_label": "How many hours per month?",
+            "availability_placeholder": "e.g., 10 hours",
+            "submit_btn": "Submit Application"
+        }
+    },
+    "contact_page": {
+        "title": "Get in Touch",
+        "info_title": "Contact Information",
+        "location_title": "Our Headquarters",
+        "location_desc": "Km 25 Way to Sierra Nevada<br />Santa Marta, Magdalena, Colombia",
+        "phone_title": "Phone / WhatsApp",
+        "email_title": "Email Addresses",
+        "form_title": "Send us a Message",
+        "form_labels": {
+            "subject": "Subject",
+            "name": "Name",
+            "email": "Email",
+            "message": "Message"
+        },
+        "subject_options": {
+            "general": "General Inquiry",
+            "corporate": "Corporate Partnerships",
+            "press": "Press & Media",
+            "volunteer": "Volunteering"
+        },
+        "submit_btn": "Send Message"
+    },
+    "privacy_page": {
+        "title": "Privacy Policy",
+        "last_updated": "Last updated: January 1, 2024",
+        "p1": "At SAMVAL Foundation, we take your data privacy very seriously. This policy describes how we collect and use your information.",
+        "p2": "We collect personal information only when you voluntarily provide it through our contact or donation forms.",
+        "p3": "Your data is used exclusively for the foundation's purposes and is never shared with third parties without your explicit consent."
+    },
+    "terms_page": {
+        "title": "Terms of Use",
+        "last_updated": "Last updated: January 1, 2024",
+        "p1": "By accessing and using this website, you agree to comply with the following terms and conditions.",
+        "p2": "All content on this site is the property of SAMVAL Foundation and is protected by intellectual property laws.",
+        "p3": "Unauthorized use of any material on this site is strictly prohibited."
+    },
+    "footer": {
+        "desc": "Senior software engineering that funds technological and social development in Colombia's territories.",
+        "tagline": "Innovation that respects the territory",
+        "mission": "Our mission is to democratize access to science and technology in vulnerable communities.",
+        "foundation_title": "Foundation",
+        "tech_title": "Tech Services",
+        "contact_title": "Contact",
+        "links": {
+            "about": "About Us",
+            "programs": "Social Programs",
+            "impact": "Our Impact",
+            "volunteer": "Volunteer"
+        },
+        "services": {
+            "web": "Web Development",
+            "ai": "IA & Data",
+            "consulting": "Cloud Consulting",
+            "cases": "Success Cases"
+        },
+        "rights": "All rights reserved.",
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Use"
+    },
+    "admin": {
+        "login": {
+            "title": "Admin Panel",
+            "email": "Email",
+            "password": "Password",
+            "btn": "Login",
+            "error": "Invalid credentials (Demo: admin@samval.org / admin123)",
+            "logging_in": "Logging in..."
+        },
+        "layout": {
+            "dashboard": "Dashboard",
+            "partners": "Partners",
+            "financials": "Financials",
+            "photos": "Photos / Gallery",
+            "team": "Team",
+            "logout": "Logout",
+            "loading": "Loading..."
+        },
+        "dashboard": {
+            "welcome": "Welcome to SAMVAL Manager",
+            "subtitle": "Manage visual content and foundation reports.",
+            "stats": {
+                "photos": "Photos in Gallery",
+                "partners": "Registered Partners",
+                "team": "Team Members"
+            },
+            "shortcuts": "Shortcuts",
+            "view_all": "View all"
+        },
+        "photos": {
+            "title": "Photo Management",
+            "add": "Upload New Photo",
+            "url": "Image URL",
+            "desc": "Description / Caption",
+            "category": "Category",
+            "save": "Save Photo",
+            "empty": "No photos registered.",
+            "delete": "Delete"
+        },
+        "financials": {
+            "title": "Financial Statements",
+            "add": "Add New Report",
+            "year": "Year",
+            "file": "File (PDF)",
+            "save": "Upload Report"
+        },
+        "partners": {
+            "title": "Partner Management",
+            "add": "Add New Partner"
+        },
+        "team": {
+            "title": "Team Management",
+            "add": "Add Member",
+            "role": "Role / Position",
+            "bio": "Biography"
+        }
+    },
+    "data": {
+        "photos": {
+            "1": "Main Banner - Children learning",
+            "2": "Mission - Teamwork",
+            "impact_year": "Impact 2024",
+            "real_learning": "Real Learning"
+        },
+        "financials": {
+            "1": "Management Report 2025",
+            "2": "Financial Statements 2024"
+        },
+        "team": {
+            "1": {
+                "role": "Executive Director",
+                "bio": "Engineer with over 10 years of experience in social project management and technology."
+            },
+            "2": {
+                "role": "Tech Lead",
+                "bio": "Full Stack Developer passionate about teaching and open source."
+            },
+            "3": {
+                "role": "Field Coordinator",
+                "bio": "Sociologist expert in community work and participatory methodologies."
+            }
+        },
+        "sections": {
+            "home": "Home Page",
+            "hero": "Hero Banner",
+            "mission": "Mission Image",
+            "vision": "Vision Image",
+            "projects": "Social Projects",
+            "gallery": "Project Gallery",
+            "tech": "Tech Services",
+            "web": "Web Image",
+            "mobile": "Mobile Image",
+            "ai": "AI Image"
+        }
+    }
+}

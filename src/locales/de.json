@@ -1,0 +1,482 @@
+{
+    "seo": {
+        "home": {
+            "title": "Stiftung SAMVAL | Technologische Innovation mit sozialer Wirkung",
+            "description": "Wir stärken gefährdete Gebiete durch STEAM-Bildung, Robotik und KI. Erfahren Sie mehr über unsere sozialen Projekte in der Sierra Nevada."
+        },
+        "about": {
+            "title": "Über uns | Stiftung SAMVAL - Territoriale Technologie",
+            "description": "Erfahren Sie mehr über die Geschichte, Mission und Vision der Stiftung SAMVAL. Hochwertiges Engineering im Dienste der Gemeinschaft."
+        },
+        "projects": {
+            "title": "Soziale Projekte | SAMVAL Impact Ecosystem",
+            "description": "Entdecken Sie unsere Initiativen: Internationale Medizinische Mission, Arhuaco-Robotik und BiblioBurro 2.0. Territoriale Innovation."
+        },
+        "services": {
+            "title": "Tech-Services | Zweckorientierte Softwareentwicklung",
+            "description": "Webentwicklung, KI und Senior Consulting. Mit der Beauftragung unserer Dienstleistungen finanzieren Sie direkt die digitale Inklusion in Kolumbien."
+        },
+        "contact": {
+            "title": "Kontakt | Werden Sie Teil der SAMVAL-Transformation",
+            "description": "Kontaktieren Sie uns für Partnerschaften, Spenden oder Tech-Dienstleistungen. Mit Sitz in Barranquilla, tätig in ganz Kolumbien."
+        }
+    },
+    "navbar": {
+        "title": "SAMVAL STIFTUNG",
+        "tagline": "Technologie, die das Territorium respektiert",
+        "home": "Startseite",
+        "about": "Über uns",
+        "projects": "Soziale Projekte",
+        "services": "Tech-Dienstleistungen",
+        "contact": "Kontakt",
+        "request_software": "Software anfordern",
+        "donate": "Spenden"
+    },
+    "social_feed": {
+        "tag": "@fundacionsamval",
+        "title": "Verfolgen Sie unseren Impact <1>in Echtzeit</1>",
+        "subtitle": "Treten Sie unserer Community bei und erleben Sie, wie Technologie das Leben in jedem Winkel Kolumbiens verändert.",
+        "view_profile": "Profil ansehen",
+        "posts": {
+            "p1": "Die Zukunft durch Robotik in der Sierra Nevada gestalten.",
+            "p2": "Unsere STEAM-Labore erreichen die entlegensten Gebiete.",
+            "p3": "Territoriale Bildung: Unsere Wurzeln respektieren.",
+            "p4": "Partnerschaften, die Leben verändern. Danke an alle unsere Partner."
+        }
+    },
+    "home": {
+        "hero_tagline": "STEAM-BILDUNG UND INNOVATION FÜR DEN TERRITORIALEN FRIEDEN",
+        "hero_title": "Technologie, die das Territorium respektiert",
+        "hero_desc": "Wir sind Ermöglicher von Veränderungen und transformieren Realitäten durch Beratung, Engineering und Bildungsprojekte.",
+        "hero_bold": "Wir setzen uns für die digitale Inklusion gefährdeter Gemeinschaften ein.",
+        "cta_invest": "In Impact investieren",
+        "cta_services": "Tech-Lösungen",
+        "mission_title": "Unsere Essenz",
+        "mission_subtitle": "Die Samval-Stiftung verbindet High-Level-Engineering mit nachhaltiger Gemeinschaftsentwicklung.",
+        "mission_card_title": "Bildungszweck",
+        "mission_card_desc": "Wir entwerfen Brücken zwischen fortschrittlicher Technologie und lokalem Wissen, um Gemeinschaften zu stärken.",
+        "vision_card_title": "Lokale Wirkung",
+        "vision_card_desc": "Wir implementieren digitale Infrastrukturen und Lösungen, die die territoriale Kultur respektieren und fördern.",
+        "values_card_title": "Soziales Engagement",
+        "values_card_desc": "Jede entwickelte Software finanziert Robotik- und Programmierungsprogramme in der Sierra Nevada.",
+        "impact_title": "Messbare Wirkung",
+        "impact_desc": "Wir schreiben nicht nur Code, wir bauen Zukunft. Dies sind unsere kumulierten Zahlen zur sozialen Wirkung.",
+        "impact_stats": {
+            "kids": "Erreichte Schüler",
+            "families": "Profitierende Familien",
+            "projects": "Durchgeführte Projekte",
+            "volunteers": "Aktive Freiwillige"
+        },
+        "services_title": "Engineering mit Zweck",
+        "services_desc": "Wir bieten modernste technologische Dienstleistungen für Unternehmen, die Exzellenz und soziale Verantwortung suchen.",
+        "services_list": {
+            "web": "Entwicklung von Webplattformen",
+            "mobile": "Mobile Anwendungen",
+            "ai": "KI & Automatisierung",
+            "consulting": "Strategische Beratung"
+        },
+        "view_details": "Details anzeigen",
+        "cta_bottom_title": "Jede Codezeile unterstützt einen Traum in der Sierra Nevada",
+        "cta_bottom_desc": "Bereit, Teil der digitalen Transformation mit sozialer Wirkung zu sein?",
+        "cta_donate_now": "Jetzt spenden",
+        "cta_volunteer": "Freiwilliger werden"
+    },
+    "about_page": {
+        "hero_tag": "UNSERE DNA",
+        "hero_title": "Mehr als eine Stiftung,<br /><1>eine technologische Brücke</1>",
+        "hero_desc": "Wir sind aus der Überzeugung entstanden, dass <1>Software Engineering</1> der Motor der Transformation für Kolumbiens entlegenste Gemeinschaften sein kann.",
+        "cta_schedule": "Beratung vereinbaren",
+        "cta_response": "Schnelle Antwort via WhatsApp",
+        "stats": {
+            "territories": "Erreichte Gebiete",
+            "weeks": "Wochen der Wirkung",
+            "included": "Eingeschlossene Gemeinschaften",
+            "ready": "Technologie bereit"
+        },
+        "how_title": "Wie machen wir das?",
+        "how_desc": "Wir kombinieren <1>Senior Software</1>-Dienstleistungen für den Privatsektor mit <1>Digitalen Inklusions</1>-Programmen in der Sierra Nevada und der Karibik.",
+        "cards": {
+            "culture_title": "Kultureller Respekt",
+            "culture_desc": "Wir passen die Technologie an die realen Bedürfnisse des Kogui-Volkes und der bäuerlichen Gemeinschaften an.",
+            "measure_title": "Messbare Ergebnisse",
+            "measure_desc": "Jedes Projekt verfügt über technische Erfolgsmetriken und verifizierbare soziale Auswirkungen.",
+            "support_title": "Unterstützung",
+            "support_desc": "Wir liefern nicht nur und gehen; wir bilden lokale Führungskräfte für die Nachhaltigkeit der Lösungen aus."
+        },
+        "evolution_title": "Unsere Entwicklung",
+        "evolution_desc": "Von kleinen Robotikprojekten bis hin zu groß angelegten Software-Implementierungen für Unternehmen.",
+        "timeline": {
+            "2019_title": "Erste Schritte",
+            "2019_desc": "Beginn grundlegender Robotik-Workshops in ländlichen Schulen.",
+            "2021_title": "Konsolidierung",
+            "2021_desc": "Allianzen mit dem Privatsektor für technische Stipendien.",
+            "2024_title": "SAMVAL Meilenstein",
+            "2024_desc": "Start der Tech-Dienstleistungsplattform zur Finanzierung der Wirkung."
+        },
+        "cta_final_title": "Möchten Sie mehr wissen?",
+        "cta_final_desc": "Wir sind bereit Ihnen zu erzählen, wie Ihr Unternehmen ein Verbündeter der Technologie mit Seele sein kann.",
+        "cta_final_btn": "Mit uns sprechen"
+    },
+    "social_programs_page": {
+        "tag": "IMPACT-ÖKOSYSTEM",
+        "title": "Projekte, die das Territorium <1>respektieren</1>",
+        "subtitle": "Wir kombinieren überliefertes Wissen und modernste Technologie für den sozialen Wandel in Kolumbien.",
+        "projects": {
+            "p1_title": "Internationale Medizinische Mission",
+            "p1_cat": "GEMEINSCHAFTSGESUNDHEIT",
+            "p1_desc": "Wir verwalten Besuche von Medizinstudenten US-amerikanischer Universitäten im Rahmen von Missionen im ganzen Land. Wir bieten Präventivmedizin und Basisarzneimittel für gefährdete Gemeinschaften an.",
+            "p1_impact": "Ganzheitliche Versorgung vor Ort",
+            "p2_title": "Arhuaco-Robotik",
+            "p2_cat": "URSPRÜNGLICHE BILDUNG",
+            "p2_desc": "Wir bringen Technologie in die Sierra Nevada de Santa Marta. Wir setzen Thymio-Roboter ein, um Programmierung unter Respektierung von Kultur und Territorium zu lehren.",
+            "p2_impact": "Ländliche STEAM-Bildung",
+            "p3_title": "BiblioBurro 2.0",
+            "p3_cat": "OFFLINE-KI",
+            "p3_desc": "Wir installieren Server mit offline arbeitenden multimodalen KI-Modellen, die als intelligente Tutoren in Gebieten ohne Internet fungieren.",
+            "p3_impact": "KI im Dienste des ländlichen Raums"
+        },
+        "testimonials_title": "Stimmen aus dem Territorium",
+        "testimonials": {
+            "t1_quote": "Unsere Kinder mitten in den Bergen Thymio-Roboter programmieren zu sehen, ist ein Traum. Die Technologie nimmt uns nicht unsere Identität; sie hilft uns, sie zu zeigen.",
+            "t1_author": "Arhuaco-Anführer",
+            "t1_role": "Sierra Nevada",
+            "t2_quote": "Die Offline-KI von BiblioBurro hat es Jugendlichen ohne Internet ermöglicht, sofort mit globalem Wissen zu interagieren.",
+            "t2_author": "Landlehrer",
+            "t2_role": "Magdalena"
+        }
+    },
+    "tech_services_page": {
+        "hero_title": "Senior Technologische Lösungen",
+        "hero_desc": "Wir entwickeln Weltklasse-Software, die die soziale Entwicklung Kolumbiens finanziert.",
+        "why_title": "Warum Sie uns wählen sollten?",
+        "why_list": {
+            "senior_team": "Senior Engineering Team mit Erfahrung auf dem US-amerikanischen und europäischen Markt.",
+            "social_impact": "100 % unserer Gewinne werden in soziale Projekte reinvestiert.",
+            "agile_methodology": "Kontinuierliche Lieferung, transparente Kommunikation und hochwertiger Code.",
+            "tax_benefits": "Spendenbescheinigungen für die Inanspruchnahme von Dienstleistungen mit sozialer Wirkung."
+        },
+        "excellence_quote": "Technische Exzellenz ist unsere Sprache; soziale Wirkung ist unser Zweck.",
+        "solutions_title": "Unsere Lösungen",
+        "solutions": {
+            "web_title": "Webentwicklung",
+            "web_desc": "Skalierbare Plattformen, maßgeschneiderte CRMs und progressive Webanwendungen.",
+            "web_features": [
+                "React/Next.js",
+                "Cloud-Architekturen",
+                "SEO & Performance"
+            ],
+            "mobile_title": "Mobile Apps",
+            "mobile_desc": "Native und hybride Erlebnisse mit hohem Fokus auf UX/UI.",
+            "mobile_features": [
+                "React Native",
+                "iOS / Android",
+                "Offline-Modus"
+            ],
+            "ai_title": "KI & Data Science",
+            "ai_desc": "Prädiktive Modelle und intelligente Prozessautomatisierung.",
+            "ai_features": [
+                "Python / TensorFlow",
+                "NLP",
+                "Datenvisualisierung"
+            ],
+            "cloud_title": "Cloud & DevOps",
+            "cloud_desc": "Sichere, belastbare und hochverfügbare Infrastruktur.",
+            "cloud_features": [
+                "AWS / GCP / Azure",
+                "Kubernetes",
+                "Automatisierte CI/CD"
+            ]
+        },
+        "cases_tag": "Erfolgsgeschichten",
+        "cases_title": "Unser technologischer Fußabdruck",
+        "cases_desc": "Erfahren Sie, wie wir lokalen und globalen Unternehmen geholfen haben, ihre technologischen Ziele zu erreichen.",
+        "cases": {
+            "tirrty_title": "Tirrty Marktplatz",
+            "tirrty_amount": "Projekt: $25k USD",
+            "tirrty_desc": "Skalierbare Plattform für den internationalen Handel mit komplexer Zahlungsintegration.",
+            "tirrty_impact_tech": "LÖSUNG:",
+            "tirrty_tech_list": [
+                "Web-Architektur",
+                "Payment Gateway",
+                "Admin-Dashboard"
+            ],
+            "tirrty_benefit": "Wir haben die Ladezeit um 40 % optimiert und den Umsatz gesteigert.",
+            "agro_title": "Vieh-Verbündeter",
+            "agro_tag": "Vieh-Verbündeter",
+            "agro_desc": "Mobile App zur Bestandskontrolle und Tiergesundheit ohne ständigen Internetbedarf.",
+            "agro_impact_eng": "ENGINEERING:",
+            "agro_tech_list": [
+                "React Native",
+                "Offline-Sync",
+                "Geolokalisierung"
+            ],
+            "agro_impact": "+1200 Rinder in Echtzeit in ländlichen Gebieten überwacht.",
+            "robotics_title": "Robotik Barranquilla",
+            "robotics_tag": "Barranquilla Distrikt",
+            "robotics_desc": "Management-Software für das größte Bildungsinnovationsprogramm im Distrikt.",
+            "robotics_impact_social": "SOZIALE WIRKUNG:",
+            "robotics_tech_list": [
+                "Bildungsmanagement",
+                "Analytics",
+                "Studentenportal"
+            ],
+            "robotics_goal": "Wir stellen die Rückverfolgbarkeit des Lernens von 45.000 Kindern sicher."
+        },
+        "form_title": "Angebot anfordern",
+        "form_success": "Nachricht erfolgreich gesendet! Wir werden uns bald bei Ihnen melden.",
+        "form_labels": {
+            "name": "Name des Kontakts",
+            "name_placeholder": "Ihr Name...",
+            "company": "Unternehmen",
+            "company_placeholder": "Ihr Firmenname...",
+            "email": "E-Mail-Adresse",
+            "email_placeholder": "email@firma.de",
+            "service_type": "Dienstleistungstyp",
+            "service_options": {
+                "web": "Webentwicklung",
+                "mobile": "Mobile App",
+                "ai": "KI / Daten",
+                "custom": "Sonstiges / Beratung"
+            },
+            "project_desc": "Projektbeschreibung",
+            "project_desc_placeholder": "Erzählen Sie uns kurz, was Sie entwickeln möchten...",
+            "submit_btn": "Anfrage senden"
+        }
+    },
+    "get_involved_page": {
+        "esal_tag": "SONDERSTEUERREGIMEN (ESAL)",
+        "hero_title": "Investition und soziale Unterstützung",
+        "hero_desc": "Als Einheit des <1>Sonderregimes</1> zertifizieren wir Ihren Beitrag, damit Sie gesetzliche Steuervorteile erhalten, während wir das Territorium transformieren.",
+        "tabs": {
+            "donate": "Unternehmen und Einzelpersonen",
+            "volunteer": "Freiwilliger werden"
+        },
+        "invest_project": {
+            "tag": "ZWECKGEBUNDENE INVESTITION 2026",
+            "title": "STEAM-Ausbildungsprojekt: Arhuaco-Gemeinschaft",
+            "description": "Ein umfassendes <1>12-wöchiges</1> Programm zur Stärkung der Kompetenzen in Naturwissenschaften, Technik, Ingenieurwesen, Kunst und Mathematik für 30 Kinder in der Sierra Nevada (Vereda Don Diego).",
+            "details": {
+                "equipment": "<0>Ausrüstung:</0> 30 Thymio Wireless Roboter.",
+                "capacity": "<0>Kapazität:</0> 3 ausgebildete lokale Lehrer.",
+                "sustainability": "<0>Nachhaltigkeit:</0> Permanente Ausrüstung.",
+                "impact": "<0>Auswirkung:</0> 3 öffentliche Schulen profitiert."
+            },
+            "why_invest_title": "WARUM IN DIESES PROJEKT INVESTIEREN?",
+            "reasons": [
+                "Reputationsgewinn (CSR)",
+                "SDG-Ausrichtung (Hochwertige Bildung)",
+                "Operative Machbarkeit und Transparenz"
+            ]
+        },
+        "budget_card": {
+            "total_investment": "GESAMTINVESTITION",
+            "total_amount": "240 Mio. COP",
+            "description": "Konsolidiertes Budget für Technologie, spezialisiertes menschliches Talent und Logistik.",
+            "tax_savings": "STEUEREINSPARUNGEN (ART. 257 ET)",
+            "discount": "25% RABATT",
+            "net_cost": "NETTO-KOSTEN",
+            "net_amount": "180 Mio. COP",
+            "cta_button": "Technisches Angebot anfordern"
+        },
+        "breakdown": {
+            "tech": {
+                "title": "TECHNOLOGIE (63 Mio.)",
+                "desc": "30 Thymio-Roboter, Erweiterungssätze und permanente Baumaterialien."
+            },
+            "talent": {
+                "title": "TALENT (105 Mio.)",
+                "desc": "STEAM-Spezialisten, Ausbildung von 3 lokalen Lehrern und akademisches Management."
+            },
+            "logistics": {
+                "title": "LOGISTIK (25 Mio.)",
+                "desc": "Raumaufbereitung, Transport und 12-wöchiges Catering."
+            },
+            "eval": {
+                "title": "BEWERTUNG (7 Mio.)",
+                "desc": "Monitoring mit Erfolgsindikatoren und 12-monatige Nachverfolgung."
+            }
+        },
+        "personal_contributions": {
+            "title": "Persönliche Beiträge",
+            "description": "Auch Sie können Teil davon sein. Wir laden Einzelpersonen ein, <1>fortgeschrittene Bildung in KI und Technologie</1> für Gruppen zu finanzieren, die die Welt zurückgelassen hat.",
+            "groups": [
+                "Afro- und Raizal-Gemeinschaften",
+                "Alleinerziehende Mütter / Weibliche Haushaltsvorstände",
+                "LGBTQ+-Kollektive",
+                "Senioren (Neue Fähigkeiten in KI)"
+            ],
+            "monthly_btn": "Monatlich spenden",
+            "monthly_note": "Ihr monatlicher Beitrag finanziert ein Stipendium für ein lokales Talent."
+        },
+        "impact_collection": {
+            "title": "Wirkung nach Sammlung",
+            "description": "Wir finanzieren hochkarätige KI-Labore und intensive Bootcamps. Globale Beiträge werden für den Kauf von Servern und Lizenzen für Offline-Lernen verwendet.",
+            "items": [
+                "Training in LLMs und Generativer KI",
+                "Web-Entwicklungs-Zertifizierung",
+                "Robotik-Kits für Jugendliche"
+            ],
+            "global_btn": "Einmalige Spende leisten"
+        },
+        "legal_note": "<0>Rechtlicher Hinweis:</0> Die Samval Foundation ist eine gemeinnützige Organisation im <2>Sondersteuerregime</2>. Alle Spender erhalten die entsprechende Spendenbescheinigung, die vor der DIAN für die Nutzung gesetzlicher Vorteile gültig ist (Art. 125 und 257 E.T.).",
+        "volunteer_form": {
+            "title": "Als Freiwilliger beitreten",
+            "subtitle": "Dein Wissen kann ein Leben verändern. Sag uns, was du tun kannst.",
+            "area_label": "Interessenbereich",
+            "area_options": {
+                "eng": "Engineering / Code",
+                "edu": "Bildung / Workshops",
+                "soc": "Soziale Arbeit",
+                "health": "Gesundheit / Wohlbefinden",
+                "comms": "Kommunikation / Design"
+            },
+            "name_label": "Vollständiger Name",
+            "name_placeholder": "Max Mustermann",
+            "contact_label": "WhatsApp / Telefon",
+            "contact_placeholder": "+57 300...",
+            "availability_label": "Wie viele Stunden pro Monat?",
+            "availability_placeholder": "z.B. 10 Stunden",
+            "submit_btn": "Bewerbung absenden"
+        }
+    },
+    "contact_page": {
+        "title": "Kontakt aufnehmen",
+        "info_title": "Kontaktinformationen",
+        "location_title": "Unser Hauptsitz",
+        "location_desc": "Km 25 Weg zur Sierra Nevada<br />Santa Marta, Magdalena, Kolumbien",
+        "phone_title": "Telefon / WhatsApp",
+        "email_title": "E-Mail-Adressen",
+        "form_title": "Schicken Sie uns eine Nachricht",
+        "form_labels": {
+            "subject": "Betreff",
+            "name": "Name",
+            "email": "E-Mail",
+            "message": "Nachricht"
+        },
+        "subject_options": {
+            "general": "Allgemeine Anfrage",
+            "corporate": "Unternehmenspartnerschaften",
+            "press": "Presse & Medien",
+            "volunteer": "Freiwilligenarbeit"
+        },
+        "submit_btn": "Nachricht senden"
+    },
+    "privacy_page": {
+        "title": "Datenschutzrichtlinie",
+        "last_updated": "Zuletzt aktualisiert: 1. Januar 2024",
+        "p1": "Bei der SAMVAL Stiftung nehmen wir den Schutz Ihrer Daten sehr ernst. Diese Richtlinie beschreibt, wie wir Ihre Informationen sammeln und verwenden.",
+        "p2": "Wir sammeln personenbezogene Daten nur, wenn Sie diese freiwillig über unsere Kontakt- oder Spendenformulare angeben.",
+        "p3": "Ihre Daten werden ausschließlich für die Zwecke der Stiftung verwendet und niemals ohne Ihre ausdrückliche Zustimmung an Dritte weitergegeben."
+    },
+    "terms_page": {
+        "title": "Nutzungsbedingungen",
+        "last_updated": "Zuletzt aktualisiert: 1. Januar 2024",
+        "p1": "Durch den Zugriff auf und die Nutzung dieser Website erklären Sie sich mit den folgenden Geschäftsbedingungen einverstanden.",
+        "p2": "Alle Inhalte auf dieser Website sind Eigentum der SAMVAL Stiftung und durch Gesetze zum geistigen Eigentum geschützt.",
+        "p3": "Die unbefugte Nutzung von Materialien auf dieser Website ist strengstens untersagt."
+    },
+    "footer": {
+        "desc": "Senior Software Engineering, das die technologische und soziale Entwicklung in Kolumbiens Territorien finanziert.",
+        "sections": {
+            "links": "Schnelllinks",
+            "contact": "Kontakt",
+            "legal": "Rechtliches"
+        },
+        "rights": "Alle Rechte vorbehalten."
+    },
+    "admin": {
+        "login": {
+            "title": "Admin-Bereich",
+            "email": "E-Mail",
+            "password": "Passwort",
+            "btn": "Anmelden",
+            "error": "Ungültige Anmeldedaten (Demo: admin@samval.org / admin123)",
+            "logging_in": "Anmeldung..."
+        },
+        "layout": {
+            "dashboard": "Dashboard",
+            "partners": "Partner",
+            "financials": "Finanzen",
+            "photos": "Fotos / Galerie",
+            "team": "Team",
+            "logout": "Abmelden",
+            "loading": "Laden..."
+        },
+        "dashboard": {
+            "welcome": "Willkommen beim SAMVAL Manager",
+            "subtitle": "Verwalten Sie visuelle Inhalte und Stiftungsberichte.",
+            "stats": {
+                "photos": "Fotos in Galerie",
+                "partners": "Registrierte Partner",
+                "team": "Teammitglieder"
+            },
+            "shortcuts": "Verknüpfungen",
+            "view_all": "Alle ansehen"
+        },
+        "photos": {
+            "title": "Fotoverwaltung",
+            "add": "Neues Foto hochladen",
+            "url": "Bild-URL",
+            "desc": "Beschreibung / Bildunterschrift",
+            "category": "Kategorie",
+            "save": "Foto speichern",
+            "empty": "Keine Fotos registriert.",
+            "delete": "Löschen"
+        },
+        "financials": {
+            "title": "Finanzberichte",
+            "add": "Neuen Bericht hinzufügen",
+            "year": "Jahr",
+            "file": "Datei (PDF)",
+            "save": "Bericht hochladen"
+        },
+        "partners": {
+            "title": "Partnerverwaltung",
+            "add": "Neuen Partner hinzufügen"
+        },
+        "team": {
+            "title": "Teamverwaltung",
+            "add": "Mitglied hinzufügen",
+            "role": "Rolle / Position",
+            "bio": "Biografie"
+        }
+    },
+    "data": {
+        "photos": {
+            "1": "Hauptbanner - Kinder lernen",
+            "2": "Mission - Teamarbeit",
+            "impact_year": "Impact 2024",
+            "real_learning": "Reales Lernen"
+        },
+        "financials": {
+            "1": "Lagebericht 2025",
+            "2": "Finanzberichte 2024"
+        },
+        "team": {
+            "1": {
+                "role": "Geschäftsführerin",
+                "bio": "Ingenieurin mit über 10 Jahren Erfahrung in sozialem Projektmanagement und Technologie."
+            },
+            "2": {
+                "role": "Tech Lead",
+                "bio": "Full-Stack-Entwickler mit Leidenschaft für Lehre und Open Source."
+            },
+            "3": {
+                "role": "Feldkoordinatorin",
+                "bio": "Soziologin, Expertin für Gemeinschaftsarbeit und partizipative Methoden."
+            }
+        },
+        "sections": {
+            "home": "Startseite",
+            "hero": "Hauptbanner",
+            "mission": "Missionsbild",
+            "vision": "Visionsbild",
+            "projects": "Soziale Projekte",
+            "gallery": "Projektgalerie",
+            "tech": "Tech-Services",
+            "web": "Web-Bild",
+            "mobile": "Mobile-Bild",
+            "ai": "KI-Bild"
+        }
+    }
+}

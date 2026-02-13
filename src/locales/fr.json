@@ -1,0 +1,514 @@
+{
+    "seo": {
+        "home": {
+            "title": "Fondation SAMVAL | Innovation Technologique et Impact Social",
+            "description": "Nous autonomisons les territoires vulnérables grâce à l'éducation STEAM, la robotique et l'IA. Découvrez nos projets sociaux dans la Sierra Nevada."
+        },
+        "about": {
+            "title": "À Propos | Fondation SAMVAL - Technologie Territoriale",
+            "description": "Découvrez l'histoire, la mission et la vision de la Fondation SAMVAL. Ingénierie de haut niveau au service de la communauté."
+        },
+        "projects": {
+            "title": "Projets Sociaux | Écosystème d'Impact SAMVAL",
+            "description": "Explorez nos initiatives : Mission Médicale Internationale, Robotique Arhuaca et BiblioBurro 2.0. Innovation territoriale."
+        },
+        "services": {
+            "title": "Services Tech | Ingénierie Logicielle à Impact Social",
+            "description": "Développement web, IA et conseil senior. En faisant appel à nous, vous financez directement l'inclusion numérique en Colombie."
+        },
+        "contact": {
+            "title": "Contact | Rejoignez la Transformation SAMVAL",
+            "description": "Contactez-nous pour des partenariats, des dons ou des services technologiques. Basés à Barranquilla, impactant toute la Colombie."
+        }
+    },
+    "navbar": {
+        "title": "FONDATION SAMVAL",
+        "tagline": "Une technologie qui respecte le territoire",
+        "home": "Accueil",
+        "about": "À propos",
+        "projects": "Projets Sociaux",
+        "services": "Services Tech",
+        "contact": "Contact",
+        "request_software": "Demander un Logiciel",
+        "donate": "Faire un don"
+    },
+    "social_feed": {
+        "tag": "@fundacionsamval",
+        "title": "Suivez notre impact <1>en temps réel</1>",
+        "subtitle": "Rejoignez notre communauté et voyez comment la technologie transforme des vies dans chaque coin de la Colombie.",
+        "view_profile": "Voir le Profil",
+        "posts": {
+            "p1": "Transformer l'avenir grâce à la robotique dans la Sierra Nevada.",
+            "p2": "Nos laboratoires STEAM atteignant les zones les plus reculées.",
+            "p3": "Éducation territoriale : Respecter nos racines.",
+            "p4": "Des partenariats qui changent des vies. Merci à tous nuestros alliés."
+        }
+    },
+    "home": {
+        "hero_tagline": "ÉDUCATION STEAM ET INNOVATION POUR LA PAIX TERRITORIALE",
+        "hero_title": "Du code qui transforme des communautés.",
+        "hero_desc": "À la Fondation Samval, nous unissons l'excellence du développement logiciel à l'impact social.",
+        "hero_bold": "100% des bénéfices de nos services technologiques financent des programmes éducatifs avancés.",
+        "cta_invest": "Investir Socialement",
+        "cta_services": "Services Informatiques",
+        "mission_title": "Notre Essence",
+        "mission_subtitle": "Nous sommes un pont entre la technologie de pointe et les besoins profonds de nos communautés.",
+        "mission_card_title": "Mission",
+        "mission_card_desc": "Autonomiser les communautés vulnérables grâce à une éducation disruptive, tout en fournissant des solutions technologiques de classe mondiale.",
+        "vision_card_title": "Vision",
+        "vision_card_desc": "Être la référence latino-américaine de l'entreprise sociale, où la technologie est le principal moteur du développement territorial durable.",
+        "values_card_title": "Valeurs",
+        "values_card_desc": "Transparence totale, excellence technique, respect du territoire et engagement indéfectible envers l'équité.",
+        "impact_title": "Impact Mesurable",
+        "impact_desc": "Chaque ligne de code pour nos clients se traduit par des bourses et des laboratoires pour ceux qui en ont le plus besoin.",
+        "impact_stats": {
+            "kids": "Enfants Éduqués",
+            "families": "Familles Soutenues",
+            "projects": "Projets IT",
+            "volunteers": "Bénévoles"
+        },
+        "services_title": "Technologie avec un Objectif",
+        "services_desc": "Nous offrons des services de développement logiciel qui financent un véritable changement social.",
+        "services_list": {
+            "web": "Développement Web",
+            "mobile": "Applications Mobiles",
+            "ai": "Intégration IA",
+            "consulting": "Consulting IT"
+        },
+        "view_details": "Voir les détails",
+        "cta_bottom_title": "Prêt pour le changement ?",
+        "cta_bottom_desc": "Vous êtes le moteur du territoire. Rejoignez-nous aujourd'hui.",
+        "cta_donate_now": "Faire un don maintenant",
+        "cta_volunteer": "Devenir Bénévole"
+    },
+    "about_page": {
+        "hero_tag": "À propos de la Fondation Samval",
+        "hero_title": "L'innovation naît <1>du territoire</1>",
+        "hero_desc": "Nous concevons des expériences <1>STEAM</1> en intégrant les enseignants et les leaders locaux pour garantir que la technologie ne soit pas étrangère, mais un outil qui génère de réelles opportunités dans leur propre contexte.",
+        "cta_schedule": "Planifier un appel",
+        "cta_response": "Nous répondons en moins de 24 heures.",
+        "stats": {
+            "territories": "Territoires en cours",
+            "weeks": "Semaines Déploiement du programme",
+            "included": "Mentorat et kits STEAM",
+            "ready": "Modèle prêt à mettre en œuvre"
+        },
+        "how_title": "Comment nous y parvenons",
+        "how_desc": "Co-conception avec des leaders locaux, formation pédagogique de haute qualité et mesure rigoureuse de l'impact pour que chaque investissement laisse une véritable <1>capacité installée</1> dans la communauté.",
+        "cards": {
+            "culture_title": "Pertinence culturelle",
+            "culture_desc": "Nous développons des défis et des exemples dans leur propre langue et contexte socioculturels. La technologie ne doit pas effacer l'identité; elle doit la renforcer.",
+            "measure_title": "Exécution mesurable",
+            "measure_desc": "Nous travaillons avec des pilotes courts, des OKR (objectifs et résultats clés) clairs et des rapports simples mais puissants pour la prise de décision directive.",
+            "support_title": "Accompagnement de proximité",
+            "support_desc": "Nous ne livrons pas seulement des kits. Nous formons des facilitateurs locaux et fournissons un soutien continu pour garantir que la technologie reste et évolue."
+        },
+        "evolution_title": "Notre Évolution",
+        "evolution_desc": "Nous itérons avec des preuves : nous apprenons sur le terrain avec chaque cohorte pour perfectionner notre méthodologie.",
+        "timeline": {
+            "2019_title": "Pilotes ruraux",
+            "2019_desc": "Nous avons créé les premiers Clubs STEAM avec des kits de base et une validation exhaustive de la méthodologie sur le terrain.",
+            "2021_title": "Contenu bilingue",
+            "2021_desc": "Les enseignants et les leaders locaux co-créent des défis dans leur propre langue, comblant les lacunes linguistiques en technologie.",
+            "2024_title": "Laboratoires mobiles",
+            "2024_desc": "Développement d'une route de déploiement rapide qui nous permet d'opérer dans 5 départements simultanément."
+        },
+        "cta_final_title": "Prêt à commencer le changement ?",
+        "cta_final_desc": "Concrétisons le déploiement dans votre territoire. En 45 minutes, nous définissons les objectifs, les cohortes et un budget estimé.",
+        "cta_final_btn": "Planifier un appel maintenant"
+    },
+    "social_programs_page": {
+        "tag": "Écosystème d'impact",
+        "title": "Des projets qui <1>respectent</1> le territoire",
+        "subtitle": "Nous combinons savoirs ancestraux et technologie de pointe pour la transformation sociale en Colombie.",
+        "projects": {
+            "p1_title": "Mission Médicale Internationale",
+            "p1_cat": "Santé Communautaire",
+            "p1_desc": "Nous gérons la visite d'étudiants en médecine d'universités américaines lors de missions à travers le pays. Nous offrons des soins préventifs et des médicaments de base aux communautés vulnérables.",
+            "p1_impact": "500 patients par mission",
+            "p2_title": "Robotique Arhuaco",
+            "p2_cat": "Éducation Ancestrale",
+            "p2_desc": "Nous apportons la technologie à la Sierra Nevada de Santa Marta. Nous utilisons des robots Thymio pour enseigner la programmation dans le respect de la culture et du territoire.",
+            "p2_impact": "Formation dans la Sierra Nevada",
+            "p3_title": "BiblioBurro 2.0",
+            "p3_cat": "IA Hors Ligne",
+            "p3_desc": "Nous installons des serveurs avec des modèles d'IA multimodaux hors ligne qui agissent comme des tuteurs intelligents dans les zones sans internet.",
+            "p3_impact": "IA sans Internet"
+        },
+        "testimonials_title": "Voix du Territoire",
+        "testimonials": {
+            "t1_quote": "Voir nos enfants programmer des robots Thymio au milieu des montagnes est un rêve. La technologie ne nous enlève pas ce que nous sommes, elle nous aide à le montrer.",
+            "t1_author": "Leader Arhuaco",
+            "t1_role": "Sierra Nevada",
+            "t2_quote": "L'IA hors ligne du BiblioBurro a permis aux jeunes sans internet d'interagir instantanément avec les connaissances mondiales.",
+            "t2_author": "Enseignant Rural",
+            "t2_role": "Magdalena"
+        }
+    },
+    "tech_services_page": {
+        "hero_title": "Services de Développement Logiciel",
+        "hero_desc": "Qualité d'entreprise, impact social. Engagez nos services et transformez votre entreprise tout en transformant la Colombie.",
+        "why_title": "Pourquoi choisir Samval Tech ?",
+        "why_list": {
+            "senior_team": "Équipe Senior : Ingénieurs expérimentés dans des startups et des entreprises mondiales.",
+            "social_impact": "Impact Social Direct : 100 % des bénéfices sont réinvestis dans l'éducation.",
+            "agile_methodology": "Méthodologies Agiles : Scrum et Kanban pour des livraisons rapides et transparentes.",
+            "tax_benefits": "Avantages Fiscaux : Certificat de don pour une partie du service."
+        },
+        "excellence_quote": "L'excellence technique est notre façon de servir la communauté.",
+        "solutions_title": "Nos Solutions",
+        "solutions": {
+            "web_title": "Développement Web Full Stack",
+            "web_desc": "Nous créons des plateformes web robustes, évolutives et sécurisées utilisant les dernières technologies (React, Node.js, Python).",
+            "web_features": [
+                "E-commerce & Marketplaces",
+                "Systèmes de Gestion (ERP/CRM)",
+                "Portails d'Entreprise",
+                "Tableaux de Bord Analytiques"
+            ],
+            "mobile_title": "Applications Mobiles",
+            "mobile_desc": "Développement natif et multiplateforme (React Native, Flutter) pour iOS et Android, axé sur une UX/UI supérieure.",
+            "mobile_features": [
+                "Apps Grand Public",
+                "Apps d'Entreprise",
+                "Intégration Matérielle",
+                "Maintenance & Support"
+            ],
+            "ai_title": "Intelligence Artificielle & Données",
+            "ai_desc": "Nous implémentons des solutions d'IA générative et d'analyse de données pour optimiser vos processus commerciaux.",
+            "ai_features": [
+                "Chatbots & Assistants Virtuels",
+                "Modèles Prédictifs",
+                "Traitement du Langage Naturel",
+                "Automatisation Intelligente"
+            ],
+            "cloud_title": "Consulting IT & Cloud",
+            "cloud_desc": "Modernisation de l'infrastructure et migration vers le cloud pour garantir disponibilité et efficacité.",
+            "cloud_features": [
+                "Architecture AWS/Azure/GCP",
+                "Pipelines CI/CD",
+                "Docker & Kubernetes",
+                "Sécurité Cloud"
+            ]
+        },
+        "cases_tag": "Trajectoire",
+        "cases_title": "Cas de Réussite",
+        "cases_desc": "Nous avons aidé des entreprises de divers secteurs à faire évoluer leur technologie.",
+        "cases": {
+            "tirrty_title": "Tirrty Marketplace",
+            "tirrty_amount": "Projet: $25k USD",
+            "tirrty_desc": "Nous avons mené l'entrée tactique sur le marché du e-commerce américain. Nous avons intégré la technologie indienne (Dukaan) pour un déploiement agile et un soutien juridique.",
+            "tirrty_impact_tech": "SOLUCIÓN:",
+            "tirrty_tech_list": [
+                "Dév. Web & Apps",
+                "LLC Delaware"
+            ],
+            "tirrty_benefit": "Bénéfices : Bourses STEAM rurales.",
+            "agro_title": "Écosystème Bovino",
+            "agro_tag": "Aliado Ganadero",
+            "agro_desc": "Nous avons développé le MVP de la plateforme nationale d'enchères en direct pour Magdalena, intégrant biométrie et traçabilité blockchain.",
+            "agro_impact_eng": "INGÉNIERIE:",
+            "agro_tech_list": [
+                "React Native",
+                "Sync Offline",
+                "Géolocalisation"
+            ],
+            "agro_impact": "Impact : Santé préventive communautaire.",
+            "robotics_title": "Robotique Atlántico",
+            "robotics_tag": "Distrito Barranquilla",
+            "robotics_desc": "Mise en œuvre de la robotique éducative pour élever la qualité de l'éducation et favoriser les compétences technologiques.",
+            "robotics_impact_social": "IMPACT SOCIAL & IT:",
+            "robotics_tech_list": [
+                "Inclusion Numérique",
+                "Qualité Éducative",
+                "Analytics"
+            ],
+            "robotics_goal": "Objectif : Encourager les connaissances technologiques dès la base."
+        },
+        "form_title": "Demander un Devis",
+        "form_success": "Merci de votre intérêt. Notre équipe technique vous contactera bientôt.",
+        "form_labels": {
+            "name": "Nom de Contact",
+            "name_placeholder": "Jean Dupont",
+            "company": "Entreprise",
+            "company_placeholder": "Nom de votre entreprise...",
+            "email": "Email Professionnel",
+            "email_placeholder": "jean@societe.com",
+            "service_type": "Type de Service",
+            "service_options": {
+                "web": "Développement Web",
+                "mobile": "App Mobile",
+                "ai": "IA / Données",
+                "custom": "Développement Sur Mesure"
+            },
+            "project_desc": "Description du Projet",
+            "project_desc_placeholder": "Parlez-nous brièvement de vos besoins...",
+            "submit_btn": "Envoyer la Demande"
+        }
+    },
+    "get_involved_page": {
+        "esal_tag": "Régime Fiscal Spécial (ESAL)",
+        "hero_title": "Investissement et Soutien Social",
+        "hero_desc": "En tant qu'entité à <1>Régime Spécial</1>, nous certifions votre contribution afin que vous puissiez obtenir les avantages fiscaux prévus par la loi pendant que nous transformons le territoire.",
+        "tabs": {
+            "donate": "Entreprises et Particuliers",
+            "volunteer": "Devenir Bénévole"
+        },
+        "invest_project": {
+            "tag": "Investissement à Vocation 2026",
+            "title": "Projet de Formation STEAM : Communauté Arhuaca",
+            "description": "Un programme complet de <1>12 semaines</1> conçu pour renforcer les compétences en Science, Technologie, Ingénierie, Arts et Mathématiques chez 30 garçons et filles de la Sierra Nevada (Vereda Don Diego).",
+            "details": {
+                "equipment": "<0>Équipement :</0> 30 robots Thymio Wireless.",
+                "capacity": "<0>Capacité :</0> 3 enseignants locaux formés.",
+                "sustainability": "<0>Durabilité :</0> Équipement permanent.",
+                "impact": "<0>Impact :</0> 3 écoles publiques bénéficiaires."
+            },
+            "why_invest_title": "Pourquoi investir dans ce projet ?",
+            "reasons": [
+                "Retour Réputationnel (RSE)",
+                "Alignement avec les ODD (Qualité de l'Éducation)",
+                "Viabilité Opérationnelle et Transparence"
+            ]
+        },
+        "budget_card": {
+            "total_investment": "Investissement Total",
+            "total_amount": "$240M",
+            "description": "Budget consolidé couvrant la technologie, le talent humain spécialisé et la logistique.",
+            "tax_savings": "Économies d'Impôt (Art. 257 ET)",
+            "discount": "25% REMISE",
+            "net_cost": "Coût Économique Net",
+            "net_amount": "$180M",
+            "cta_button": "Demander une Proposition Technique"
+        },
+        "breakdown": {
+            "tech": {
+                "title": "Technologie ($63M)",
+                "desc": "30 robots Thymio, kits d'extension et matériaux de construction permanents."
+            },
+            "talent": {
+                "title": "Talent ($105M)",
+                "desc": "Spécialistes STEAM, formation de 3 enseignants locaux et gestion académique."
+            },
+            "logistics": {
+                "title": "Logistique ($25M)",
+                "desc": "Aménagement des espaces, transport et alimentation pendant 12 semaines."
+            },
+            "eval": {
+                "title": "Évaluation ($7M)",
+                "desc": "Suivi avec indicateurs de réussite et suivi post-projet à 12 mois."
+            }
+        },
+        "personal_contributions": {
+            "title": "Contributions Personnelles",
+            "description": "Vous pouvez aussi en faire partie. Nous invitons les particuliers à financer une <1>éducation avancée en IA et technologie</1> pour les groupes que le monde a laissés de côté.",
+            "groups": [
+                "Communautés Afro et Raizal",
+                "Mères Chefs de Famille",
+                "Collectifs LGBTQ+",
+                "Seniors (Nouvelles Compétences en IA)"
+            ],
+            "monthly_btn": "Je Veux Donner Mensuellement",
+            "monthly_note": "Votre don mensuel offre une bourse à un talent local."
+        },
+        "impact_collection": {
+            "title": "Impact par Collection",
+            "description": "Nous finançons des laboratoires d'IA et des bootcamps intensifs de haut niveau. Les contributions mondiales servent à l'achat de serveurs et de licences pour l'apprentissage hors ligne.",
+            "items": [
+                "Formation en LLMs et IA Générative",
+                "Certification en Développement Web",
+                "Kits de Robotique pour les Jeunes"
+            ],
+            "global_btn": "Faire une Contribution Mondiale"
+        },
+        "legal_note": "<0>Note Légale :</0> La Fondation Samval est une entité à but non lucratif qualifiée sous le <2>Régime Fiscal Spécial</2>. Tous les donateurs reçoivent le certificat de don respectif valide auprès de la DIAN pour bénéficier des avantages légaux (Art. 125 et 257 E.T.).",
+        "volunteer_form": {
+            "title": "Talent sur le Territoire",
+            "subtitle": "Pas seulement de l'argent, vos connaissances transforment aussi.",
+            "area_label": "Domaine d'Expertise",
+            "area_options": {
+                "eng": "Ingénierie / Robotique / IA",
+                "edu": "Éducation / Pédagogie",
+                "soc": "Anthropologie / Sociologie",
+                "health": "Santé (Mission Médicale)",
+                "comms": "Communication / Design"
+            },
+            "name_label": "Nom Complet",
+            "name_placeholder": "Jean Dupont",
+            "contact_label": "WhatsApp / Lien vers le Profil",
+            "contact_placeholder": "+33 6...",
+            "availability_label": "Disponibilité",
+            "availability_placeholder": "Ex : Week-ends, 2h/semaine",
+            "submit_btn": "Postuler mon Talent"
+        }
+    },
+    "contact_page": {
+        "title": "Contactez-nous",
+        "info_title": "Informations de Contact",
+        "location_title": "Emplacement Principal",
+        "location_desc": "Km 25 Vía a la Sierra Nevada<br />Santa Marta, Magdalena, Colombie",
+        "phone_title": "Téléphones / WhatsApp",
+        "email_title": "E-mails",
+        "form_title": "Envoyez-nous un message",
+        "form_labels": {
+            "subject": "Sujet",
+            "name": "Nom",
+            "email": "Email",
+            "message": "Message"
+        },
+        "subject_options": {
+            "general": "Informations Générales",
+            "corporate": "Alliances Corporatives",
+            "press": "Presse",
+            "volunteer": "Bénévolat"
+        },
+        "submit_btn": "Envoyer Message"
+    },
+    "privacy_page": {
+        "title": "Politique de traitement des données personnelles",
+        "validity": "Vigence : Janvier 2026 | Loi 1581 de 2012",
+        "responsible_title": "1. Identification du Responsable",
+        "responsible_content": "La <0>FONDATION SAMVAL</0>, identifiée par le NIT enregistré auprès de la Chambre de Commerce de Barranquilla, domiciliée à Calle 104 #51B-154 Ofi 17, Barranquilla, Colombie, e-mail : contact@samval.org et téléphone : 323 320 7532, agit en tant que Responsable du traitement de vos données personnelles.",
+        "purposes_title": "2. Finalités du Traitement",
+        "purposes_intro": "Les données personnelles collectées seront utilisées aux fins principales et secondaires suivantes :",
+        "purposes_list": [
+            "Gérer les processus de don, l'émission de certificats fiscaux et les rapports à la DIAN.",
+            "Maintenir la communication sur l'impact des projets sociaux sur le territoire.",
+            "Traiter les demandes de services technologiques et de support technique.",
+            "Respecter les obligations légales et réglementaires concernant les ESAL (entités à but non lucratif).",
+            "Analyse statistique et d'impact social sous anonymisation."
+        ],
+        "rights_title": "3. Droits des titulaires",
+        "rights_intro": "Conformément à la réglementation colombienne en vigueur, vous avez le droit de :",
+        "rights_list": [
+            "Connaître, mettre à jour et rectifier vos informations personnelles.",
+            "Demander une preuve de l'autorisation accordée.",
+            "Être informé de l'utilisation qui a été faite de vos données.",
+            "Déposer des plaintes auprès de la Surintendance de l'Industrie et du Commerce (SIC).",
+            "Révoquer l'autorisation ou demander la suppression des données lorsque les principes, droits et garanties constitutionnels ne sont pas respectés."
+        ],
+        "procedure_title": "4. Procédure pour l'exercice des droits",
+        "procedure_content": "Vous pouvez formuler toute demande, plainte ou demande de mise à jour en envoyant un e-mail à <1>contact@samval.org</1>. Le délai de réponse ne dépassera pas les quinze (15) jours ouvrables établis par la loi.",
+        "security_title": "5. Sécurité de l'information",
+        "security_content": "La Fondation Samval met en œuvre des mesures de sécurité techniques, humaines et administratives pour garantir que vos données ne soient pas altérées, perdues ou consultées par des tiers non autorisés, conformément aux normes de cybersécurité exigées pour 2026."
+    },
+    "terms_page": {
+        "title": "Conditions générales d'utilisation",
+        "validity": "Dernière mise à jour : Janvier 2026",
+        "acceptance_title": "1. Acceptation de l'utilisateur",
+        "acceptance_content": "L'accès et l'utilisation du site web de la <0>FONDATION SAMVAL</0> confèrent le statut d'Utilisateur et impliquent l'acceptation totale de ces conditions. Le site web vise à informer sur les projets sociaux, les services technologiques et à faciliter les dons sous le régime fiscal spécial.",
+        "property_title": "2. Propriété intellectuelle",
+        "property_content": "Tout le contenu (textes, logos, code source de démonstration, images et méthodologies STEAM) est la propriété exclusive de la Fondation Samval ou dispose des licences correspondantes. Toute reproduction totale ou partielle sans autorisation écrite préalable est interdite.",
+        "donation_title": "3. Processus de don et d'investissement social",
+        "donation_content1": "Les dons effectués via les canaux officiels de la Fondation sont régis par la réglementation ESAL en Colombie. La Fondation s'engage à délivrer des certificats de don valides pour déduction fiscale (Art. 257 E.T.) une fois la réception des fonds vérifiée.",
+        "donation_content2": "Chaque investissement dans des projets territoriaux (tels que les programmes de robotique dans la Sierra Nevada) comprend des rapports d'impact périodiques et une transparence dans l'exécution budgétaire.",
+        "exemption_title": "4. Clause de non-responsabilité",
+        "exemption_content": "La Fondation Samval n'est pas responsable des interruptions techniques du service ni de l'utilisation abusive que des tiers pourraient faire des informations publiées. Nous ne garantissons pas de résultats d'apprentissage spécifiques si la méthodologie STEAM complète fournie par nos facilitateurs n'est pas suivie.",
+        "jurisdiction_title": "5. Législation et juridiction",
+        "jurisdiction_content": "Ces conditions sont régies par les lois de la République de Colombie. Toute controverse sera résolue devant les juges compétents de la ville de Barranquilla."
+    },
+    "footer": {
+        "desc": "Ingénierie logicielle senior qui finance le développement technologique et social dans les territoires colombiens.",
+        "sections": {
+            "links": "Liens Rapides",
+            "contact": "Contact",
+            "legal": "Légal"
+        },
+        "rights": "Tous droits réservés."
+    },
+    "admin": {
+        "login": {
+            "title": "Panel Administratif",
+            "email": "Email",
+            "password": "Mot de passe",
+            "btn": "Entrer",
+            "error": "Identifiants incorrects (Démo : admin@samval.org / admin123)",
+            "logging_in": "Connexion..."
+        },
+        "layout": {
+            "dashboard": "Tableau de Bord",
+            "partners": "Partenaires / Alliés",
+            "financials": "Finances",
+            "photos": "Photos / Galerie",
+            "team": "Équipe",
+            "logout": "Déconnexion",
+            "loading": "Chargement..."
+        },
+        "dashboard": {
+            "welcome": "Bienvenue chez SAMVAL Manager",
+            "subtitle": "Gérez le contenu visuel et les rapports de la fondation.",
+            "stats": {
+                "photos": "Photos en Galerie",
+                "partners": "Partenaires Enregistrés",
+                "team": "Membres de l'Équipe"
+            },
+            "shortcuts": "Raccourcis",
+            "view_all": "Voir tout"
+        },
+        "photos": {
+            "title": "Gestion des Photos",
+            "add": "Télécharger une Photo",
+            "url": "URL de l'image",
+            "desc": "Description / Légende",
+            "category": "Catégorie",
+            "save": "Enregistrer la Photo",
+            "empty": "Aucune photo enregistrée.",
+            "delete": "Supprimer"
+        },
+        "financials": {
+            "title": "États Financiers",
+            "add": "Ajouter un Rapport",
+            "year": "Année",
+            "file": "Fichier (PDF)",
+            "save": "Télécharger le Rapport"
+        },
+        "partners": {
+            "title": "Gestion des Partenaires",
+            "add": "Ajouter un Partenaire"
+        },
+        "team": {
+            "title": "Gestion de l'Équipe",
+            "add": "Ajouter un Membre",
+            "role": "Rôle / Poste",
+            "bio": "Biographie"
+        }
+    },
+    "data": {
+        "photos": {
+            "1": "Bannière Principale - Enfants apprenant",
+            "2": "Mission - Travail d'équipe",
+            "impact_year": "Impact 2024",
+            "real_learning": "Apprentissage Réel"
+        },
+        "financials": {
+            "1": "Rapport de Gestion 2025",
+            "2": "États Financiers 2024"
+        },
+        "team": {
+            "1": {
+                "role": "Directrice Exécutive",
+                "bio": "Ingénieure avec plus de 10 ans d'expérience dans la gestion de projets sociaux et technologiques."
+            },
+            "2": {
+                "role": "Leader Technique",
+                "bio": "Développeur Full Stack passionné par l'enseignement et le code libre."
+            },
+            "3": {
+                "role": "Coordinatrice de Terrain",
+                "bio": "Sociologue experte en travail communautaire et méthodologies participatives."
+            }
+        },
+        "sections": {
+            "home": "Page d'Accueil",
+            "hero": "Bannière Principale (Hero)",
+            "mission": "Mission - Image",
+            "vision": "Vision - Image",
+            "projects": "Projets Sociaux",
+            "gallery": "Galerie de Projets",
+            "tech": "Services Tech",
+            "web": "Web - Image",
+            "mobile": "Mobile - Image",
+            "ai": "IA - Image"
+        }
+    }
+}

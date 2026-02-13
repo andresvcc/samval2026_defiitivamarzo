@@ -10,6 +10,13 @@ import GetInvolved from './pages/GetInvolved';
 import Contact from './pages/Contact';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfUse from './pages/TermsOfUse';
+import AdminLayout from './components/admin/AdminLayout';
+import Login from './pages/admin/Login';
+import Dashboard from './pages/admin/Dashboard';
+import Photos from './pages/admin/Photos';
+import Financials from './pages/admin/Financials';
+import Partners from './pages/admin/Partners';
+import Team from './pages/admin/Team';
 
 // ScrollToTop component to reset scroll on route change
 const ScrollToTop = () => {
@@ -51,6 +58,17 @@ const App: React.FC = () => {
             <Route path="/contacto" element={<Contact />} />
             <Route path="/privacidad" element={<PrivacyPolicy />} />
             <Route path="/terminos" element={<TermsOfUse />} />
+
+            {/* Admin Routes */}
+            <Route path="/admin/login" element={<Login />} />
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route index element={<Dashboard />} />
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="photos" element={<Photos />} />
+              <Route path="financials" element={<Financials />} />
+              <Route path="partners" element={<Partners />} />
+              <Route path="team" element={<Team />} />
+            </Route>
           </Routes>
         </main>
         <Footer />
