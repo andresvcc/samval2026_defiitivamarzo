@@ -1,12 +1,20 @@
 {
     "seo": {
         "home": {
-            "title": "Fundación SAMVAL | Innovación Tecnológica con Impacto Social",
-            "description": "Empoderamos territorios vulnerables a través de la educación STEAM, robótica e inteligencia artificial. Conoce nuestros proyectos sociales en la Sierra Nevada."
+            "title": "Fundación SAMVAL - Robótica Etnopertinente en Colombia",
+            "description": "La primera plataforma de robótica etnopertinente en Latinoamérica. Enseñamos pensamiento computacional en lenguas nativas y transformamos territorios."
         },
         "about": {
-            "title": "Nosotros | Fundación SAMVAL - Tecnología para el Territorio",
-            "description": "Conoce la historia, misión y visión de la Fundación SAMVAL. NIT 901.036.033-0. Ingeniería de alto nivel al servicio de la comunidad."
+            "title": "Nosotros | Fundación SAMVAL",
+            "description": "Conoce nuestra esencia territorial y cómo codiseñamos educación STEAM de calidad con líderes locales e indígenas en Colombia."
+        },
+        "impact": {
+            "title": "Nuestro Impacto | Fundación SAMVAL",
+            "description": "Evidencia de nuestro impacto en educación STEAM rural y robótica en la Sierra Nevada y San Basilio de Palenque."
+        },
+        "resources": {
+            "title": "Recursos | Fundación SAMVAL",
+            "description": "Descarga guías pedagógicas y módulos educativos co-creados para enseñar tecnología respetando la cultura local."
         },
         "projects": {
             "title": "Proyectos Sociales | Ecosistema de Impacto SAMVAL",
@@ -19,6 +27,18 @@
         "contact": {
             "title": "Contacto | Únete a la Transformación SAMVAL",
             "description": "Contáctanos para alianzas, donaciones o servicios tecnológicos. Estamos en Barranquilla, impactando a toda Colombia."
+        },
+        "get_involved": {
+            "title": "Donar e Invertir | Fundación SAMVAL",
+            "description": "Invierte en impacto social con beneficios tributarios. Apoya la educación STEAM en comunidades vulnerables de Colombia."
+        },
+        "privacy": {
+            "title": "Política de Privacidad | Fundación SAMVAL",
+            "description": "Conoce nuestra política de tratamiento de datos personales y tus derechos como titular de la información."
+        },
+        "terms": {
+            "title": "Términos de Uso | Fundación SAMVAL",
+            "description": "Términos y condiciones de uso del sitio web de la Fundación SAMVAL."
         }
     },
     "navbar": {
@@ -26,6 +46,8 @@
         "tagline": "Tecnología que respeta el territorio",
         "home": "Inicio",
         "about": "Nosotros",
+        "impact": "Impacto",
+        "resources": "Recursos",
         "projects": "Proyectos Sociales",
         "services": "Servicios Tech",
         "contact": "Contacto",
@@ -49,8 +71,27 @@
         "hero_title": "Tecnología que respeta el territorio",
         "hero_desc": "Somos facilitadores de cambio, transformando realidades a través de proyectos de consultoría, ingeniería y educación.",
         "hero_bold": "Trabajamos por la inclusión digital de comunidades vulnerables.",
+        "hero_positioning": "La primera plataforma de robótica etnopertinente de América Latina: integramos el robot Thymio con lenguas nativas y cosmovisión indígena.",
         "cta_invest": "Invierta en Impacto",
         "cta_services": "Soluciones Tech",
+        "unique_tag": "LO QUE NOS HACE ÚNICOS",
+        "unique_title": "No somos otro programa de robótica",
+        "unique_subtitle": "Samval crea tecnología educativa cocreada desde las comunidades, no impuesta desde afuera.",
+        "unique_1_title": "Programación en Lenguas Nativas",
+        "unique_1_desc": "Somos la única organización en Colombia donde niños Arahuacos y Palenqueros programan robots en Iku y Palenquero. La tecnología habla su idioma.",
+        "unique_2_title": "Robot Thymio Cocreado",
+        "unique_2_desc": "Cada módulo pedagógico es diseñado con la comunidad. Los desafíos del robot integran su cosmovisión, mitos y territorio — no currículos genéricos.",
+        "unique_3_title": "Robótica Etnopertinente",
+        "unique_3_desc": "Creamos una nueva categoría: metodología educativa que une robótica física, identidad cultural y pensamiento computacional para pueblos étnicos.",
+        "complement_tag": "COMPLEMENTO ESENCIAL",
+        "complement_title": "Donde los programas masivos no llegan",
+        "complement_desc": "Los grandes programas nacionales instalan laboratorios y entregan equipos. Pero ninguno adapta su contenido a la lengua, cosmovisión ni identidad de las comunidades étnicas.",
+        "complement_1_title": "Pertinencia Cultural",
+        "complement_1_desc": "La única metodología que integra cosmovisión indígena en los desafíos STEM. No traducimos: cocreamos desde la comunidad.",
+        "complement_2_title": "Confianza Comunitaria",
+        "complement_2_desc": "Años de trabajo en territorio nos han dado lo que ningún programa centralizso puede comprar: la confianza de las autoridades tradicionales.",
+        "complement_3_title": "Continuidad Real",
+        "complement_3_desc": "No hacemos campamentos de 4 días. Nuestro acompañamiento es sostenido, formando líderes locales que multiplican el impacto.",
         "mission_title": "Nuestra Esencia",
         "mission_subtitle": "La Fundación Samval une la ingeniería de alto nivel con el desarrollo comunitario sostenible.",
         "mission_card_title": "Propósito Educativo",
@@ -103,15 +144,18 @@
             "support_title": "Capacidad Instalada",
             "support_desc": "Formamos maestros y facilitadores locales para que la tecnología permanezca y evolucione en la comunidad."
         },
+        "alliances_title": "Red de Aliados",
+        "alliances_desc": "La transformación real en los territorios no se logra sola. Construimos ecosistemas educativos con organizaciones que comparten nuestra visión tecnológica.",
+        "alliances_badge": "Robótica Etnopertinente",
         "evolution_title": "Información Institucional",
         "evolution_desc": "Fundación SAMVAL - NIT: 901.036.033-0 | Entidad dedicada a la ciencia, tecnología e innovación en Barranquilla y territorios vulnerables.",
         "timeline": {
-            "2019_title": "Primeros Pasos",
-            "2019_desc": "Inicio de talleres de robótica básica en escuelas rurales.",
-            "2021_title": "Consolidación",
-            "2021_desc": "Alianzas con el sector privado para becas técnicas.",
-            "2024_title": "Hito SAMVAL",
-            "2024_desc": "Lanzamiento de la plataforma de servicios tech para financiar el impacto."
+            "2024_title": "Nacimiento Global",
+            "2024_desc": "Reunión de fundadores en Suiza (inicios) y constitución oficial de la Fundación SAMVAL (Julio).",
+            "2025_title": "Expedición Etnopertinente",
+            "2025_desc": "Visita a la Sierra Nevada. Lanzamiento de lenguajes de programación en lenguas indígenas.",
+            "2026_title": "Consolidación Legal",
+            "2026_desc": "Obtención del Régimen Tributario Especial (ESAL) para beneficios a donantes."
         },
         "cta_final_title": "¿Quieres conocernos más?",
         "cta_final_desc": "Estamos listos para contarte cómo tu empresa puede ser aliada de la tecnología con alma.",
@@ -371,9 +415,103 @@
     "terms_page": {
         "title": "Términos de Uso",
         "last_updated": "Última actualización: 1 de enero de 2024",
+        "validity": "Última actualización: 1 de enero de 2024",
         "p1": "Al acceder y utilizar este sitio web, usted acepta cumplir con los siguientes términos y condiciones.",
         "p2": "Todo el contenido de este sitio es propiedad de la Fundación SAMVAL y está protegido por las leyes de propiedad intelectual.",
-        "p3": "El uso no autorizado de cualquier material de este sitio está estrictamente prohibido."
+        "p3": "El uso no autorizado de cualquier material de este sitio está estrictamente prohibido.",
+        "acceptance_title": "Aceptación de los Términos",
+        "acceptance_content": "Al acceder y utilizar el sitio web de la <0>Fundación SAMVAL</0> (NIT 901.036.033-0), usted acepta quedar vinculado por estos Términos de Uso. Si no está de acuerdo con alguna parte de estos términos, le solicitamos abstenerse de utilizar el sitio.",
+        "property_title": "Propiedad Intelectual",
+        "property_content": "Todo el contenido publicado en este sitio web — incluyendo textos, gráficos, logotipos, íconos, imágenes, clips de audio/video, código fuente y software — es propiedad exclusiva de la Fundación SAMVAL o de sus licenciantes y está protegido por las leyes colombianas e internacionales de propiedad intelectual. Queda prohibida su reproducción, distribución o modificación sin autorización escrita.",
+        "donation_title": "Donaciones y Transacciones",
+        "donation_content1": "Las donaciones realizadas a través de este sitio son voluntarias y se destinan íntegramente a los programas sociales y educativos de la Fundación SAMVAL. Como entidad del Régimen Tributario Especial (ESAL), emitimos certificados de donación válidos ante la DIAN.",
+        "donation_content2": "Los donantes recibirán su certificado tributario dentro de los 30 días hábiles siguientes a la transacción. Las donaciones no son reembolsables salvo en casos de error comprobado en el procesamiento del pago.",
+        "exemption_title": "Limitación de Responsabilidad",
+        "exemption_content": "La Fundación SAMVAL no garantiza que el sitio web esté libre de errores o interrupciones. El contenido se proporciona \"tal cual\" sin garantías explícitas o implícitas. La fundación no será responsable por daños directos, indirectos, incidentales o consecuentes derivados del uso o la imposibilidad de uso del sitio.",
+        "jurisdiction_title": "Jurisdicción y Ley Aplicable",
+        "jurisdiction_content": "Estos Términos de Uso se rigen por las leyes de la República de Colombia. Cualquier controversia será resuelta por los tribunales competentes de la ciudad de Barranquilla, Atlántico, Colombia."
+    },
+    "impact_page": {
+        "tag": "EVIDENCIA DE IMPACTO",
+        "title": "Nuestro Impacto",
+        "subtitle": "Datos reales, comunidades reales, historias que transforman.",
+        "metrics_title": "Cifras de Impacto Acumulado",
+        "metric_1": "Niños y Jóvenes",
+        "metric_1_value": "1,200+",
+        "metric_1_desc": "estudiantes de comunidades étnicas han participado en nuestros programas STEAM",
+        "metric_2": "Comunidades",
+        "metric_2_value": "8",
+        "metric_2_desc": "comunidades indígenas y afrocolombianas atendidas directamente",
+        "metric_3": "Horas de Formación",
+        "metric_3_value": "4,500+",
+        "metric_3_desc": "horas de educación en robótica y programación impartidas",
+        "metric_4": "Docentes Capacitados",
+        "metric_4_value": "85",
+        "metric_4_desc": "docentes de zonas rurales formados en metodología STEAM etnopertinente",
+        "map_title": "Dónde Trabajamos",
+        "map_desc": "Nuestra presencia se concentra en los territorios étnicos de la costa Caribe colombiana, con expansión planificada.",
+        "map_location_1": "Sierra Nevada de Santa Marta",
+        "map_location_1_desc": "Comunidades Arahuacas — programación en lengua Iku, robótica con Thymio integrada a la Ley de Origen.",
+        "map_location_2": "San Basilio de Palenque",
+        "map_location_2_desc": "Primera comunidad afrocolombiana con módulos de robótica en lengua Palenquera. Robots que hablan Palenquero.",
+        "map_location_3": "Barranquilla",
+        "map_location_3_desc": "Sede administrativa y laboratorio de desarrollo. Alianzas con universidades locales.",
+        "cases_title": "Historias de Transformación",
+        "case_1_title": "De la Sierra al Código: Iku Digital",
+        "case_1_desc": "En la Sierra Nevada de Santa Marta, niños Arahuacos aprendieron a programar el robot Thymio usando conceptos de su Ley de Origen. Los ancianos de la comunidad participaron en el diseño de los desafíos, integrando la cosmovisión en cada módulo. El resultado: niños que ven la tecnología como extensión de su cultura, no como amenaza.",
+        "case_1_quote": "\"El robot entiende nuestra forma de pensar el territorio.\"",
+        "case_1_author": "— Mamo Arahuaco, Sierra Nevada",
+        "case_2_title": "Palenque Programa: Robots en Lengua Palenquera",
+        "case_2_desc": "En San Basilio de Palenque, la primera comunidad libre de América, los niños programan en Palenquero — una lengua criolla que no tiene representación en ningún programa gubernamental de STEM. Samval cocreó los módulos con líderes locales, integrando música, danza y tradición oral en los desafíos de robótica.",
+        "case_2_quote": "\"Aquí el robot también baila champeta.\"",
+        "case_2_author": "— Estudiante, San Basilio de Palenque",
+        "timeline_title": "Nuestra Trayectoria",
+        "timeline": [
+            { "year": "2024", "event": "Reunión de los miembros fundadores en Suiza para acordar la implementación de tecnologías con impacto social que hoy SAMVAL hace realidad." },
+            { "year": "2024", "event": "Constitución oficial de la Fundación SAMVAL (18 de Julio de 2024)." },
+            { "year": "2025", "event": "Visita a la Sierra Nevada. Lanzamiento de lenguajes de programación en lenguas indígenas." },
+            { "year": "2026", "event": "Obtención de la calificación en el Régimen Tributario Especial (ESAL). Este hito garantiza máxima transparencia e impacto medible en Colombia, permitiendo a nuestros donantes y aliados estratégicos beneficiarse de un importante retorno tributario al aportar a la educación del territorio." }
+        ],
+        "report_title": "Informe de Impacto",
+        "report_desc": "Descarga nuestro informe completo con datos, metodología y testimonios.",
+        "report_btn": "Próximamente — Junio 2026",
+        "report_note": "El primer Informe de Impacto de SAMVAL está en desarrollo. Incluirá métricas verificables, casos de estudio y recomendaciones."
+    },
+    "resources_page": {
+        "tag": "BIBLIOTECA PEDAGÓGICA",
+        "title": "Recursos Educativos",
+        "subtitle": "Guías, módulos y herramientas abiertas para que la robótica etnopertinente sea replicable.",
+        "guides_title": "Guías Pedagógicas",
+        "guide_1_title": "Guía Thymio + Cosmovisión Indígena",
+        "guide_1_desc": "20 páginas con integración del robot Thymio y la Ley de Origen Arahuaca. Diseñada para docentes de comunidades étnicas.",
+        "guide_1_status": "En desarrollo — Publicación Q2 2026",
+        "guide_2_title": "Módulo de 4 Sesiones: Palenque STEAM",
+        "guide_2_desc": "Módulo pedagógico adaptado al contexto de San Basilio de Palenque. Actividades de robótica en lengua Palenquera.",
+        "guide_2_status": "En desarrollo — Publicación Q3 2026",
+        "guide_3_title": "Manual de Robótica para Docentes Rurales",
+        "guide_3_desc": "Guía práctica para docentes sin experiencia previa en tecnología. Incluye actividades sin conexión a internet.",
+        "guide_3_status": "En desarrollo — Publicación Q4 2026",
+        "modules_title": "Módulos por Comunidad",
+        "module_arahuaco_title": "Módulo Arahuaco (Iku)",
+        "module_arahuaco_desc": "Conceptos de programación integrados con la Ley de Origen. Desafíos del robot basados en ciclos naturales y territorio sagrado.",
+        "module_palenquero_title": "Módulo Palenquero",
+        "module_palenquero_desc": "Robótica en lengua criolla Palenquera. Desafíos que integran música, danza y tradición oral afrocolombiana.",
+        "license_text": "Todos los materiales son publicados bajo licencia Creative Commons BY-NC-SA 4.0. Úsalos, compártelos, adáptalos — con atribución.",
+        "coming_soon": "Próximamente"
+    },
+    "alliances_section": {
+        "tag": "ALIANZAS Y RED",
+        "title": "Nuestro Ecosistema",
+        "subtitle": "Construimos puentes entre la innovación global y las comunidades locales.",
+        "badge": "Robótica Etnopertinente",
+        "badge_desc": "Creadores de la primera categoría de robótica educativa culturalmente integrada en América Latina.",
+        "aspirational_title": "Alianzas Estratégicas en Desarrollo",
+        "alliance_1": "Code.org NAIPI",
+        "alliance_1_desc": "Iniciativa global de computación para pueblos indígenas. Samval aspira a ser socio regional en Colombia.",
+        "alliance_2": "Red STEM Latinoamérica — Siemens Stiftung",
+        "alliance_2_desc": "200+ instituciones en 14 países. Candidatura de SAMVAL en proceso para 2026.",
+        "alliance_3": "WRO Colombia",
+        "alliance_3_desc": "Pipeline hacia competencias internacionales de robótica para beneficiarios avanzados de SAMVAL."
     },
     "footer": {
         "desc": "Ingeniería de software senior que financia el desarrollo tecnológico y social en los territorios de Colombia.",

@@ -12,16 +12,29 @@ const LanguageSwitcher: React.FC = () => {
 
     return (
         <div className="relative group z-50">
-            <button className="flex items-center space-x-1 p-2 rounded-full hover:bg-slate-100 transition text-slate-600">
-                <Globe size={20} />
-                <span className="uppercase font-bold text-xs">{i18n.language.split('-')[0]}</span>
+            <button className="neu-icon w-10 h-10 text-stone-500 hover:text-samval-guinda transition-all duration-200">
+                <Globe size={18} />
             </button>
-            <div className="absolute right-0 top-full pt-2 w-32 hidden group-hover:block animate-fade-in">
-                <div className="bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden">
-                    <button onClick={() => changeLanguage('es')} className="block w-full text-left px-4 py-2 text-sm hover:bg-slate-50 text-slate-700 font-medium">Español</button>
-                    <button onClick={() => changeLanguage('en')} className="block w-full text-left px-4 py-2 text-sm hover:bg-slate-50 text-slate-700 font-medium">English</button>
-                    <button onClick={() => changeLanguage('fr')} className="block w-full text-left px-4 py-2 text-sm hover:bg-slate-50 text-slate-700 font-medium">Français</button>
-                    <button onClick={() => changeLanguage('de')} className="block w-full text-left px-4 py-2 text-sm hover:bg-slate-50 text-slate-700 font-medium">Deutsch</button>
+            <div className="absolute right-0 top-full pt-2 w-36 hidden group-hover:block animate-neu-fade-in">
+                <div className="neu-raised-sm p-2 space-y-1">
+                    {[
+                        { code: 'es', label: 'Español' },
+                        { code: 'en', label: 'English' },
+                        { code: 'fr', label: 'Français' },
+                        { code: 'de', label: 'Deutsch' },
+                    ].map(lang => (
+                        <button
+                            key={lang.code}
+                            onClick={() => changeLanguage(lang.code)}
+                            className={`block w-full text-left px-4 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 ${
+                                i18n.language.startsWith(lang.code)
+                                    ? 'neu-pressed-sm text-samval-guinda font-bold'
+                                    : 'text-stone-600 hover:text-samval-guinda hover:bg-stone-200/30'
+                            }`}
+                        >
+                            {lang.label}
+                        </button>
+                    ))}
                 </div>
             </div>
         </div>

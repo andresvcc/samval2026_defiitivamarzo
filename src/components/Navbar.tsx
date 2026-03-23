@@ -12,35 +12,61 @@ const Navbar: React.FC = () => {
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  const isActive = (path: string) => location.pathname === path ? 'text-samval-guinda font-semibold underline decoration-2 underline-offset-4' : 'text-slate-600 hover:text-samval-guinda';
+  const isActive = (path: string) =>
+    location.pathname === path
+      ? 'text-samval-guinda font-bold'
+      : 'text-stone-500 hover:text-samval-guinda';
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-sm border-b border-slate-200 shadow-sm transition-all duration-300">
+    <nav className="sticky top-0 z-50 w-full transition-all duration-300"
+      style={{
+        background: '#e0d6cc',
+        boxShadow: '0 4px 12px #c4b8ac, 0 -2px 8px #f0e8e0'
+      }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
-            <img
-              src="https://i.ibb.co/DDs8DDfy/SAMVALLOGO.png"
-              alt="SAMVAL Logo"
-              className="h-12 w-auto object-contain"
-            />
+            <div className="neu-icon w-12 h-12 p-2">
+              <img
+                src="https://i.ibb.co/DDs8DDfy/SAMVALLOGO.png"
+                alt="SAMVAL Logo"
+                className="h-full w-auto object-contain"
+              />
+            </div>
             <div className="flex flex-col">
               <span className="text-xl font-bold text-[#801b1b] leading-none">{t('navbar.title')}</span>
-              <span className="text-[10px] sm:text-xs text-slate-500 font-medium tracking-tight">{t('navbar.tagline')}</span>
+              <span className="text-[10px] sm:text-xs text-stone-400 font-medium tracking-tight">{t('navbar.tagline')}</span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Link to="/" className={`${isActive('/')} transition-colors`}>{t('navbar.home')}</Link>
-            <Link to="/nosotros" className={`${isActive('/nosotros')} transition-colors`}>{t('navbar.about')}</Link>
-            <Link to="/proyectos" className={`${isActive('/proyectos')} transition-colors`}>{t('navbar.projects')}</Link>
-            <Link to="/servicios-tech" className={`${isActive('/servicios-tech')} transition-colors`}>{t('navbar.services')}</Link>
-            <Link to="/contacto" className={`${isActive('/contacto')} transition-colors`}>{t('navbar.contact')}</Link>
+          <div className="hidden md:flex items-center space-x-2">
+            {[
+              { path: '/', label: t('navbar.home') },
+              { path: '/nosotros', label: t('navbar.about') },
+              { path: '/impacto', label: t('navbar.impact') },
+              { path: '/recursos', label: t('navbar.resources') },
+              { path: '/proyectos', label: t('navbar.projects') },
+              { path: '/servicios-tech', label: t('navbar.services') },
+              { path: '/contacto', label: t('navbar.contact') },
+            ].map(link => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 ${
+                  location.pathname === link.path
+                    ? 'text-samval-guinda neu-pressed-sm'
+                    : 'text-stone-500 hover:text-samval-guinda hover:bg-stone-200/30'
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             {/* Language Switcher */}
             <div className="hidden md:block">
               <LanguageSwitcher />
@@ -50,30 +76,30 @@ const Navbar: React.FC = () => {
             <div className="hidden lg:flex items-center space-x-3">
               <Link
                 to="/servicios-tech"
-                className="flex items-center space-x-1 px-4 py-2 text-sm font-medium text-samval-guinda bg-red-50 hover:bg-red-100 rounded-full transition-colors border border-samval-guinda/20"
+                className="flex items-center space-x-1.5 px-5 py-2.5 text-sm font-bold text-samval-guinda rounded-xl transition-all duration-200 neu-flat hover:shadow-none"
+                style={{ fontSize: '13px' }}
               >
-                <Code size={16} />
+                <Code size={15} />
                 <span>{t('navbar.request_software')}</span>
               </Link>
               <Link
                 to="/donar"
-                className="flex items-center space-x-1 px-4 py-2 text-sm font-medium text-white bg-samval-guinda hover:bg-samval-dark rounded-full shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5"
+                className="neu-btn-primary flex items-center space-x-1.5 !py-2.5 !px-5 !text-sm !rounded-xl"
               >
-                <Heart size={16} className="fill-current" />
+                <Heart size={15} className="fill-current" />
                 <span>{t('navbar.donate')}</span>
               </Link>
             </div>
           </div>
 
-
           {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center gap-4">
+          <div className="md:hidden flex items-center gap-3">
             <LanguageSwitcher />
             <button
               onClick={toggleMenu}
-              className="text-slate-500 hover:text-slate-700 focus:outline-none p-2"
+              className="neu-icon w-10 h-10 text-stone-500 hover:text-stone-700 transition-all"
             >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
+              {isOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
@@ -81,21 +107,51 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-white border-t border-slate-100 absolute w-full shadow-2xl animate-fade-in">
-          <div className="px-4 pt-4 pb-8 space-y-3">
-            <Link to="/" onClick={toggleMenu} className={`block px-4 py-3 rounded-xl text-lg font-bold ${location.pathname === '/' ? 'bg-red-50 text-samval-guinda' : 'text-slate-700 hover:bg-slate-50'}`}>{t('navbar.home')}</Link>
-            <Link to="/nosotros" onClick={toggleMenu} className={`block px-4 py-3 rounded-xl text-lg font-bold ${location.pathname === '/nosotros' ? 'bg-red-50 text-samval-guinda' : 'text-slate-700 hover:bg-slate-50'}`}>{t('navbar.about')}</Link>
-            <Link to="/proyectos" onClick={toggleMenu} className={`block px-4 py-3 rounded-xl text-lg font-bold ${location.pathname === '/proyectos' ? 'bg-red-50 text-samval-guinda' : 'text-slate-700 hover:bg-slate-50'}`}>{t('navbar.projects')}</Link>
-            <Link to="/servicios-tech" onClick={toggleMenu} className={`block px-4 py-3 rounded-xl text-lg font-bold ${location.pathname === '/servicios-tech' ? 'bg-red-50 text-samval-guinda' : 'text-slate-700 hover:bg-slate-50'}`}>{t('navbar.services')}</Link>
-            <Link to="/contacto" onClick={toggleMenu} className={`block px-4 py-3 rounded-xl text-lg font-bold ${location.pathname === '/contacto' ? 'bg-red-50 text-samval-guinda' : 'text-slate-700 hover:bg-slate-50'}`}>{t('navbar.contact')}</Link>
+        <div className="md:hidden absolute w-full animate-neu-fade-in"
+          style={{
+            background: '#e0d6cc',
+            boxShadow: '0 12px 24px #c4b8ac'
+          }}
+        >
+          <div className="px-4 pt-4 pb-8 space-y-2">
+            {[
+              { path: '/', label: t('navbar.home') },
+              { path: '/nosotros', label: t('navbar.about') },
+              { path: '/impacto', label: t('navbar.impact') },
+              { path: '/recursos', label: t('navbar.resources') },
+              { path: '/proyectos', label: t('navbar.projects') },
+              { path: '/servicios-tech', label: t('navbar.services') },
+              { path: '/contacto', label: t('navbar.contact') },
+            ].map(link => (
+              <Link
+                key={link.path}
+                to={link.path}
+                onClick={toggleMenu}
+                className={`block px-5 py-3.5 rounded-xl text-base font-bold transition-all ${
+                  location.pathname === link.path
+                    ? 'neu-pressed-sm text-samval-guinda'
+                    : 'text-stone-600 hover:bg-stone-200/30'
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
 
-            <div className="pt-6 border-t border-slate-100 space-y-4">
-              <Link to="/servicios-tech" onClick={toggleMenu} className="flex items-center justify-center w-full px-6 py-4 bg-red-50 text-samval-guinda rounded-2xl font-black border border-samval-guinda/20 shadow-sm">
-                <Code size={20} className="mr-3" />
+            <div className="pt-6 space-y-3">
+              <Link
+                to="/servicios-tech"
+                onClick={toggleMenu}
+                className="flex items-center justify-center w-full px-6 py-4 neu-raised-sm text-samval-guinda font-bold text-sm"
+              >
+                <Code size={18} className="mr-2" />
                 {t('navbar.request_software').toUpperCase()}
               </Link>
-              <Link to="/donar" onClick={toggleMenu} className="flex items-center justify-center w-full px-6 py-4 bg-samval-guinda text-white rounded-2xl font-black shadow-lg shadow-samval-guinda/30">
-                <Heart size={20} className="mr-3 fill-current" />
+              <Link
+                to="/donar"
+                onClick={toggleMenu}
+                className="flex items-center justify-center w-full px-6 py-4 neu-btn-primary !rounded-xl !text-base"
+              >
+                <Heart size={18} className="mr-2 fill-current" />
                 {t('navbar.donate').toUpperCase()}
               </Link>
             </div>

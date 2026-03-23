@@ -1,8 +1,8 @@
-
 import React, { useEffect, useState } from 'react';
-import { FinancialStatement, staticFinancialsData } from '../../data/staticData';
+import { FinancialStatement } from '../../data/staticData';
 import { Trash2, Info } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { supabase } from '../../supabase';
 
 const Financials: React.FC = () => {
     const { t } = useTranslation();
@@ -10,17 +10,89 @@ const Financials: React.FC = () => {
     const [uploading, setUploading] = useState(false);
     const [year, setYear] = useState(new Date().getFullYear());
     const [title, setTitle] = useState(t('admin.financials.title') + ' ' + new Date().getFullYear());
+    const [loading, setLoading] = useState(true);
+
+    const fetchFinancials = async () => {
+        try {
+            setLoading(true);
+            const { data, error } = await supabase
+                .from('financial_statements')
+                .select('*')
+                .order('year', { ascending: false });
+
+            if (error) throw error;
+            setFinancials(data || []);
+        } catch (error) {
+            console.error('Error fetching financials:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
-        // Cargar datos estáticos
-        setFinancials(staticFinancialsData);
+        fetchFinancials();
     }, []);
 
     const handleUpload = async (e: React.FormEvent) => {
         e.preventDefault();
         setUploading(true);
-        alert(t('admin.photos.empty')); // Placeholder for static mode alert
-        setUploading(false);
+
+        try {
+            const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+            if (!fileInput.files || fileInput.files.length === 0) {
+                alert('Please select a file');
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const fileExt = file.name.split('.').pop();
+            const fileName = `financials/${Date.now()}.${fileExt}`;
+
+            const { error: uploadError } = await supabase.storage
+                .from('documents')
+                .upload(fileName, file);
+
+            if (uploadError) throw uploadError;
+
+            const { data: { publicUrl } } = supabase.storage
+                .from('documents')
+                .getPublicUrl(fileName);
+
+            const { error: insertError } = await supabase
+                .from('financial_statements')
+                .insert([{
+                    year,
+                    title,
+                    file_url: publicUrl
+                }]);
+
+            if (insertError) throw insertError;
+
+            await fetchFinancials();
+            alert('Financial statement added successfully!');
+            setTitle('');
+        } catch (error) {
+            console.error('Error uploading financial statement:', error);
+            alert('Error uploading financial statement');
+        } finally {
+            setUploading(false);
+        }
+    };
+
+    const handleDelete = async (id: string) => {
+        if (!confirm('Are you sure?')) return;
+        try {
+            const { error } = await supabase
+                .from('financial_statements')
+                .delete()
+                .eq('id', id);
+
+            if (error) throw error;
+            setFinancials(financials.filter(f => f.id !== id));
+        } catch (error) {
+            console.error('Error deleting:', error);
+            alert('Error deleting item');
+        }
     };
 
     return (
@@ -29,21 +101,18 @@ const Financials: React.FC = () => {
                 <h1 className="text-2xl font-bold">{t('admin.financials.title')}</h1>
                 <div className="bg-blue-50 text-blue-700 px-4 py-2 rounded-lg flex items-center gap-2 text-sm border border-blue-100">
                     <Info size={16} />
-                    <span>{t('admin.layout.loading') === 'Cargando...' ? 'Modo Estático Activado' : 'Static Mode Enabled'}</span>
+                    <span>{loading ? 'Cargando...' : 'Live Mode'}</span>
                 </div>
             </div>
 
-            <form onSubmit={handleUpload} className="bg-white p-6 rounded-lg shadow-md mb-8 space-y-4 max-w-lg opacity-75 grayscale-[0.5] pointer-events-none relative">
-                <div className="absolute inset-0 z-10 bg-white/50 flex items-center justify-center">
-                    <span className="bg-gray-800 text-white px-3 py-1 rounded text-sm font-bold">Demo</span>
-                </div>
+            <form onSubmit={handleUpload} className="bg-white p-6 rounded-lg shadow-md mb-8 space-y-4 max-w-lg relative">
                 <h3 className="text-lg font-semibold mb-4">{t('admin.financials.add')}</h3>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">{t('admin.financials.year')}</label>
                     <input type="number" value={year} onChange={e => setYear(Number(e.target.value))} className="mt-1 block w-full border rounded-md shadow-sm py-2 px-3 sm:text-sm" />
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-gray-700">{t('admin.financials.year')}</label>
+                    <label className="block text-sm font-medium text-gray-700">{t('admin.financials.title_field') || 'Title'}</label>
                     <input type="text" value={title} onChange={e => setTitle(e.target.value)} className="mt-1 block w-full border rounded-md shadow-sm py-2 px-3 sm:text-sm" />
                 </div>
                 <div>
@@ -57,7 +126,9 @@ const Financials: React.FC = () => {
 
             <div className="bg-white shadow overflow-hidden sm:rounded-md">
                 <ul className="divide-y divide-gray-200">
-                    {financials.map((item) => (
+                    {loading ? (
+                        <li className="px-6 py-4 text-center text-gray-500">Loading...</li>
+                    ) : financials.map((item) => (
                         <li key={item.id} className="px-6 py-4 flex items-center justify-between hover:bg-gray-50">
                             <div>
                                 <p className="text-sm font-medium text-blue-600 truncate">{t(`data.financials.${item.id}`) || item.title}</p>
@@ -67,13 +138,13 @@ const Financials: React.FC = () => {
                             </div>
                             <div className="flex items-center space-x-4">
                                 <a href={item.file_url} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-900 text-sm font-medium">{t('admin.financials.file')}</a>
-                                <button onClick={() => alert('Edite src/data/staticData.ts para eliminar')} className="text-red-600/50 cursor-not-allowed">
+                                <button onClick={() => handleDelete(item.id)} className="text-red-600 hover:text-red-900">
                                     <Trash2 size={18} />
                                 </button>
                             </div>
                         </li>
                     ))}
-                    {financials.length === 0 && <li className="px-6 py-4 text-center text-gray-500">{t('admin.photos.empty')}</li>}
+                    {!loading && financials.length === 0 && <li className="px-6 py-4 text-center text-gray-500">{t('admin.photos.empty')}</li>}
                 </ul>
             </div>
         </div>

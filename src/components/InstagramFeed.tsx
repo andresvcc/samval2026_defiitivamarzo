@@ -18,7 +18,6 @@ const InstagramFeed: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const [isLive, setIsLive] = useState(false);
 
-    // Fallback static posts (used when no Instagram token is configured)
     const staticPosts: DisplayPost[] = [
         {
             id: 1,
@@ -57,11 +56,8 @@ const InstagramFeed: React.FC = () => {
             setLoading(true);
             try {
                 const igPosts = await fetchInstagramPosts(4);
-
                 if (cancelled) return;
-
                 if (igPosts.length > 0) {
-                    // Transform real Instagram posts to our display format
                     const transformedPosts: DisplayPost[] = igPosts.map((post: InstagramPost) => ({
                         id: post.id,
                         image: post.media_type === 'VIDEO'
@@ -77,7 +73,6 @@ const InstagramFeed: React.FC = () => {
                     setPosts(transformedPosts);
                     setIsLive(true);
                 } else {
-                    // Fallback to static posts
                     setPosts(staticPosts);
                     setIsLive(false);
                 }
@@ -92,18 +87,17 @@ const InstagramFeed: React.FC = () => {
         }
 
         loadPosts();
-
         return () => { cancelled = true; };
     }, []);
 
     return (
-        <section className="py-24 bg-slate-50 overflow-hidden">
+        <section className="py-24 overflow-hidden" style={{ background: '#e0d6cc' }}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
                     <div className="max-w-xl text-left">
-                        <div className="inline-flex items-center space-x-2 bg-samval-guinda/10 text-samval-guinda px-4 py-2 rounded-full mb-6 border border-samval-guinda/20">
-                            <Instagram size={18} />
-                            <span className="text-xs font-black uppercase tracking-widest">{t('social_feed.tag')}</span>
+                        <div className="inline-flex items-center space-x-2 neu-raised-sm px-5 py-2.5 mb-6">
+                            <Instagram size={18} className="text-samval-guinda" />
+                            <span className="text-xs font-black uppercase tracking-widest text-samval-guinda">{t('social_feed.tag')}</span>
                             {isLive && (
                                 <span className="relative flex h-2 w-2 ml-2">
                                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -111,10 +105,10 @@ const InstagramFeed: React.FC = () => {
                                 </span>
                             )}
                         </div>
-                        <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tighter leading-none">
+                        <h2 className="text-4xl md:text-6xl font-black text-stone-800 mb-6 tracking-tighter leading-none">
                             <Trans i18nKey="social_feed.title" components={{ 1: <span className="text-samval-guinda" /> }} />
                         </h2>
-                        <p className="text-lg text-slate-500 font-medium">
+                        <p className="text-lg text-stone-500 font-medium">
                             {t('social_feed.subtitle')}
                         </p>
                     </div>
@@ -122,39 +116,38 @@ const InstagramFeed: React.FC = () => {
                         href="https://www.instagram.com/fundacionsamval/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group flex items-center space-x-3 bg-white px-8 py-4 rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-100 hover:border-samval-guinda/30 transition-all font-black"
+                        className="group flex items-center space-x-3 neu-raised px-8 py-4 hover:scale-[1.02] transition-all duration-300 font-black"
                     >
-                        <span className="text-slate-900">{t('social_feed.view_profile')}</span>
+                        <span className="text-stone-700">{t('social_feed.view_profile')}</span>
                         <ExternalLink size={18} className="text-samval-guinda group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                     </a>
                 </div>
 
-                {/* Loading Skeleton */}
                 {loading ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                         {[1, 2, 3, 4].map((i) => (
-                            <div key={i} className="aspect-square rounded-[2.5rem] bg-slate-200 animate-pulse flex items-center justify-center">
-                                <Loader2 size={32} className="text-slate-400 animate-spin" />
+                            <div key={i} className="aspect-square neu-pressed rounded-[28px] flex items-center justify-center">
+                                <Loader2 size={28} className="text-stone-400 animate-spin" />
                             </div>
                         ))}
                     </div>
                 ) : (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                         {posts.map((post) => (
                             <a
                                 key={post.id}
                                 href={post.permalink || "https://www.instagram.com/fundacionsamval/"}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="group relative aspect-square overflow-hidden rounded-[2.5rem] bg-slate-200 shadow-sm transition-all hover:shadow-2xl block"
+                                className="group relative aspect-square overflow-hidden neu-raised-lg transition-all duration-300 hover:scale-[1.02] block"
                             >
                                 <img
                                     src={post.image}
                                     alt={post.caption}
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[30%] group-hover:grayscale-0"
+                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 rounded-[28px]"
                                     loading="lazy"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                                <div className="absolute inset-0 bg-gradient-to-t from-stone-900/90 via-stone-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8 rounded-[28px]">
                                     <p className="text-white text-sm font-bold line-clamp-2 mb-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                                         {post.caption}
                                     </p>

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solicitud de Cotización — SAMVAL</title>
+
+  <!--
+    ============================================================
+    SAMVAL — Formulario de Cotización v2
+    HubSpot Portal ID : 51241676
+    HubSpot Form ID   : 3ac4b906-6c2d-403b-9e71-a2c7ab1b87c0
+
+    Campos:
+      company, firstname, lastname, email, phone, message
+      + consentimiento GDPR (legalConsentOptions)
+
+    Nota: el reCAPTCHA lo valida HubSpot del lado del servidor,
+    no se necesita replicar en el front.
+    ============================================================
+    INSTRUCCIONES:
+    · WordPress  → CSS en "Apariencia › CSS adicional"
+                   HTML + script en bloque "HTML personalizado"
+    · Webflow    → componente "Embed"
+    · HTML puro  → pega el archivo completo
+    ============================================================
+  -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    .sv-wrap {
+      font-family: 'DM Sans', sans-serif;
+      background: #701610;
+      border-radius: 16px;
+      padding: 2.5rem 2rem 2rem;
+      max-width: 720px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sv-wrap::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 200px; height: 200px;
+      background: rgba(193,139,138,0.12);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .sv-label-top {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #C18B8A;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .sv-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 2rem;
+      line-height: 1.2;
+    }
+
+    .sv-title span { color: #C18B8A; }
+
+    .sv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 520px) {
+      .sv-grid { grid-template-columns: 1fr; }
+    }
+
+    .sv-group { display: flex; flex-direction: column; gap: 6px; }
+    .sv-group.full { grid-column: 1 / -1; }
+
+    .sv-group label {
+      font-size: 11px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .sv-req { color: #C18B8A; margin-left: 2px; }
+
+    .sv-group input,
+    .sv-group textarea {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 14px;
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+      width: 100%;
+    }
+
+    .sv-group input::placeholder,
+    .sv-group textarea::placeholder { color: rgba(255,255,255,0.3); }
+
+    .sv-group input:focus,
+    .sv-group textarea:focus {
+      border-color: #C18B8A;
+      background: rgba(193,139,138,0.1);
+    }
+
+    .sv-group textarea {
+      resize: vertical;
+      min-height: 100px;
+      line-height: 1.5;
+    }
+
+    /* ── GDPR ── */
+    .sv-gdpr {
+      grid-column: 1 / -1;
+      margin-top: 0.25rem;
+      padding: 1rem 1.25rem;
+      background: rgba(0,0,0,0.2);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+    }
+
+    .sv-gdpr-text {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.6;
+      margin-bottom: 0.75rem;
+    }
+
+    .sv-check-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 0.6rem;
+    }
+
+    .sv-check-row:last-child { margin-bottom: 0; }
+
+    .sv-check-row input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      min-width: 16px;
+      margin-top: 2px;
+      accent-color: #C18B8A;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      padding: 0;
+    }
+
+    .sv-check-row label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0;
+      text-transform: none;
+      font-weight: 400;
+      cursor: pointer;
+      line-height: 1.5;
+    }
+
+    .sv-check-row label .sv-req { font-size: 12px; }
+
+    /* ── Botón ── */
+    .sv-btn {
+      width: 100%;
+      margin-top: 1.25rem;
+      padding: 14px;
+      background: #fff;
+      color: #701610;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .sv-btn:hover { background: #f6f6f6; }
+    .sv-btn:active { transform: scale(0.99); }
+    .sv-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    /* ── Mensajes ── */
+    .sv-status {
+      margin-top: 1rem;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      line-height: 1.5;
+      display: none;
+    }
+
+    .sv-status.ok {
+      background: rgba(112,22,16,0.6);
+      border: 1px solid rgba(193,139,138,0.5);
+      color: #f0d0cf;
+      display: block;
+    }
+
+    .sv-status.err {
+      background: rgba(80,0,0,0.4);
+      border: 1px solid rgba(255,100,50,0.4);
+      color: #ffaa80;
+      display: block;
+    }
+
+    .sv-status.loading {
+      background: rgba(193,139,138,0.1);
+      border: 1px solid rgba(193,139,138,0.3);
+      color: #e0b0af;
+      display: block;
+    }
+
+    .sv-spinner {
+      display: inline-block;
+      width: 12px; height: 12px;
+      border: 2px solid rgba(193,139,138,0.4);
+      border-top-color: #C18B8A;
+      border-radius: 50%;
+      animation: sv-spin 0.7s linear infinite;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+
+    @keyframes sv-spin { to { transform: rotate(360deg); } }
+
+    .sv-footer {
+      margin-top: 1.25rem;
+      font-size: 11px;
+      color: rgba(255,255,255,0.25);
+      text-align: center;
+    }
+
+    .sv-footer a {
+      color: rgba(193,139,138,0.7);
+      text-decoration: none;
+    }
+
+    .sv-footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <div class="sv-wrap" id="sv-wrap">
+
+    <div class="sv-label-top">Fundación SAMVAL</div>
+    <div class="sv-title">Solicite una <span>Cotización</span></div>
+
+    <div class="sv-grid" id="sv-fields">
+
+      <div class="sv-group full">
+        <label for="sv-empresa">Nombre de la empresa</label>
+        <input type="text" id="sv-empresa" placeholder="Nombre de su empresa u organización..." autocomplete="organization" />
+      </div>
+
+      <div class="sv-group">
+        <label for="sv-nombre">Nombre <span class="sv-req">*</span></label>
+        <input type="text" id="sv-nombre" placeholder="Su nombre..." autocomplete="given-name" />
+      </div>
+
+      <div class="sv-group">
+        <label for="sv-apellidos">Apellidos <span class="sv-req">*</span></label>
+        <input type="text" id="sv-apellidos" placeholder="Sus apellidos..." autocomplete="family-name" />
+      </div>
+
+      <div class="sv-group full">
+        <label for="sv-correo">Correo <span class="sv-req">*</span></label>
+        <input type="email" id="sv-correo" placeholder="correo@empresa.com" autocomplete="email" />
+      </div>
+
+      <div class="sv-group full">
+        <label for="sv-telefono">Número de teléfono <span class="sv-req">*</span></label>
+        <input type="tel" id="sv-telefono" placeholder="+57 300 000 0000" autocomplete="tel" />
+      </div>
+
+      <div class="sv-group full">
+        <label for="sv-mensaje">Mensaje <span class="sv-req">*</span></label>
+        <textarea id="sv-mensaje" placeholder="Dinos qué necesitas..."></textarea>
+      </div>
+
+      <!-- GDPR -->
+      <div class="sv-gdpr">
+        <p class="sv-gdpr-text">
+          SAMVAL se compromete a proteger y respetar tu privacidad, y solo usaremos tu información personal
+          para administrar tu cuenta y proporcionar los productos y servicios que nos solicitaste.
+        </p>
+
+        <div class="sv-check-row">
+          <input type="checkbox" id="sv-consent-comms" />
+          <label for="sv-consent-comms">
+            Acepto recibir otras comunicaciones de SAMVAL.
+          </label>
+        </div>
+
+        <div class="sv-check-row">
+          <input type="checkbox" id="sv-consent-data" />
+          <label for="sv-consent-data">
+            Acepto que SAMVAL almacene y trate mis datos personales. <span class="sv-req">*</span>
+          </label>
+        </div>
+
+        <p class="sv-gdpr-text" style="margin-top: 0.75rem; margin-bottom: 0;">
+          Puedes darte de baja en cualquier momento. Consulta nuestra
+          <a href="https://www.samval.org/privacidad" target="_blank">Política de privacidad</a>.
+        </p>
+      </div>
+
+    </div>
+
+    <button class="sv-btn" id="sv-btn" onclick="svEnviar()">Enviar</button>
+
+    <div class="sv-status" id="sv-status"></div>
+
+    <div class="sv-footer">
+      Protegido por HubSpot reCAPTCHA ·
+      <a href="https://www.samval.org/privacidad" target="_blank">Política de privacidad</a>
+    </div>
+
+  </div>
+
+  <script>
+    var SV_PORTAL_ID = '51241676';
+    var SV_FORM_ID   = '3ac4b906-6c2d-403b-9e71-a2c7ab1b87c0';
+    var SV_ENDPOINT  = 'https://api.hsforms.com/submissions/v3/integration/submit/'
+                       + SV_PORTAL_ID + '/' + SV_FORM_ID;
+
+    async function svEnviar() {
+      var empresa    = document.getElementById('sv-empresa').value.trim();
+      var nombre     = document.getElementById('sv-nombre').value.trim();
+      var apellidos  = document.getElementById('sv-apellidos').value.trim();
+      var correo     = document.getElementById('sv-correo').value.trim();
+      var telefono   = document.getElementById('sv-telefono').value.trim();
+      var mensaje    = document.getElementById('sv-mensaje').value.trim();
+      var consentData = document.getElementById('sv-consent-data').checked;
+      var consentComms = document.getElementById('sv-consent-comms').checked;
+
+      if (!nombre || !apellidos || !correo || !telefono || !mensaje) {
+        svStatus('err', 'Por favor completa todos los campos obligatorios (*).');
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) {
+        svStatus('err', 'El correo electrónico no tiene un formato válido.');
+        return;
+      }
+      if (!consentData) {
+        svStatus('err', 'Debes aceptar que SAMVAL almacene y trate tus datos personales para continuar.');
+        return;
+      }
+
+      var btn = document.getElementById('sv-btn');
+      btn.disabled = true;
+      svStatus('loading', '<span class="sv-spinner"></span>Enviando a HubSpot...');
+
+      var payload = {
+        fields: [
+          { name: 'company',   value: empresa   },
+          { name: 'firstname', value: nombre    },
+          { name: 'lastname',  value: apellidos },
+          { name: 'email',     value: correo    },
+          { name: 'phone',     value: telefono  },
+          { name: 'message',   value: mensaje   }
+        ],
+        context: {
+          pageUri:  window.location.href,
+          pageName: 'Solicitud de Cotización — SAMVAL'
+        },
+        legalConsentOptions: {
+          consent: {
+            consentToProcess: consentData,
+            text: 'Acepto que SAMVAL almacene y trate mis datos personales.',
+            communications: [
+              {
+                value: consentComms,
+                subscriptionTypeId: 999,
+                text: 'Acepto recibir otras comunicaciones de SAMVAL.'
+              }
+            ]
+          }
+        }
+      };
+
+      try {
+        var response = await fetch(SV_ENDPOINT, {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+          svStatus('ok', '¡Solicitud enviada con éxito! Nos pondremos en contacto contigo pronto.');
+          document.getElementById('sv-fields').style.opacity       = '0.4';
+          document.getElementById('sv-fields').style.pointerEvents = 'none';
+          btn.style.display = 'none';
+        } else {
+          var err = await response.json().catch(function() { return {}; });
+          svStatus('err', 'Error al enviar: ' + (err.message || 'Intenta de nuevo en unos momentos.'));
+          btn.disabled = false;
+        }
+      } catch (e) {
+        svStatus('err', 'Error de conexión. Verifica tu red e intenta de nuevo.');
+        btn.disabled = false;
+      }
+    }
+
+    function svStatus(type, msg) {
+      var el = document.getElementById('sv-status');
+      el.className = 'sv-status ' + type;
+      el.innerHTML = msg;
+    }
+  </script>
+
+</body>
+</html>

@@ -10,6 +10,9 @@ import GetInvolved from './pages/GetInvolved';
 import Contact from './pages/Contact';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfUse from './pages/TermsOfUse';
+import Impact from './pages/Impact';
+import Resources from './pages/Resources';
+import Success from './pages/Success';
 import AdminLayout from './components/admin/AdminLayout';
 import Login from './pages/admin/Login';
 import Dashboard from './pages/admin/Dashboard';
@@ -56,8 +59,11 @@ const App: React.FC = () => {
             <Route path="/donar" element={<GetInvolved />} />
             <Route path="/voluntariado" element={<GetInvolved />} /> {/* Shared page with toggle */}
             <Route path="/contacto" element={<Contact />} />
+            <Route path="/impacto" element={<Impact />} />
+            <Route path="/recursos" element={<Resources />} />
             <Route path="/privacidad" element={<PrivacyPolicy />} />
             <Route path="/terminos" element={<TermsOfUse />} />
+            <Route path="/gracias" element={<Success />} />
 
             {/* Admin Routes */}
             <Route path="/admin/login" element={<Login />} />
