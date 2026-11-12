@@ -1,5 +1,6 @@
+import { useDocumentNavigate } from '../hooks/useDocumentNavigate';
 import React, { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Heart, CheckCircle, ArrowRight, ArrowLeft, Mail, Code, HandHeart, Home } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import SEO from '../components/SEO';
@@ -29,7 +30,7 @@ type SuccessType = keyof typeof successTypes;
 const isSuccessType = (value: string): value is SuccessType => value in successTypes;
 
 const Success: React.FC = () => {
-  const navigate = useNavigate();
+  const navigate = useDocumentNavigate();
   const location = useLocation();
   const { t } = useTranslation();
   const rawType = new URLSearchParams(location.search).get('tipo') || 'donacion';

@@ -1,3 +1,4 @@
+import { media } from '../generated/media';
 
 import React from 'react';
 import { Book, Users } from 'lucide-react';
@@ -11,14 +12,14 @@ const SocialPrograms: React.FC = () => {
     {
       title: t('social_programs_page.projects.p1_title'),
       category: t('social_programs_page.projects.p1_cat'),
-      image: "https://i.ibb.co/W46TrSDw/Gemini-Generated-Image-j509xvj509xvj509.png",
+      image: media.steam,
       description: t('social_programs_page.projects.p1_desc'),
       impact: t('social_programs_page.projects.p1_impact')
     },
     {
       title: t('social_programs_page.projects.p2_title'),
       category: t('social_programs_page.projects.p2_cat'),
-      image: "https://i.ibb.co/2Yq3L7nC/imgi-2-event-1.jpg",
+      image: media.event,
       description: t('social_programs_page.projects.p2_desc'),
       impact: t('social_programs_page.projects.p2_impact')
     },
@@ -49,7 +50,7 @@ const SocialPrograms: React.FC = () => {
           {projects.map((project, idx) => (
             <div key={idx} className="neu-raised-lg overflow-hidden group hover:scale-[1.02] transition-all duration-500 flex flex-col h-full">
               <div className="relative h-64 sm:h-56 overflow-hidden shrink-0" style={{ borderRadius: '28px 28px 0 0' }}>
-                <img
+                <img loading="lazy" decoding="async"
                   src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"

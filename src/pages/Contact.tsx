@@ -1,15 +1,18 @@
+import { useDocumentNavigate } from '../hooks/useDocumentNavigate';
+import { useClientReady } from '../hooks/useClientReady';
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { useTranslation, Trans } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+
 import SEO from '../components/SEO';
 import TurnstileWidget from '../components/TurnstileWidget';
 import { submitContactForm } from '../services/samvalApi';
 import { trackConversion } from '../utils/conversions';
 
 const Contact: React.FC = () => {
+  const clientReady = useClientReady();
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = useDocumentNavigate();
   const [formData, setFormData] = useState({
     empresa: '',
     correo: '',
@@ -122,6 +125,7 @@ const Contact: React.FC = () => {
             </div>
 
             <form onSubmit={handleSubmit} className="relative z-10" style={{ opacity: status === 'success' ? 0.4 : 1, pointerEvents: status === 'success' ? 'none' : 'auto' }}>
+              <fieldset className="contents" disabled={!clientReady}>
               <input
                 type="text"
                 name="website"
@@ -262,6 +266,7 @@ const Contact: React.FC = () => {
                   privacidad y el compromiso de proteger tu privacidad, consulta nuestra <a href="/privacidad" className="text-[#C18B8A] hover:underline">Política de privacidad</a>.
                 </p>
               </div>
+            </fieldset>
             </form>
 
             <div className="relative z-10">

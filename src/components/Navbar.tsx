@@ -1,16 +1,15 @@
+import {changeSiteLanguage} from '../i18n';
+import { Link } from './Link';
+import { media } from '../generated/media';
 
-import React, { useEffect, useRef, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Menu, X, Heart, Code, Globe } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from './LanguageSwitcher';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [renderMobileMenu, setRenderMobileMenu] = useState(false);
-  const menuPanelRef = useRef<HTMLDivElement>(null);
-  const menuContentRef = useRef<HTMLDivElement>(null);
-  const menuIconRef = useRef<HTMLSpanElement>(null);
   const location = useLocation();
   const { t, i18n } = useTranslation();
 
@@ -33,93 +32,6 @@ const Navbar: React.FC = () => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen]);
-
-  useEffect(() => {
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (isOpen) {
-      setRenderMobileMenu(true);
-      return;
-    }
-
-    if (reduceMotion || !menuPanelRef.current) {
-      setRenderMobileMenu(false);
-      return;
-    }
-
-    let cancelled = false;
-    import('gsap').then(({ gsap }) => {
-      if (cancelled || !menuPanelRef.current) return;
-
-      gsap.to(menuPanelRef.current, {
-        autoAlpha: 0,
-        y: -14,
-        duration: 0.22,
-        ease: 'power2.in',
-        onComplete: () => setRenderMobileMenu(false)
-      });
-    });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [isOpen]);
-
-  useEffect(() => {
-    if (!renderMobileMenu) return;
-
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduceMotion) return;
-
-    let cancelled = false;
-    let cleanup: (() => void) | undefined;
-
-    import('gsap').then(({ gsap }) => {
-      if (cancelled || !menuPanelRef.current) return;
-
-      const items = menuContentRef.current?.querySelectorAll('[data-mobile-menu-item]') ?? [];
-      const ctx = gsap.context(() => {
-        gsap.fromTo(
-          menuPanelRef.current,
-          { autoAlpha: 0, y: -18 },
-          { autoAlpha: 1, y: 0, duration: 0.34, ease: 'power3.out' }
-        );
-
-        gsap.fromTo(
-          items,
-          { autoAlpha: 0, y: 16 },
-          { autoAlpha: 1, y: 0, duration: 0.42, stagger: 0.045, ease: 'power3.out', delay: 0.08 }
-        );
-      }, menuPanelRef);
-
-      cleanup = () => ctx.revert();
-    });
-
-    return () => {
-      cancelled = true;
-      cleanup?.();
-    };
-  }, [renderMobileMenu]);
-
-  useEffect(() => {
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduceMotion || !menuIconRef.current) return;
-
-    let cancelled = false;
-    import('gsap').then(({ gsap }) => {
-      if (cancelled || !menuIconRef.current) return;
-
-      gsap.fromTo(
-        menuIconRef.current,
-        { rotate: isOpen ? -90 : 90, scale: 0.86 },
-        { rotate: 0, scale: 1, duration: 0.24, ease: 'back.out(1.8)' }
-      );
-    });
-
-    return () => {
-      cancelled = true;
-    };
   }, [isOpen]);
 
   const navLinks = [
@@ -161,7 +73,8 @@ const Navbar: React.FC = () => {
               }}
             >
               <img
-                src="https://i.ibb.co/DDs8DDfy/SAMVALLOGO.png"
+                src={media.logo}
+                  width="84" height="102" decoding="async"
                 alt="SAMVAL Logo"
                 className="h-full w-auto object-contain"
               />
@@ -233,7 +146,7 @@ const Navbar: React.FC = () => {
                 aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
                 aria-expanded={isOpen}
               >
-                <span ref={menuIconRef} className="flex items-center justify-center">
+                <span className="flex items-center justify-center">
                   {isOpen ? <X size={20} /> : <Menu size={20} />}
                 </span>
               </button>
@@ -264,9 +177,8 @@ const Navbar: React.FC = () => {
     </nav>
 
     {/* Mobile Menu Dialog */}
-    {renderMobileMenu && (
+    {isOpen && (
       <div
-        ref={menuPanelRef}
         className="lg:hidden fixed inset-x-0 top-16 bottom-0 z-[90] overflow-y-auto"
         role="dialog"
         aria-modal="true"
@@ -276,7 +188,7 @@ const Navbar: React.FC = () => {
           backdropFilter: 'blur(18px)'
         }}
       >
-        <div ref={menuContentRef} className="min-h-full px-4 pt-5 pb-8">
+        <div className="min-h-full px-4 pt-5 pb-8">
           <div className="mb-5 h-px w-full bg-stone-900/10 shadow-[0_1px_0_rgba(255,255,255,0.45)]" />
           <div
             data-mobile-menu-item
@@ -290,7 +202,7 @@ const Navbar: React.FC = () => {
               {languages.map(lang => (
                 <button
                   key={lang.code}
-                  onClick={() => i18n.changeLanguage(lang.code)}
+                  onClick={() => changeSiteLanguage(lang.code)}
                   className={`min-w-10 rounded-lg px-3 py-2 text-xs font-black transition-all ${
                     i18n.language.startsWith(lang.code)
                       ? 'bg-samval-guinda text-white'

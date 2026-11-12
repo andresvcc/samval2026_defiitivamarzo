@@ -1,8 +1,10 @@
+import { useDocumentNavigate } from '../hooks/useDocumentNavigate';
+import { useClientReady } from '../hooks/useClientReady';
 import React, { useState, useEffect, useRef } from 'react';
 
 import { Heart, Hand, ShieldCheck, TrendingUp, Info, CheckCircle, Smartphone, Users2, Sparkles, GraduationCap } from 'lucide-react';
 import { useTranslation, Trans } from 'react-i18next';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import SEO from '../components/SEO';
 import TurnstileWidget from '../components/TurnstileWidget';
 import { submitVolunteerForm } from '../services/samvalApi';
@@ -10,9 +12,23 @@ import { trackConversion } from '../utils/conversions';
 
 const SubscriptionButton: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const navigate = useNavigate();
+  const [visible, setVisible] = useState(false);
+  const navigate = useDocumentNavigate();
 
   useEffect(() => {
+    if (!containerRef.current) return;
+    const observer = new IntersectionObserver(entries => {
+      if (entries.some(entry => entry.isIntersecting)) {
+        setVisible(true);
+        observer.disconnect();
+      }
+    }, { rootMargin: '200px' });
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!visible) return;
     const renderButton = () => {
       if ((window as any).paypal && containerRef.current && containerRef.current.children.length === 0) {
         (window as any).paypal.Buttons({
@@ -60,21 +76,22 @@ const SubscriptionButton: React.FC = () => {
         script.addEventListener('load', renderButton);
       }
     }
-  }, [navigate]);
+  }, [navigate, visible]);
 
   return <div ref={containerRef} id="paypal-button-container-P-19Y73375FD6273356NHAMERQ" className="w-[11.625rem] mx-auto min-h-[42px] flex justify-center items-center"></div>;
 };
 
 const GetInvolved: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'donate' | 'volunteer'>('donate');
+  const clientReady = useClientReady();
+  const location = useLocation();
+  const [activeTab, setActiveTab] = useState<'donate' | 'volunteer'>(() => location.pathname === '/voluntariado' ? 'volunteer' : 'donate');
   const [volunteerStatus, setVolunteerStatus] = useState<'idle' | 'loading' | 'error'>('idle');
   const [volunteerErrorMessage, setVolunteerErrorMessage] = useState('');
   const [turnstileRequired, setTurnstileRequired] = useState(false);
   const [turnstileResetKey, setTurnstileResetKey] = useState(0);
   const [turnstileToken, setTurnstileToken] = useState('');
   const { t } = useTranslation();
-  const navigate = useNavigate();
-  const location = useLocation();
+  const navigate = useDocumentNavigate();
 
   const reasons = t('get_involved_page.invest_project.reasons', { returnObjects: true }) as string[];
   const personalGroups = t('get_involved_page.personal_contributions.groups', { returnObjects: true }) as string[];
@@ -402,6 +419,7 @@ const GetInvolved: React.FC = () => {
                 </div>
 
                 <form className="space-y-5" onSubmit={handleVolunteerSubmit}>
+              <fieldset className="contents" disabled={!clientReady}>
                   <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div className="space-y-2">
@@ -470,7 +488,8 @@ const GetInvolved: React.FC = () => {
                       />
                     </p>
                   </div>
-                </form>
+                </fieldset>
+            </form>
               </div>
             </div>
           )}

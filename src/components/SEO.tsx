@@ -1,14 +1,23 @@
-import React, { useEffect } from 'react';
+import { media } from '../generated/media';
+import React, { createContext, useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface SEOProps {
     page?: string;
     title?: string;
     description?: string;
+    keywords?: string;
 }
+
+export const SeoMetadataContext = createContext<{title?: string; description?: string} | null>(null);
 
 const SEO: React.FC<SEOProps> = ({ page, title, description }) => {
     const { t, i18n } = useTranslation();
+    const metadata=useContext(SeoMetadataContext);
+    if(import.meta.env.SSR && metadata){
+        metadata.title=title || (page ? t(`seo.${page}.title`,{defaultValue:''}) : '') || 'Fundación SAMVAL';
+        metadata.description=description || (page ? t(`seo.${page}.description`,{defaultValue:''}) : '');
+    }
 
     useEffect(() => {
         // Resolve title: direct prop > translation key > fallback
@@ -70,7 +79,7 @@ const SEO: React.FC<SEOProps> = ({ page, title, description }) => {
             "@type": "NGO",
             "name": "Fundación SAMVAL",
             "url": "https://samval.org",
-            "logo": "https://samval.org/logo.png",
+            "logo": "https://samval.org" + media.logo,
             "description": descContent || "Organización No Gubernamental especializada en robótica etnopertinente y educación STEAM para comunidades indígenas y afrocolombianas en Colombia.",
             "knowsAbout": ["Robótica Etnopertinente", "Educación STEAM Indígena", "Robots Educativos", "Arhuaco", "Palenquero"],
             "areaServed": "Colombia"

@@ -1,3 +1,4 @@
+import { media } from '../generated/media';
 
 import React from 'react';
 import { Target, Users, BookOpen, Rocket, CheckCircle2, Clock, MapPin, Calendar, ArrowRight } from 'lucide-react';
@@ -26,8 +27,8 @@ const About: React.FC = () => {
       {/* Hero */}
       <section className="relative py-32 overflow-hidden min-h-[60vh] flex items-center" style={{ background: '#1e1b18' }}>
         <div className="absolute inset-0 z-0">
-          <img
-            src="https://i.ibb.co/LzNmC5xS/IMG-4859.jpg"
+          <img loading="lazy" decoding="async"
+            src={media.about}
             alt="Territorio Colombiano"
             className="w-full h-full object-cover"
           />

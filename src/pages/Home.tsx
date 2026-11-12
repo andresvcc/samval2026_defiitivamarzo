@@ -1,12 +1,12 @@
+import { Link } from '../components/Link';
+import { media } from '../generated/media';
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+
 import { ArrowRight, Code, Heart, BookOpen, Activity, Languages, Bot, Fingerprint, Leaf, Users, Clock } from 'lucide-react';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { useTranslation } from 'react-i18next';
 import SEO from '../components/SEO';
 import InstagramFeed from '../components/InstagramFeed';
-import TypewriterText from '../components/TypewriterText';
 
 const COLORS = ['#801b1b', '#a62d2d', '#5a1212', '#d4a373'];
 
@@ -34,11 +34,18 @@ const Home: React.FC = () => {
       {/* Hero Section */}
       <section className="relative min-h-[85vh] flex items-center overflow-hidden py-12" style={{ background: '#1e1b18' }}>
         <div className="absolute inset-0 z-0">
-          <img
-            src="https://i.ibb.co/23vCh1H2/Gemini-Generated-Image-tvcl5gtvcl5gtvcl.png"
-            alt="Paisaje Colombiano y Tecnología"
-            className="w-full h-full object-cover"
-          />
+          <picture className="block w-full h-full">
+            <source media="(max-width: 600px)" srcSet={`${media.heroSmall} 400w, ${media.heroMobile} 640w`} sizes="100vw" />
+            <img
+              src={media.hero}
+              srcSet={`${media.heroTablet} 960w, ${media.hero} 1440w`}
+              sizes="100vw"
+              width="1440" height="804"
+              fetchPriority="high" decoding="async"
+              alt="Paisaje Colombiano y Tecnología"
+              className="w-full h-full object-cover"
+            />
+          </picture>
           <div className="absolute inset-0 bg-black/10"></div>
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/34 to-transparent"></div>
           <div
@@ -66,7 +73,7 @@ const Home: React.FC = () => {
             <p className="text-lg sm:text-xl text-stone-200 mb-10 leading-relaxed max-w-2xl min-h-[4.5em] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
               style={{ textShadow: '0 2px 8px rgba(0,0,0,0.6)' }}
             >
-              <TypewriterText text={t('home.hero_positioning')} charsPerSecond={32} />
+              {t('home.hero_positioning')}
             </p>
             <div className="flex flex-col sm:flex-row gap-5">
               <Link to="/donar" className="group inline-flex items-center justify-center px-10 py-4 text-white font-black rounded-2xl text-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
@@ -109,7 +116,7 @@ const Home: React.FC = () => {
                 "name": "Fundación SAMVAL",
                 "alternateName": "SAMVAL STIFTUNG",
                 "url": "https://samval.org",
-                "logo": "https://i.ibb.co/DDs8DDfy/SAMVALLOGO.png",
+                "logo": "https://samval.org" + media.logo,
                 "contactPoint": {
                   "@type": "ContactPoint",
                   "telephone": "+57-323-320-7532",
@@ -252,21 +259,15 @@ const Home: React.FC = () => {
               </div>
             </div>
             <div className="lg:w-1/2 w-full h-[400px] neu-dark-pressed p-8" style={{ borderRadius: '28px' }}>
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-                  <XAxis dataKey="name" stroke="#6b5f52" fontSize={11} tickLine={false} axisLine={false} />
-                  <Tooltip
-                    contentStyle={{ backgroundColor: '#1e1b18', border: '1px solid #2a2622', borderRadius: '16px', color: '#fff' }}
-                    itemStyle={{ color: '#d4a373' }}
-                    cursor={{ fill: 'rgba(255,255,255,0.05)', radius: 10 }}
-                  />
-                  <Bar dataKey="value" radius={[10, 10, 10, 10]} barSize={40}>
-                    {data.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
+              <div className="flex items-end justify-around h-full gap-3" role="img" aria-label={data.map(item => `${item.name}: ${item.value}`).join(', ')}>
+                {data.map((item, index) => (
+                  <div key={item.name} className="h-full flex flex-col justify-end items-center gap-3 flex-1 min-w-0">
+                    <span className="text-sm font-bold text-samval-accent">{item.value}</span>
+                    <div className="w-full max-w-10 rounded-xl" style={{ height: `${Math.max(4, item.value / 1200 * 75)}%`, background: COLORS[index % COLORS.length] }} />
+                    <span className="text-xs text-stone-400 text-center break-words">{item.name}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

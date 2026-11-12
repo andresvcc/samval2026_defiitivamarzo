@@ -1,3 +1,4 @@
+import { media } from '../generated/media';
 
 // Tipos
 export type Photo = {
@@ -45,7 +46,7 @@ export const staticTeamData: TeamMember[] = [
         name: 'Ana María Vallejo',
         role: 'Directora Ejecutiva',
         bio: 'Ingeniera con más de 10 años de experiencia en gestión de proyectos sociales y tecnología.',
-        photo_url: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200&h=200',
+        photo_url: media.team1,
         social_linkedin: '#',
         created_at: new Date().toISOString()
     },
@@ -54,7 +55,7 @@ export const staticTeamData: TeamMember[] = [
         name: 'Carlos Rodríguez',
         role: 'Líder Técnico',
         bio: 'Desarrollador Full Stack apasionado por la enseñanza y el código libre.',
-        photo_url: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200&h=200',
+        photo_url: media.team2,
         social_linkedin: '#',
         created_at: new Date().toISOString()
     },
@@ -63,7 +64,7 @@ export const staticTeamData: TeamMember[] = [
         name: 'Luisa Fernanda',
         role: 'Coordinadora de Campo',
         bio: 'Socióloga experta en trabajo comunitario y metodologías participativas.',
-        photo_url: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=200&h=200',
+        photo_url: media.team3,
         social_linkedin: '#',
         created_at: new Date().toISOString()
     }
@@ -106,7 +107,7 @@ export const staticFinancialsData: FinancialStatement[] = [
 export const staticPhotosData: Photo[] = [
     {
         id: '1',
-        url: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=1000',
+        url: media.project1,
         description: 'Banner Principal - Niños aprendiendo',
         category: 'home',
         page: 'home',
@@ -116,7 +117,7 @@ export const staticPhotosData: Photo[] = [
     },
     {
         id: '2',
-        url: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=1000',
+        url: media.project2,
         description: 'Misión - Trabajo en equipo',
         category: 'home',
         page: 'home',

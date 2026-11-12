@@ -1,3 +1,4 @@
+import { media } from '../generated/media';
 import React, { useEffect, useState } from 'react';
 import { Instagram, Heart, MessageCircle, ExternalLink, Loader2 } from 'lucide-react';
 import { useTranslation, Trans } from 'react-i18next';
@@ -14,46 +15,48 @@ interface DisplayPost {
 
 const InstagramFeed: React.FC = () => {
     const { t } = useTranslation();
-    const [posts, setPosts] = useState<DisplayPost[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [isLive, setIsLive] = useState(false);
 
     const staticPosts: DisplayPost[] = [
         {
             id: 1,
-            image: "https://images.unsplash.com/photo-1588072432836-e10032774350?w=800&h=800&fit=crop&q=80",
+            image: media.feed1,
             likes: "1.2k",
             comments: "45",
             caption: t('social_feed.posts.p1')
         },
         {
             id: 2,
-            image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&h=800&fit=crop&q=80",
+            image: media.feed2,
             likes: "850",
             comments: "32",
             caption: t('social_feed.posts.p2')
         },
         {
             id: 3,
-            image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&h=800&fit=crop&q=80",
+            image: media.feed3,
             likes: "954",
             comments: "28",
             caption: t('social_feed.posts.p3')
         },
         {
             id: 4,
-            image: "https://images.unsplash.com/photo-1560439514-4e9645039924?w=800&h=800&fit=crop&q=80",
+            image: media.feed4,
             likes: "1.1k",
             comments: "50",
             caption: t('social_feed.posts.p4')
         }
     ];
 
+    const [posts, setPosts] = useState<DisplayPost[]>(staticPosts);
+
     useEffect(() => {
+        if (!import.meta.env.VITE_INSTAGRAM_TOKEN) return;
         let cancelled = false;
 
         async function loadPosts() {
-            setLoading(true);
+
             try {
                 const igPosts = await fetchInstagramPosts(4);
                 if (cancelled) return;
@@ -133,7 +136,7 @@ const InstagramFeed: React.FC = () => {
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {posts.map((post) => (
+                        {(isLive ? posts : staticPosts).map((post) => (
                             <a
                                 key={post.id}
                                 href={post.permalink || "https://www.instagram.com/fundacionsamval/"}

@@ -1,16 +1,20 @@
+import { useDocumentNavigate } from '../hooks/useDocumentNavigate';
+import { useClientReady } from '../hooks/useClientReady';
+import { media } from '../generated/media';
 
 import React, { useState } from 'react';
 import { Code, Smartphone, Cpu, Cloud, CheckCircle, ArrowRight, BarChart3, ShieldCheck, Zap } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+
 import SEO from '../components/SEO';
 import TurnstileWidget from '../components/TurnstileWidget';
 import { submitTechServicesForm } from '../services/samvalApi';
 import { trackConversion } from '../utils/conversions';
 
 const TechServices: React.FC = () => {
+  const clientReady = useClientReady();
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = useDocumentNavigate();
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -140,7 +144,7 @@ const TechServices: React.FC = () => {
               ))}
             </div>
             <div className="relative h-80 overflow-hidden neu-raised-lg">
-              <img src="https://picsum.photos/id/3/800/600" alt="Equipo de desarrollo" className="object-cover w-full h-full" style={{ borderRadius: '28px' }} />
+              <img loading="lazy" decoding="async" src="https://picsum.photos/id/3/800/600" alt="Equipo de desarrollo" className="object-cover w-full h-full" style={{ borderRadius: '28px' }} />
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6" style={{ borderRadius: '0 0 28px 28px' }}>
                 <p className="text-white font-medium">"{t('tech_services_page.excellence_quote')}"</p>
               </div>
@@ -192,7 +196,7 @@ const TechServices: React.FC = () => {
             {/* Tirrty */}
             <div className="neu-raised-lg overflow-hidden group hover:scale-[1.02] transition-all duration-500 flex flex-col">
               <div className="h-56 relative overflow-hidden" style={{ borderRadius: '28px 28px 0 0' }}>
-                <img src="https://i.ibb.co/S4Qd27Vs/Dise-o-sin-t-tulo-2.jpg" alt="Tirrty.com" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                <img loading="lazy" decoding="async" src={media.tirrty} alt="Tirrty.com" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                 <div className="absolute top-4 right-4 neu-btn-primary !py-1.5 !px-4 !text-xs !font-black !uppercase !tracking-tighter z-10 !rounded-xl">
                   {t('tech_services_page.cases.tirrty_amount') || 'Proyecto: $25k USD'}
                 </div>
@@ -215,7 +219,7 @@ const TechServices: React.FC = () => {
             {/* Agro */}
             <div className="neu-raised-lg overflow-hidden group hover:scale-[1.02] transition-all duration-500 flex flex-col">
               <div className="h-56 relative overflow-hidden" style={{ borderRadius: '28px 28px 0 0' }}>
-                <img src="https://i.ibb.co/MxW7wLg6/Dise-o-sin-t-tulo-3.jpg" alt="Agro-Tech" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                <img loading="lazy" decoding="async" src={media.agro} alt="Agro-Tech" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                 <div className="absolute top-4 right-4 neu-raised-sm !px-4 !py-1.5 text-xs font-black text-stone-600 uppercase tracking-tighter z-20">{t('tech_services_page.cases.agro_tag') || 'Aliado Ganadero'}</div>
               </div>
               <div className="p-8 flex-grow">
@@ -236,7 +240,7 @@ const TechServices: React.FC = () => {
             {/* Robótica */}
             <div className="neu-raised-lg overflow-hidden group hover:scale-[1.02] transition-all duration-500 flex flex-col">
               <div className="h-56 relative overflow-hidden" style={{ borderRadius: '28px 28px 0 0' }}>
-                <img src="https://i.ibb.co/8DHKqmRP/Dise-o-sin-t-tulo-15.png" alt="Robótica" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                <img loading="lazy" decoding="async" src={media.robotics} alt="Robótica" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                 <div className="absolute top-4 right-4 neu-btn-primary !py-1.5 !px-4 !text-xs !font-black !uppercase !tracking-tighter z-20 !rounded-xl">{t('tech_services_page.cases.robotics_tag') || 'Distrito Barranquilla'}</div>
               </div>
               <div className="p-8 flex-grow">
@@ -269,6 +273,7 @@ const TechServices: React.FC = () => {
             </div>
 
             <form onSubmit={handleSubmit} className="relative z-10">
+              <fieldset className="contents" disabled={!clientReady}>
               <input
                 type="text"
                 name="website"
@@ -440,6 +445,7 @@ const TechServices: React.FC = () => {
               <div className="mt-3 text-[11px] text-center" style={{ color: 'rgba(255, 255, 255, 0.25)' }}>
                 Protegido por validación anti-spam · <a href="/privacidad" className="no-underline hover:underline" style={{ color: 'rgba(193,139,138,0.7)' }}>Política de privacidad</a>
               </div>
+            </fieldset>
             </form>
           </div>
         </div>

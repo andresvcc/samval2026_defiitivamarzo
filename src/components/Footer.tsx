@@ -1,6 +1,8 @@
+import { Link } from './Link';
+import { media } from '../generated/media';
 import React from 'react';
 import { Facebook, Twitter, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
-import { Link } from 'react-router-dom';
+
 import { useTranslation } from 'react-i18next';
 import { openCookiePreferences } from '../utils/analytics';
 
@@ -22,7 +24,8 @@ const Footer: React.FC = () => {
             <div className="flex items-center space-x-3 mb-6">
               <div className="neu-dark-flat w-12 h-12 flex items-center justify-center p-2">
                 <img
-                  src="https://i.ibb.co/DDs8DDfy/SAMVALLOGO.png"
+                  src={media.logo}
+                  width="84" height="102" decoding="async"
                   alt="SAMVAL Logo"
                   className="h-full w-auto object-contain brightness-0 invert"
                 />

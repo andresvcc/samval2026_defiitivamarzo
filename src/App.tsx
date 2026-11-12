@@ -1,20 +1,20 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import React, { Suspense, lazy, useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import CookieConsentBanner from './components/CookieConsentBanner';
 import Home from './pages/Home';
-import About from './pages/About';
-import SocialPrograms from './pages/SocialPrograms';
-import TechServices from './pages/TechServices';
-import GetInvolved from './pages/GetInvolved';
-import Contact from './pages/Contact';
-import PrivacyPolicy from './pages/PrivacyPolicy';
-import TermsOfUse from './pages/TermsOfUse';
-import Impact from './pages/Impact';
-import Resources from './pages/Resources';
-import Success from './pages/Success';
-import { useGsapPageAnimations } from './hooks/useGsapPageAnimations';
+import {routeLoaders} from './routes';
+const About = lazy(routeLoaders['/nosotros']);
+const SocialPrograms = lazy(routeLoaders['/proyectos']);
+const TechServices = lazy(routeLoaders['/servicios-tech']);
+const GetInvolved = lazy(routeLoaders['/donar']);
+const Contact = lazy(routeLoaders['/contacto']);
+const PrivacyPolicy = lazy(routeLoaders['/privacidad']);
+const TermsOfUse = lazy(routeLoaders['/terminos']);
+const Impact = lazy(routeLoaders['/impacto']);
+const Resources = lazy(routeLoaders['/recursos']);
+const Success = lazy(routeLoaders['/gracias']);
 import { trackPageView } from './utils/analytics';
 
 // ScrollToTop component to reset scroll on route change
@@ -42,14 +42,13 @@ const ScrollToTop = () => {
 
 const App: React.FC = () => {
   return (
-    <Router>
+    <>
       <ScrollToTop />
       <AnalyticsRouteTracker />
-      <PageAnimations />
       <div className="flex flex-col min-h-screen font-sans">
         <Navbar />
         <main className="flex-grow">
-          <Routes>
+          <Suspense fallback={<div className="min-h-[50vh]" aria-busy="true" />}><Routes>
             <Route path="/" element={<Home />} />
             <Route path="/nosotros" element={<About />} />
             <Route path="/proyectos" element={<SocialPrograms />} />
@@ -63,12 +62,12 @@ const App: React.FC = () => {
             <Route path="/terminos" element={<TermsOfUse />} />
             <Route path="/gracias" element={<Success />} />
 
-          </Routes>
+          </Routes></Suspense>
         </main>
         <Footer />
       </div>
       <CookieConsentBanner />
-    </Router>
+    </>
   );
 };
 
@@ -79,11 +78,6 @@ const AnalyticsRouteTracker = () => {
     trackPageView(`${pathname}${search}${hash}`);
   }, [pathname, search, hash]);
 
-  return null;
-};
-
-const PageAnimations = () => {
-  useGsapPageAnimations();
   return null;
 };
 

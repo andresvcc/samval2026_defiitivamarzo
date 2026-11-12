@@ -8,3 +8,4 @@ dist
 .env.*
 docs
 data
+.prerender-build

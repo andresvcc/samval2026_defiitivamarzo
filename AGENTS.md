@@ -7,7 +7,10 @@ La landing de `central.samval.org` pertenece a otro repositorio.
 
 - Usar `codebase-memory` para exploración estructural; verificar cobertura y
   leer directamente lo que no esté indexado.
-- Mantener el CSS de Tailwind compilado y servido desde el propio sitio.
+- Mantener el CSS de Tailwind compilado y servido desde el propio sitio,
+  incluido en el HTML de las páginas preparadas para lectura inmediata.
+- Mantener los presupuestos de transferencia, el prerenderizado por idioma y
+  los recursos locales. El build y las pruebas los verifican en Dokploy.
 - Conservar el backend Node y los formularios al cambiar el frontend.
 - Verificar con el build de producción y comprobar móvil y tablet. Las
   escrituras de prueba y los envíos de correo usan datos y destinatarios

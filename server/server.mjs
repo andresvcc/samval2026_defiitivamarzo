@@ -3,6 +3,7 @@ import fs from 'node:fs/promises';
 import http from 'node:http';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createStaticSite } from './static-site.mjs';
 import {
   buildFormNotificationEmail,
   buildSubmitterAutoresponderEmail,
@@ -73,22 +74,7 @@ const formConfigs = {
   },
 };
 
-const contentTypes = {
-  '.css': 'text/css; charset=utf-8',
-  '.gif': 'image/gif',
-  '.html': 'text/html; charset=utf-8',
-  '.ico': 'image/x-icon',
-  '.jpeg': 'image/jpeg',
-  '.jpg': 'image/jpeg',
-  '.js': 'text/javascript; charset=utf-8',
-  '.json': 'application/json; charset=utf-8',
-  '.png': 'image/png',
-  '.svg': 'image/svg+xml',
-  '.txt': 'text/plain; charset=utf-8',
-  '.webp': 'image/webp',
-  '.woff': 'font/woff',
-  '.woff2': 'font/woff2',
-};
+
 
 const json = (res, status, body) => {
   res.writeHead(status, {
@@ -514,43 +500,7 @@ const handleEventCapture = async (req, res) => {
   json(res, 202, { ok: true, id: record.id });
 };
 
-const getStaticPath = (urlPath) => {
-  const safePath = path.normalize(decodeURIComponent(urlPath)).replace(/^(\.\.[/\\])+/, '');
-  const requestedPath = path.join(STATIC_DIR, safePath);
-
-  if (!requestedPath.startsWith(STATIC_DIR)) {
-    return null;
-  }
-
-  return requestedPath;
-};
-
-const serveStatic = async (req, res, urlPath) => {
-  let filePath = getStaticPath(urlPath === '/' ? '/index.html' : urlPath);
-
-  try {
-    const stat = filePath ? await fs.stat(filePath) : null;
-    if (stat?.isDirectory()) {
-      filePath = path.join(filePath, 'index.html');
-    }
-  } catch {
-    filePath = path.join(STATIC_DIR, 'index.html');
-  }
-
-  try {
-    const file = await fs.readFile(filePath);
-    const extension = path.extname(filePath);
-    const isAsset = extension && extension !== '.html';
-
-    res.writeHead(200, {
-      'content-type': contentTypes[extension] || 'application/octet-stream',
-      'cache-control': isAsset ? 'public, max-age=31536000, immutable' : 'no-cache',
-    });
-    res.end(file);
-  } catch {
-    json(res, 404, { ok: false, error: 'Not found.' });
-  }
-};
+const serveStatic = createStaticSite(STATIC_DIR);
 
 const server = http.createServer(async (req, res) => {
   applyCorsHeaders(req, res);
@@ -592,7 +542,7 @@ const server = http.createServer(async (req, res) => {
     }
 
     if (req.method === 'GET' || req.method === 'HEAD') {
-      await serveStatic(req, res, requestUrl.pathname);
+      await serveStatic(req, res, requestUrl);
       return;
     }
 

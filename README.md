@@ -9,13 +9,21 @@ Fuente vigente de **https://samval.org** y **https://www.samval.org**.
 | Checkout del workspace | `/home/tito/samval/frontends/samval-org` |
 | Dokploy | Proyecto `web`, aplicación `samvalprod` |
 | Application ID | `W5qKam62sre2XQVf0q0eu` |
-| Publicación | Push a `main` → build del `Dockerfile` en Dokploy → despliegue → salud |
+| Publicación | Push a `main` → tipos, build y pruebas del `Dockerfile` en Dokploy → despliegue → salud |
 | Salud pública | https://samval.org/api/health |
 
 El frontend usa React, TypeScript, Vite y Tailwind; el servidor Node sirve la
 web, los formularios y los eventos propios. Los idiomas son `es`, `en`, `fr`
 y `de`. La landing de `central.samval.org` tiene su propio repositorio,
 `Samval-colombia/samval-landing-central`.
+
+El build deja preparadas las once páginas públicas en los cuatro idiomas.
+El servidor entrega su HTML legible antes de descargar JavaScript. Las
+imágenes, el logo, las fuentes y el CSS se sirven desde el propio dominio;
+cada página e idioma carga su código cuando se necesita. Los formularios se
+activan cuando sus validaciones y manejadores están listos.
+Los enlaces navegan al HTML del destino; un fallo al descargar su código
+interactivo conserva la lectura de la página.
 
 ## Empezar un cambio
 
@@ -43,6 +51,7 @@ Vite dirige `/api` al backend local. Para comprobar el resultado de producción:
 
 ```bash
 npm run build
+npm test
 npm start
 ```
 
@@ -60,10 +69,41 @@ de formularios y `/api` requiere el servidor Node.
 | Correos de formularios | `server/email-templates/` |
 | Consentimiento y medición | `src/components/CookieConsentBanner.tsx`, `src/utils/` |
 | Compilación y runtime | `Dockerfile`, `vite.config.ts`, `package-lock.json` |
+| HTML preparado y compresión | `scripts/build.mjs`, `src/entry-server.tsx`, `server/static-site.mjs` |
+| Idiomas y rutas preparados | `server/site-config.mjs`, `src/i18n.ts` |
+| Imágenes y fuente locales | `public/media/`, `src/generated/media.ts` |
 | Documentación institucional | `docs/reference/` |
 
-Tailwind se compila en el build. El HTML carga el CSS versionado de `/assets/`
-desde el mismo dominio. Mantener esta configuración al cambiar el diseño.
+Tailwind se compila en el build. Las páginas preparadas incluyen el CSS en el
+propio HTML para mostrar el diseño con la primera respuesta. El CSS versionado
+de `/assets/` se conserva para el frontend de desarrollo y las páginas
+dinámicas. Mantener esta configuración al cambiar el diseño.
+
+## Mantener la carga ligera
+
+- La lectura no depende de ejecutar JavaScript. Mantener el prerenderizado al
+  añadir rutas y traducciones; las páginas de confirmación con parámetros se
+  resuelven en el cliente.
+- Las fotos usan WebP y carga diferida. La portada tiene tamaños específicos
+  para móvil y escritorio; conservar `picture`, `srcSet` y sus dimensiones.
+- El build prepara Brotli y gzip. El servidor negocia la compresión y permite
+  respuestas 304; los recursos con nombre versionado se cachean por un año.
+- Google Analytics se descarga después del consentimiento; PayPal, al acercarse
+  a su sección. El contenido sigue disponible cuando estos proveedores fallan.
+- No ocultar el contenido para animarlo al entrar ni añadir bibliotecas para
+  representar datos que ya se pueden mostrar con HTML y CSS.
+
+El build rechaza JavaScript inicial de la portada superior a **120 KiB en Brotli**,
+incluidos los diccionarios necesarios, o HTML
+inicial superior a **20 KiB**. Las pruebas limitan la portada móvil a **70 KiB**
+y comprueban que las 44 variantes contienen títulos visibles antes de activar
+JavaScript. Estos límites se ejecutan también en Dokploy.
+
+Para actualizar imágenes, ajustar sus fuentes en `scripts/optimize-images.mjs`
+y ejecutar `npm run optimize:images -- --refresh`. Sólo esta tarea de
+mantenimiento descarga originales; el build habitual usa los WebP ya guardados
+en Git. Revisar y publicar juntos `public/media/` y `src/generated/media.ts`.
+La licencia de Inter acompaña a la fuente en `public/media/OFL-Inter.txt`.
 
 ## Configuración y datos
 
@@ -95,16 +135,21 @@ El consentimiento de analítica se gestiona en el banner y en el pie de página.
 
 ## Verificar y publicar
 
-1. Ejecutar `npm run build` y probar ese build con `npm start`.
+1. Ejecutar `npm run typecheck`, `npm run build`, `npm test` y probar ese build
+   con `npm start`.
 2. Comprobar portada, navegación y Contacto en móvil y tablet; revisar los
    cuatro idiomas. Anchos de referencia: 360, 390, 768, 820, 1024, 1280, 1440
    y 1920 píxeles.
+   Para rendimiento, usar caché fría, 400 kbps de bajada, 400 ms de latencia y
+   CPU ralentizada 4×. Medir primer contenido y elemento principal, además de
+   comprobar la lectura con JavaScript bloqueado.
 3. Bloquear `cdn.tailwindcss.com` en el navegador: el logo, el diseño y el menú
    deben seguir funcionando, con cero solicitudes a ese dominio.
 4. Confirmar que el diff contiene sólo el cambio previsto y publicar en `main`.
    Dokploy ejecuta el build y el despliegue automáticamente.
 5. Comprobar el SHA publicado, el estado `done`, el contenedor `healthy`,
-   `/api/health` y el CSS `/assets/*.css` con respuesta 200 y tipo `text/css`.
+   `/api/health`, el bloque `style[data-samval-critical]` y el CSS `/assets/*.css`
+   con respuesta 200 y tipo `text/css`.
    Revisar también `www.samval.org`.
 
 La inspección habitual usa el MCP `samval-ops`:
@@ -126,7 +171,7 @@ Dokploy y comprobar qué contenedor sigue sirviendo tráfico.
 
 | Síntoma | Primera comprobación |
 | --- | --- |
-| Página sin formato o logo enorme | El HTML debe enlazar `/assets/*.css`; comprobar su respuesta 200 y el build de Tailwind |
+| Página sin formato o logo enorme | Comprobar `style[data-samval-critical]`, el CSS de `/assets/` y el build de Tailwind |
 | El push no aparece en la web | Origen y rama de la tabla, último SHA y estado del despliegue en Dokploy |
 | Formularios sin notificación | `/api/health`, `/api/config`, nombres de las variables de Brevo y recibo de entrega |
 | Cambio de estilos sin efecto | Abrir una sesión nueva y comprobar que el HTML referencia el asset versionado del último build |

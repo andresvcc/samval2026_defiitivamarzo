@@ -7,10 +7,10 @@ ENV VITE_GA_MEASUREMENT_ID=$VITE_GA_MEASUREMENT_ID
 ENV VITE_SAMVAL_API_BASE_URL=$VITE_SAMVAL_API_BASE_URL
 
 COPY package.json package-lock.json* ./
-RUN npm ci
+RUN npm ci --ignore-scripts --no-audit --no-fund
 
 COPY . .
-RUN npm run build
+RUN npm run typecheck && npm run build && npm test
 
 FROM node:22-alpine AS runtime
 WORKDIR /app

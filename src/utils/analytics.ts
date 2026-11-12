@@ -65,7 +65,7 @@ const loadGoogleTag = () => {
   document.head.appendChild(script);
 
   window.gtag?.('js', new Date());
-  window.gtag?.('config', GA_MEASUREMENT_ID);
+  window.gtag?.('config', GA_MEASUREMENT_ID, { send_page_view: false });
 };
 
 export const getStoredConsentChoice = (): ConsentChoice | null => {
@@ -98,6 +98,7 @@ export const updateAnalyticsConsent = (choice: ConsentChoice) => {
     'update',
     choice === 'accepted' ? getAnalyticsGrantedConsentState() : getDeniedConsentState()
   );
+  if(choice==='accepted')loadGoogleTag();
 };
 
 export const saveConsentChoice = (choice: ConsentChoice) => {
@@ -119,7 +120,7 @@ export const initializeAnalytics = () => {
   const storedChoice = getStoredConsentChoice();
 
   ensureGtag();
-  loadGoogleTag();
+  window.gtag?.('consent','default',getDeniedConsentState());
 
   if (storedChoice) {
     updateAnalyticsConsent(storedChoice);
@@ -133,7 +134,7 @@ export const trackPageView = (path: string, options: TrackPageViewOptions = {}) 
   ensureGtag();
   loadGoogleTag();
 
-  window.gtag?.('config', GA_MEASUREMENT_ID, {
+  window.gtag?.('event', 'page_view', {
     page_path: path,
     page_location: window.location.href,
     page_title: document.title,
