@@ -2,7 +2,7 @@
     "seo": {
         "home": {
             "title": "Fundación SAMVAL - Robótica Etnopertinente en Colombia",
-            "description": "La primera plataforma de robótica etnopertinente en Latinoamérica. Enseñamos pensamiento computacional en lenguas nativas y transformamos territorios."
+            "description": "Una plataforma pionera de robótica etnopertinente en Latinoamérica. Enseñamos pensamiento computacional en lenguas nativas y acompañamos la transformación de territorios."
         },
         "about": {
             "title": "Nosotros | Fundación SAMVAL",
@@ -18,7 +18,7 @@
         },
         "projects": {
             "title": "Proyectos Sociales | Ecosistema de Impacto SAMVAL",
-            "description": "Explora nuestras iniciativas: Misión Médica Internacional, Robótica Arhuaca y BiblioBurro 2.0. Innovación que respeta el territorio."
+            "description": "Explora nuestras iniciativas: Misión Médica Internacional, Robótica Arhuaca y Biblioteca Offline Comunitaria. Innovación que respeta el territorio."
         },
         "services": {
             "title": "Servicios Tech | Ingeniería de Software con Propósito",
@@ -41,9 +41,69 @@
             "description": "Términos y condiciones de uso del sitio web de la Fundación SAMVAL."
         }
     },
+    "success_page": {
+        "common": {
+            "response_time_label": "Tiempo estimado de respuesta",
+            "home_action": "Volver al inicio"
+        },
+        "contacto": {
+            "tag": "Mensaje recibido",
+            "title": "Gracias por escribirnos",
+            "subtitle": "Recibimos tu mensaje correctamente y ya quedó en nuestro canal de seguimiento.",
+            "description": "Apreciamos que te hayas tomado el tiempo de contactar a SAMVAL. Revisaremos la información que compartiste y te responderemos con una orientación clara según tu necesidad.",
+            "next_title": "Qué haremos ahora",
+            "steps": [
+                "Validaremos los datos de contacto y el motivo de tu mensaje.",
+                "La persona adecuada del equipo revisará tu solicitud.",
+                "Te responderemos por correo o teléfono con el siguiente paso."
+            ],
+            "response_time": "Normalmente dentro de 1 a 2 días hábiles.",
+            "secondary_action": "Enviar otro mensaje"
+        },
+        "servicios": {
+            "tag": "Cotización recibida",
+            "title": "Gracias por solicitar una cotización",
+            "subtitle": "Tu solicitud de servicios tecnológicos fue registrada correctamente.",
+            "description": "Analizaremos el contexto de tu proyecto para responder con una orientación técnica útil, realista y alineada con el impacto social que impulsa SAMVAL.",
+            "next_title": "Próximos pasos",
+            "steps": [
+                "Revisaremos el alcance y los datos que compartiste.",
+                "Identificaremos el enfoque técnico más adecuado para tu necesidad.",
+                "Te contactaremos para precisar requerimientos, tiempos y una propuesta inicial."
+            ],
+            "response_time": "Normalmente dentro de 1 a 3 días hábiles.",
+            "secondary_action": "Ver servicios"
+        },
+        "donacion": {
+            "tag": "Apoyo recibido",
+            "title": "Gracias por apoyar nuestro trabajo",
+            "subtitle": "Tu aporte ayuda a sostener educación STEAM con enfoque territorial.",
+            "description": "Cada contribución fortalece programas que conectan tecnología, cultura y oportunidades para comunidades que históricamente han tenido menos acceso a formación digital.",
+            "next_title": "Cómo se conecta tu aporte",
+            "steps": [
+                "Registraremos tu apoyo dentro del seguimiento institucional.",
+                "Lo vincularemos a iniciativas educativas y de innovación territorial.",
+                "Seguiremos compartiendo avances del impacto que ayudamos a construir juntos."
+            ],
+            "response_time": "El impacto se reporta en nuestros canales institucionales.",
+            "secondary_action": "Ver formas de apoyar"
+        },
+        "voluntariado": {
+            "tag": "Postulación recibida",
+            "title": "Gracias por querer sumarte",
+            "subtitle": "Recibimos tu interés de voluntariado y valoramos tu disposición para aportar.",
+            "description": "Revisaremos tu perfil, área de interés y disponibilidad para identificar dónde tu experiencia puede generar mayor valor en nuestros procesos educativos y territoriales.",
+            "next_title": "Qué revisaremos",
+            "steps": [
+                "Analizaremos el área en la que quieres colaborar.",
+                "Contrastaremos tu disponibilidad con las necesidades activas del equipo.",
+                "Te contactaremos si encontramos una oportunidad adecuada para avanzar."
+            ],
+            "response_time": "Normalmente dentro de 3 a 5 días hábiles.",
+            "secondary_action": "Editar postulación"
+        }
+    },
     "navbar": {
-        "open_menu": "Abrir menú",
-        "close_menu": "Cerrar menú",
         "title": "FUNDACIÓN SAMVAL",
         "tagline": "Tecnología que respeta el territorio",
         "home": "Inicio",
@@ -73,15 +133,15 @@
         "hero_title": "Tecnología que respeta el territorio",
         "hero_desc": "Somos facilitadores de cambio, transformando realidades a través de proyectos de consultoría, ingeniería y educación.",
         "hero_bold": "Trabajamos por la inclusión digital de comunidades vulnerables.",
-        "hero_positioning": "La primera plataforma de robótica etnopertinente de América Latina: integramos el robot Thymio con lenguas nativas y cosmovisión indígena.",
+        "hero_positioning": "Una plataforma pionera de robótica etnopertinente en América Latina: integramos robots educativos con lenguas nativas y cosmovisión indígena.",
         "cta_invest": "Invierta en Impacto",
         "cta_services": "Soluciones Tech",
         "unique_tag": "LO QUE NOS HACE ÚNICOS",
         "unique_title": "No somos otro programa de robótica",
         "unique_subtitle": "Samval crea tecnología educativa cocreada desde las comunidades, no impuesta desde afuera.",
         "unique_1_title": "Programación en Lenguas Nativas",
-        "unique_1_desc": "Somos la única organización en Colombia donde niños Arahuacos y Palenqueros programan robots en Iku y Palenquero. La tecnología habla su idioma.",
-        "unique_2_title": "Robot Thymio Cocreado",
+        "unique_1_desc": "Impulsamos experiencias donde niños Arahuacos y Palenqueros programan robots educativos en Iku y Palenquero. La tecnología habla su idioma.",
+        "unique_2_title": "Robótica Educativa Cocreada",
         "unique_2_desc": "Cada módulo pedagógico es diseñado con la comunidad. Los desafíos del robot integran su cosmovisión, mitos y territorio — no currículos genéricos.",
         "unique_3_title": "Robótica Etnopertinente",
         "unique_3_desc": "Creamos una nueva categoría: metodología educativa que une robótica física, identidad cultural y pensamiento computacional para pueblos étnicos.",
@@ -89,9 +149,9 @@
         "complement_title": "Donde los programas masivos no llegan",
         "complement_desc": "Los grandes programas nacionales instalan laboratorios y entregan equipos. Pero ninguno adapta su contenido a la lengua, cosmovisión ni identidad de las comunidades étnicas.",
         "complement_1_title": "Pertinencia Cultural",
-        "complement_1_desc": "La única metodología que integra cosmovisión indígena en los desafíos STEM. No traducimos: cocreamos desde la comunidad.",
+        "complement_1_desc": "Una metodología que integra cosmovisión indígena en los desafíos STEM. No traducimos: cocreamos desde la comunidad.",
         "complement_2_title": "Confianza Comunitaria",
-        "complement_2_desc": "Años de trabajo en territorio nos han dado lo que ningún programa centralizso puede comprar: la confianza de las autoridades tradicionales.",
+        "complement_2_desc": "Años de trabajo en territorio nos han dado lo que ningún programa centralizado puede comprar: la confianza de las autoridades tradicionales.",
         "complement_3_title": "Continuidad Real",
         "complement_3_desc": "No hacemos campamentos de 4 días. Nuestro acompañamiento es sostenido, formando líderes locales que multiplican el impacto.",
         "mission_title": "Nuestra Esencia",
@@ -99,7 +159,7 @@
         "mission_card_title": "Propósito Educativo",
         "mission_card_desc": "Democratizar el acceso a la educación STEAM mediante programas contextualizados que fortalecen capacidades locales y generan oportunidades de desarrollo sostenible en territorios vulnerables.",
         "vision_card_title": "Visión",
-        "vision_card_desc": "Ser reconocidos como líderes en educación transformadora que conecta innovación, territorio y paz, impactando positivamente a más de 100,000 personas para 2030.",
+        "vision_card_desc": "Nuestra meta hacia 2030 es ampliar el alcance de la educación transformadora que conecta innovación, territorio y paz, con la aspiración de impactar positivamente a más de 100,000 personas.",
         "values_card_title": "Compromiso Social",
         "values_card_desc": "Cada software desarrollado financia programas de robótica y programación en la Sierra Nevada.",
         "impact_title": "Impacto que se puede medir",
@@ -174,30 +234,30 @@
             "p1_impact": "Atención integral en territorio",
             "p2_title": "Robótica Arhuaca",
             "p2_cat": "EDUCACIÓN ANCESTRAL",
-            "p2_desc": "Llevamos tecnología a la Sierra Nevada de Santa Marta. Utilizamos robots Thymio para enseñar programación respetando la cultura y el territorio.",
+            "p2_desc": "Llevamos tecnología a la Sierra Nevada de Santa Marta. Utilizamos robots educativos para enseñar programación respetando la cultura y el territorio.",
             "p2_impact": "Educación STEAM rural",
-            "p3_title": "BiblioBurro 2.0",
-            "p3_cat": "IA OFFLINE",
-            "p3_desc": "Instalamos servidores con modelos de IA multimodales offline que actúan como tutores inteligentes en zonas sin internet.",
-            "p3_impact": "IA al servicio del campo"
+            "p3_title": "Biblioteca Offline Comunitaria",
+            "p3_cat": "BIBLIOTECA EDUCATIVA",
+            "p3_desc": "Exploramos soluciones de aprendizaje offline para que comunidades sin conexión estable puedan acceder a contenidos educativos seleccionados y acompañamiento pedagógico.",
+            "p3_impact": "Aprendizaje offline para territorios rurales"
         },
         "testimonials_title": "Voces del Territorio",
         "testimonials": {
-            "t1_quote": "Ver a nuestros niños programar robots Thymio en medio de la montaña es un sueño. La tecnología no nos quita lo que somos, nos ayuda a mostrarlo.",
+            "t1_quote": "Ver a nuestros niños programar robots educativos en medio de la montaña es un sueño. La tecnología no nos quita lo que somos, nos ayuda a mostrarlo.",
             "t1_author": "Líder Arhuaco",
             "t1_role": "Sierra Nevada",
-            "t2_quote": "La IA offline del BiblioBurro ha permitido que jóvenes sin internet interactúen con el conocimiento global de forma instantánea.",
+            "t2_quote": "La Biblioteca Offline Comunitaria busca acercar contenidos educativos a jóvenes con conectividad limitada, respetando los ritmos y necesidades de cada comunidad.",
             "t2_author": "Docente Rural",
             "t2_role": "Magdalena"
         }
     },
     "tech_services_page": {
         "hero_title": "Soluciones Tecnológicas Senior",
-        "hero_desc": "Desarrollamos software de clase mundial que financia el desarrollo social de Colombia.",
+        "hero_desc": "Desarrollamos soluciones tecnológicas de alto nivel que apoyan el desarrollo social en Colombia.",
         "why_title": "¿Por qué elegirnos?",
         "why_list": {
             "senior_team": "Equipo de ingenieros senior con experiencia en mercados de EE.UU. y Europa.",
-            "social_impact": "El 100% de nuestras utilidades se reinvierten en proyectos sociales.",
+            "social_impact": "Reinvertimos los excedentes de nuestros servicios en programas sociales y educativos.",
             "agile_methodology": "Entregas continuas, comunicación transparente y código de alta calidad.",
             "tax_benefits": "Certificaciones de donación por contratar servicios de impacto social."
         },
@@ -302,7 +362,7 @@
             "title": "Proyecto de Formación STEAM: Comunidad Arhuaca",
             "description": "Un programa integral de <1>12 semanas</1> diseñado para fortalecer competencias en Ciencia, Tecnología, Ingeniería, Artes y Matemáticas en 30 niños y niñas de la Sierra Nevada (Vereda Don Diego).",
             "details": {
-                "equipment": "<0>Dotación:</0> 30 robots Thymio Wireless.",
+                "equipment": "<0>Dotación:</0> 30 robots educativos inalámbricos.",
                 "capacity": "<0>Capacidad:</0> 3 docentes locales entrenados.",
                 "sustainability": "<0>Sostenibilidad:</0> Equipamiento permanente.",
                 "impact": "<0>Impacto:</0> 3 escuelas públicas beneficiadas."
@@ -327,7 +387,7 @@
         "breakdown": {
             "tech": {
                 "title": "TECNOLOGÍA ($63M)",
-                "desc": "30 robots Thymio, kits de expansión y materiales de construcción permanente."
+                "desc": "30 robots educativos, kits de expansión y materiales de construcción permanente."
             },
             "talent": {
                 "title": "TALENTO ($105M)",
@@ -382,14 +442,15 @@
             "contact_placeholder": "+57 300...",
             "availability_label": "¿Cuántas horas al mes?",
             "availability_placeholder": "Ej: 10 horas",
-            "submit_btn": "Enviar Postulación"
+            "submit_btn": "Enviar Postulación",
+            "privacy_notice": "Al enviar este formulario aceptas que SAMVAL use tus datos para gestionar tu solicitud de voluntariado. Consulta nuestra <0>Política de privacidad</0>."
         }
     },
     "contact_page": {
         "title": "Ponte en Contacto",
         "info_title": "Información de Contacto",
         "location_title": "Nuestra Sede",
-        "location_desc": "Km 25 Vía a la Sierra Nevada<br />Santa Marta, Magdalena, Colombia",
+        "location_desc": "Calle 104 #51B-154 Ofi 17<br />Castellana Campestre<br />Barranquilla, Colombia",
         "phone_title": "Teléfono / WhatsApp",
         "email_title": "Correos Electrónicos",
         "form_title": "Envíanos un Mensaje",
@@ -408,28 +469,74 @@
         "submit_btn": "Enviar Mensaje"
     },
     "privacy_page": {
-        "title": "Política de Privacidad",
-        "last_updated": "Última actualización: 1 de enero de 2024",
-        "p1": "En la Fundación SAMVAL, nos tomamos muy en serio la privacidad de sus datos. Esta política describe cómo recopilamos y usamos su información.",
-        "p2": "Recopilamos información personal solo cuando usted la proporciona voluntariamente a través de nuestros formularios de contacto o donación.",
-        "p3": "Sus datos se utilizan exclusivamente para los fines de la fundación y nunca se comparten con terceros sin su consentimiento explícito."
+        "title": "Política de Tratamiento de Datos Personales",
+        "intro": "Esta política explica cómo la Fundación SAMVAL recoge, usa, conserva y protege los datos personales recibidos a través de sus formularios, donaciones, voluntariado, alianzas y canales de contacto.",
+        "validity": "Vigente desde enero de 2026 | Ley 1581 de 2012",
+        "last_updated": "Última actualización: enero de 2026",
+        "responsible_title": "1. Identificación del responsable",
+        "responsible_content": "La <0>Fundación SAMVAL</0>, identificada con NIT 901.036.033-0, con domicilio en Calle 104 #51B-154 Ofi 17, Castellana Campestre, Barranquilla, Colombia, y correo electrónico <1>info@samval.org</1>, actúa como responsable del tratamiento de los datos personales.",
+        "legal_basis_title": "2. Bases para el tratamiento",
+        "legal_basis_intro": "SAMVAL trata datos personales únicamente cuando existe una base válida para hacerlo:",
+        "legal_basis_list": [
+            "Autorización previa, expresa e informada del titular cuando sea requerida.",
+            "Cumplimiento de obligaciones legales, contables, tributarias, administrativas o regulatorias.",
+            "Gestión de relaciones precontractuales, contractuales, de donación, voluntariado, alianza o prestación de servicios.",
+            "Interés legítimo institucional para responder solicitudes, proteger la seguridad del sitio y mejorar los canales de atención, respetando los derechos de los titulares."
+        ],
+        "data_collected_title": "3. Datos que podemos recolectar",
+        "data_collected_intro": "Según el formulario o canal utilizado, la Fundación SAMVAL puede recibir las siguientes categorías de datos:",
+        "data_collected_list": [
+            "Datos de identificación y contacto: nombre, apellidos, correo electrónico, teléfono, país, ciudad, empresa u organización.",
+            "Datos relacionados con solicitudes, mensajes, intereses de voluntariado, alianzas, servicios tecnológicos o participación en programas.",
+            "Datos necesarios para gestionar donaciones, certificados, comprobantes, procesos contables o reportes exigidos por la ley.",
+            "Datos técnicos básicos de navegación, como dirección IP, dispositivo, navegador, páginas visitadas y eventos de interacción cuando se usen herramientas de medición.",
+            "Imágenes, testimonios o registros audiovisuales de actividades, únicamente cuando exista autorización o una base válida para su uso institucional."
+        ],
+        "purposes_title": "4. Finalidades del tratamiento",
+        "purposes_intro": "Los datos personales podrán ser tratados para las siguientes finalidades institucionales:",
+        "purposes_list": [
+            "Atender solicitudes enviadas mediante formularios de contacto, servicios, voluntariado o alianzas.",
+            "Gestionar donaciones, emitir certificados cuando aplique y cumplir obligaciones contables, tributarias y administrativas.",
+            "Comunicar avances, informes, convocatorias y resultados relacionados con los programas sociales y educativos.",
+            "Coordinar actividades con aliados, voluntarios, beneficiarios, proveedores y entidades públicas o privadas.",
+            "Realizar análisis estadísticos o de impacto usando información agregada o anonimizada cuando sea posible."
+        ],
+        "minors_title": "5. Datos de niños, niñas y adolescentes",
+        "minors_content": "Cuando SAMVAL participe en actividades con niños, niñas o adolescentes, el tratamiento de sus datos se realizará con protección reforzada, respetando su interés superior y, cuando corresponda, con autorización de padres, acudientes, representantes legales o instituciones aliadas legitimadas para otorgarla.",
+        "third_parties_title": "6. Encargados, proveedores y transferencias",
+        "third_parties_content": "SAMVAL puede apoyarse en proveedores tecnológicos, plataformas de formularios, CRM, alojamiento web, correo electrónico, analítica, pasarelas de pago, herramientas de comunicación y servicios administrativos. Estos terceros solo deben tratar la información para operar los servicios requeridos. Algunos proveedores pueden almacenar o procesar datos fuera de Colombia, por lo que SAMVAL procurará usar servicios con medidas razonables de seguridad y protección de datos.",
+        "cookies_title": "7. Cookies, analítica y medición",
+        "cookies_content": "El sitio puede usar cookies o tecnologías similares necesarias para su funcionamiento, medición de tráfico, análisis de navegación, mejora de contenidos y seguimiento de conversiones. Estas herramientas pueden generar datos técnicos o estadísticos que ayudan a evaluar el desempeño del sitio y la efectividad de campañas institucionales.",
+        "images_title": "8. Imágenes, testimonios y contenidos de actividades",
+        "images_content": "Las fotografías, videos, testimonios o historias de beneficiarios, voluntarios, aliados o participantes se usarán con fines institucionales, informativos o de rendición de cuentas cuando exista autorización o una base válida para su publicación. En actividades con menores de edad, SAMVAL aplicará criterios de protección reforzada.",
+        "rights_title": "9. Derechos de los titulares",
+        "rights_intro": "De acuerdo con la normativa colombiana aplicable, los titulares pueden ejercer los siguientes derechos:",
+        "rights_list": [
+            "Conocer, actualizar, rectificar o solicitar la supresión de sus datos personales.",
+            "Solicitar prueba de la autorización otorgada para el tratamiento de datos.",
+            "Ser informados sobre el uso dado a sus datos personales.",
+            "Revocar la autorización o solicitar supresión cuando no exista un deber legal, contable, contractual o tributario que exija conservar la información.",
+            "Presentar quejas ante la Superintendencia de Industria y Comercio cuando lo consideren procedente."
+        ],
+        "procedure_title": "10. Procedimiento para consultas y reclamos",
+        "procedure_content": "Las consultas, reclamos o solicitudes relacionadas con datos personales pueden enviarse a <1>info@samval.org</1>. SAMVAL responderá dentro de los plazos establecidos por la Ley 1581 de 2012 y sus normas reglamentarias.",
+        "security_title": "11. Seguridad y conservación",
+        "security_content": "La Fundación SAMVAL aplica medidas administrativas, técnicas y organizativas razonables para proteger la información contra acceso no autorizado, pérdida, alteración o uso indebido. Los datos se conservarán mientras exista la finalidad que justificó su recolección, mientras sea necesario para cumplir obligaciones legales, contables o tributarias, o durante los plazos exigidos por la normativa aplicable. Cuando ya no sean necesarios, se eliminarán, anonimizarán o archivarán de forma segura según corresponda."
     },
     "terms_page": {
         "title": "Términos de Uso",
-        "last_updated": "Última actualización: 1 de enero de 2024",
-        "validity": "Última actualización: 1 de enero de 2024",
-        "p1": "Al acceder y utilizar este sitio web, usted acepta cumplir con los siguientes términos y condiciones.",
-        "p2": "Todo el contenido de este sitio es propiedad de la Fundación SAMVAL y está protegido por las leyes de propiedad intelectual.",
-        "p3": "El uso no autorizado de cualquier material de este sitio está estrictamente prohibido.",
+        "intro": "Estos términos regulan el acceso y uso del sitio web de la Fundación SAMVAL, sus formularios, contenidos, canales de donación y páginas de información institucional.",
+        "last_updated": "Última actualización: enero de 2026",
+        "validity": "Última actualización: enero de 2026",
         "acceptance_title": "Aceptación de los Términos",
         "acceptance_content": "Al acceder y utilizar el sitio web de la <0>Fundación SAMVAL</0> (NIT 901.036.033-0), usted acepta quedar vinculado por estos Términos de Uso. Si no está de acuerdo con alguna parte de estos términos, le solicitamos abstenerse de utilizar el sitio.",
         "property_title": "Propiedad Intelectual",
-        "property_content": "Todo el contenido publicado en este sitio web — incluyendo textos, gráficos, logotipos, íconos, imágenes, clips de audio/video, código fuente y software — es propiedad exclusiva de la Fundación SAMVAL o de sus licenciantes y está protegido por las leyes colombianas e internacionales de propiedad intelectual. Queda prohibida su reproducción, distribución o modificación sin autorización escrita.",
+        "property_content": "Los textos, gráficos, logotipos, íconos, imágenes, contenidos, diseños, código y demás materiales publicados en este sitio pertenecen a la Fundación SAMVAL o se usan con autorización. Su reproducción, distribución, modificación o uso comercial requiere autorización previa y escrita.",
         "donation_title": "Donaciones y Transacciones",
-        "donation_content1": "Las donaciones realizadas a través de este sitio son voluntarias y se destinan íntegramente a los programas sociales y educativos de la Fundación SAMVAL. Como entidad del Régimen Tributario Especial (ESAL), emitimos certificados de donación válidos ante la DIAN.",
-        "donation_content2": "Los donantes recibirán su certificado tributario dentro de los 30 días hábiles siguientes a la transacción. Las donaciones no son reembolsables salvo en casos de error comprobado en el procesamiento del pago.",
+        "donation_content1": "Las donaciones realizadas a través de este sitio son voluntarias y se destinan al fortalecimiento de los programas sociales, educativos y tecnológicos de la Fundación SAMVAL. Cuando corresponda, la fundación podrá emitir certificados de donación conforme a la normativa colombiana aplicable.",
+        "donation_content2": "Las donaciones no constituyen compra de bienes o servicios y, por regla general, no son reembolsables. Si ocurre un error comprobado en el procesamiento del pago, el donante podrá escribir a info@samval.org para solicitar revisión del caso.",
         "exemption_title": "Limitación de Responsabilidad",
-        "exemption_content": "La Fundación SAMVAL no garantiza que el sitio web esté libre de errores o interrupciones. El contenido se proporciona \"tal cual\" sin garantías explícitas o implícitas. La fundación no será responsable por daños directos, indirectos, incidentales o consecuentes derivados del uso o la imposibilidad de uso del sitio.",
+        "exemption_content": "La Fundación SAMVAL procura mantener información clara y actualizada, pero no garantiza que el sitio esté libre de errores, interrupciones o desactualizaciones ocasionales. La información publicada tiene finalidad institucional e informativa y no constituye asesoría legal, tributaria, médica, financiera o profesional.",
         "jurisdiction_title": "Jurisdicción y Ley Aplicable",
         "jurisdiction_content": "Estos Términos de Uso se rigen por las leyes de la República de Colombia. Cualquier controversia será resuelta por los tribunales competentes de la ciudad de Barranquilla, Atlántico, Colombia."
     },
@@ -450,17 +557,17 @@
         "metric_4": "Docentes Capacitados",
         "metric_4_value": "85",
         "metric_4_desc": "docentes de zonas rurales formados en metodología STEAM etnopertinente",
-        "map_title": "Dónde Trabajamos",
-        "map_desc": "Nuestra presencia se concentra en los territorios étnicos de la costa Caribe colombiana, con expansión planificada.",
+        "map_title": "Presencia territorial",
+        "map_desc": "Trabajamos con comunidades, instituciones educativas y aliados locales en territorios donde la tecnología puede ampliar oportunidades sin desplazar la identidad cultural.",
         "map_location_1": "Sierra Nevada de Santa Marta",
-        "map_location_1_desc": "Comunidades Arahuacas — programación en lengua Iku, robótica con Thymio integrada a la Ley de Origen.",
+        "map_location_1_desc": "Comunidades Arahuacas — programación en lengua Iku, robótica educativa integrada a la Ley de Origen.",
         "map_location_2": "San Basilio de Palenque",
         "map_location_2_desc": "Primera comunidad afrocolombiana con módulos de robótica en lengua Palenquera. Robots que hablan Palenquero.",
         "map_location_3": "Barranquilla",
         "map_location_3_desc": "Sede administrativa y laboratorio de desarrollo. Alianzas con universidades locales.",
         "cases_title": "Historias de Transformación",
         "case_1_title": "De la Sierra al Código: Iku Digital",
-        "case_1_desc": "En la Sierra Nevada de Santa Marta, niños Arahuacos aprendieron a programar el robot Thymio usando conceptos de su Ley de Origen. Los ancianos de la comunidad participaron en el diseño de los desafíos, integrando la cosmovisión en cada módulo. El resultado: niños que ven la tecnología como extensión de su cultura, no como amenaza.",
+        "case_1_desc": "En la Sierra Nevada de Santa Marta, niños Arahuacos aprendieron a programar robots educativos usando conceptos de su Ley de Origen. Los ancianos de la comunidad participaron en el diseño de los desafíos, integrando la cosmovisión en cada módulo. El resultado: niños que ven la tecnología como extensión de su cultura, no como amenaza.",
         "case_1_quote": "\"El robot entiende nuestra forma de pensar el territorio.\"",
         "case_1_author": "— Mamo Arahuaco, Sierra Nevada",
         "case_2_title": "Palenque Programa: Robots en Lengua Palenquera",
@@ -469,23 +576,40 @@
         "case_2_author": "— Estudiante, San Basilio de Palenque",
         "timeline_title": "Nuestra Trayectoria",
         "timeline": [
-            { "year": "2024", "event": "Reunión de los miembros fundadores en Suiza para acordar la implementación de tecnologías con impacto social que hoy SAMVAL hace realidad." },
-            { "year": "2024", "event": "Constitución oficial de la Fundación SAMVAL (18 de Julio de 2024)." },
-            { "year": "2025", "event": "Visita a la Sierra Nevada. Lanzamiento de lenguajes de programación en lenguas indígenas." },
-            { "year": "2026", "event": "Obtención de la calificación en el Régimen Tributario Especial (ESAL). Este hito garantiza máxima transparencia e impacto medible en Colombia, permitiendo a nuestros donantes y aliados estratégicos beneficiarse de un importante retorno tributario al aportar a la educación del territorio." }
+            {
+                "year": "2024",
+                "event": "Reunión de los miembros fundadores en Suiza para acordar la implementación de tecnologías con impacto social que hoy SAMVAL hace realidad."
+            },
+            {
+                "year": "2024",
+                "event": "Constitución oficial de la Fundación SAMVAL (18 de Julio de 2024)."
+            },
+            {
+                "year": "2025",
+                "event": "Visita a la Sierra Nevada. Lanzamiento de lenguajes de programación en lenguas indígenas."
+            },
+            {
+                "year": "2026",
+                "event": "Obtención de la calificación en el Régimen Tributario Especial (ESAL). Este hito fortalece la transparencia y el seguimiento del impacto en Colombia, permitiendo a nuestros donantes y aliados estratégicos acceder a los beneficios tributarios aplicables al apoyar la educación del territorio."
+            }
         ],
         "report_title": "Informe de Impacto",
-        "report_desc": "Descarga nuestro informe completo con datos, metodología y testimonios.",
-        "report_btn": "Próximamente — Junio 2026",
-        "report_note": "El primer Informe de Impacto de SAMVAL está en desarrollo. Incluirá métricas verificables, casos de estudio y recomendaciones."
+        "report_desc": "Estamos consolidando datos, metodología y testimonios para publicar un informe verificable de impacto.",
+        "report_btn": "Informe en preparación",
+        "report_note": "Las cifras presentadas corresponden a registros internos y casos documentados por SAMVAL. El informe completo incluirá metodología, fuentes y recomendaciones.",
+        "territory_tag": "PRESENCIA DOCUMENTADA",
+        "territory_title": "Territorios y ejes de trabajo",
+        "axis_1": "Educación STEAM",
+        "axis_2": "Alianzas locales",
+        "axis_3": "Seguimiento de impacto"
     },
     "resources_page": {
         "tag": "BIBLIOTECA PEDAGÓGICA",
         "title": "Recursos Educativos",
         "subtitle": "Guías, módulos y herramientas abiertas para que la robótica etnopertinente sea replicable.",
         "guides_title": "Guías Pedagógicas",
-        "guide_1_title": "Guía Thymio + Cosmovisión Indígena",
-        "guide_1_desc": "20 páginas con integración del robot Thymio y la Ley de Origen Arahuaca. Diseñada para docentes de comunidades étnicas.",
+        "guide_1_title": "Guía de Robótica Educativa + Cosmovisión Indígena",
+        "guide_1_desc": "20 páginas con integración de robótica educativa y la Ley de Origen Arahuaca. Diseñada para docentes de comunidades étnicas.",
         "guide_1_status": "En desarrollo — Publicación Q2 2026",
         "guide_2_title": "Módulo de 4 Sesiones: Palenque STEAM",
         "guide_2_desc": "Módulo pedagógico adaptado al contexto de San Basilio de Palenque. Actividades de robótica en lengua Palenquera.",
@@ -536,7 +660,22 @@
         },
         "rights": "Todos los derechos reservados.",
         "privacy": "Privacidad",
-        "terms": "Términos"
+        "terms": "Términos",
+        "cookie_settings": "Configurar cookies"
+    },
+    "cookie_banner": {
+        "title": "Preferencias de privacidad",
+        "description": "Usamos cookies necesarias para el idioma y el funcionamiento del sitio. Con tu permiso, también usamos Google Analytics para medir visitas y mejorar nuestros contenidos.",
+        "privacy_link": "Ver política de privacidad",
+        "necessary_label": "Cookies necesarias",
+        "necessary_description": "Guardan preferencias básicas como el idioma y permiten que el sitio funcione correctamente.",
+        "always_active": "Siempre activas",
+        "analytics_label": "Analítica",
+        "analytics_description": "Permite medir visitas, páginas consultadas y conversiones de forma agregada para mejorar el sitio.",
+        "settings": "Configurar",
+        "reject": "Rechazar",
+        "accept": "Aceptar analítica",
+        "save": "Guardar preferencias"
     },
     "admin": {
         "login": {
@@ -544,7 +683,7 @@
             "email": "Correo Electrónico",
             "password": "Contraseña",
             "btn": "Entrar",
-            "error": "Credenciales incorrectas (Demo: admin@samval.org / admin123)",
+            "error": "Credenciales incorrectas",
             "logging_in": "Entrando..."
         },
         "layout": {

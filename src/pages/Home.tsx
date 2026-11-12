@@ -6,6 +6,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 
 import { useTranslation } from 'react-i18next';
 import SEO from '../components/SEO';
 import InstagramFeed from '../components/InstagramFeed';
+import TypewriterText from '../components/TypewriterText';
 
 const COLORS = ['#801b1b', '#a62d2d', '#5a1212', '#d4a373'];
 
@@ -38,7 +39,14 @@ const Home: React.FC = () => {
             alt="Paisaje Colombiano y Tecnología"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/35 to-transparent"></div>
+          <div className="absolute inset-0 bg-black/10"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/34 to-transparent"></div>
+          <div
+            className="absolute inset-0"
+            style={{
+              background: 'radial-gradient(ellipse at 22% 48%, rgba(0,0,0,0.58) 0%, rgba(0,0,0,0.34) 34%, rgba(0,0,0,0.08) 62%, rgba(0,0,0,0) 100%)'
+            }}
+          ></div>
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -52,19 +60,13 @@ const Home: React.FC = () => {
             >
               {t('home.hero_tagline')}
             </span>
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-white leading-[1.1] mb-6 drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)]">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.12] mb-6 drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)]">
               {t('home.hero_title')}
             </h1>
-            <p className="text-lg sm:text-xl text-stone-200 mb-6 leading-relaxed max-w-2xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-              {t('home.hero_desc')}
-              <span className="block mt-4 font-bold text-white border-l-4 border-samval-guinda pl-4">
-                {t('home.hero_bold')}
-              </span>
-            </p>
-            <p className="text-sm sm:text-base text-samval-accent/90 font-bold mb-10 max-w-2xl italic tracking-wide"
+            <p className="text-lg sm:text-xl text-stone-200 mb-10 leading-relaxed max-w-2xl min-h-[4.5em] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
               style={{ textShadow: '0 2px 8px rgba(0,0,0,0.6)' }}
             >
-              {t('home.hero_positioning')}
+              <TypewriterText text={t('home.hero_positioning')} charsPerSecond={32} />
             </p>
             <div className="flex flex-col sm:flex-row gap-5">
               <Link to="/donar" className="group inline-flex items-center justify-center px-10 py-4 text-white font-black rounded-2xl text-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"

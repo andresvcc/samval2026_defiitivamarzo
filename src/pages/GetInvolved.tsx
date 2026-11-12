@@ -2,10 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 
 import { Heart, Hand, ShieldCheck, TrendingUp, Info, CheckCircle, Smartphone, Users2, Sparkles, GraduationCap } from 'lucide-react';
 import { useTranslation, Trans } from 'react-i18next';
+import { useLocation, useNavigate } from 'react-router-dom';
 import SEO from '../components/SEO';
+import TurnstileWidget from '../components/TurnstileWidget';
+import { submitVolunteerForm } from '../services/samvalApi';
+import { trackConversion } from '../utils/conversions';
 
 const SubscriptionButton: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const renderButton = () => {
@@ -23,7 +28,16 @@ const SubscriptionButton: React.FC = () => {
             });
           },
           onApprove: function(data: any, actions: any) {
-            alert('¡Gracias por tu apoyo! ID de suscripción: ' + data.subscriptionID);
+            trackConversion('paypal_subscription', {
+              label: 'paypal_subscription_approved',
+              buttonLocation: 'paypal_subscription_button',
+              donationType: 'monthly_subscription',
+              pageSection: 'personal_contributions',
+              metadata: {
+                paypal_subscription_id: data.subscriptionID,
+              },
+            });
+            navigate('/gracias?tipo=donacion');
           }
         }).render(containerRef.current);
       }
@@ -46,20 +60,91 @@ const SubscriptionButton: React.FC = () => {
         script.addEventListener('load', renderButton);
       }
     }
-  }, []);
+  }, [navigate]);
 
   return <div ref={containerRef} id="paypal-button-container-P-19Y73375FD6273356NHAMERQ" className="w-[11.625rem] mx-auto min-h-[42px] flex justify-center items-center"></div>;
 };
 
 const GetInvolved: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'donate' | 'volunteer'>('donate');
+  const [volunteerStatus, setVolunteerStatus] = useState<'idle' | 'loading' | 'error'>('idle');
+  const [volunteerErrorMessage, setVolunteerErrorMessage] = useState('');
+  const [turnstileRequired, setTurnstileRequired] = useState(false);
+  const [turnstileResetKey, setTurnstileResetKey] = useState(0);
+  const [turnstileToken, setTurnstileToken] = useState('');
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const reasons = t('get_involved_page.invest_project.reasons', { returnObjects: true }) as string[];
   const personalGroups = t('get_involved_page.personal_contributions.groups', { returnObjects: true }) as string[];
   const impactItems = t('get_involved_page.impact_collection.items', { returnObjects: true }) as string[];
 
+  useEffect(() => {
+    if (location.pathname === '/voluntariado') {
+      setActiveTab('volunteer');
+    }
+  }, [location.pathname]);
 
+  const handleWhatsAppClick = () => {
+    trackConversion('whatsapp', {
+      label: 'investment_proposal_whatsapp',
+      buttonLocation: 'budget_card_cta',
+      contactMethod: 'whatsapp',
+      destination: 'https://wa.me/573233207532',
+      donationType: 'corporate_project',
+      pageSection: 'corporate_donation',
+    });
+  };
+
+  const handlePaypalClick = () => {
+    trackConversion('paypal_click', {
+      label: 'paypal_global_donation_click',
+      buttonLocation: 'global_paypal_button',
+      destination: 'https://www.paypal.com/ncp/payment/QXKY6ZSGJ8UEA',
+      donationType: 'one_time',
+      pageSection: 'impact_collection',
+    });
+  };
+
+  const handleVolunteerSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const submittedForm = new FormData(event.currentTarget);
+    const volunteerArea = submittedForm.get('area')?.toString() || 'not_specified';
+
+    setVolunteerStatus('loading');
+    setVolunteerErrorMessage('');
+
+    if (turnstileRequired && !turnstileToken) {
+      setVolunteerErrorMessage('Completa la verificación anti-spam para continuar.');
+      setVolunteerStatus('error');
+      return;
+    }
+
+    try {
+      await submitVolunteerForm({
+        area: volunteerArea,
+        name: submittedForm.get('name')?.toString() || '',
+        contact: submittedForm.get('contact')?.toString() || '',
+        availability: submittedForm.get('availability')?.toString() || '',
+        website: submittedForm.get('website')?.toString() || '',
+      }, turnstileToken);
+
+      trackConversion('volunteer', {
+        label: 'volunteer_form_submitted',
+        formType: 'volunteer',
+        pageSection: 'volunteer_form',
+        metadata: {
+          volunteer_area: volunteerArea,
+        },
+      });
+      navigate('/gracias?tipo=voluntariado');
+    } catch (error) {
+      setVolunteerErrorMessage(error instanceof Error ? error.message : 'Error de conexión. Verifica tu red e intenta de nuevo.');
+      setVolunteerStatus('error');
+      setTurnstileResetKey((value) => value + 1);
+    }
+  };
 
   return (
     <div className="min-h-screen pb-24" style={{ background: '#e0d6cc' }}>
@@ -186,6 +271,7 @@ const GetInvolved: React.FC = () => {
                         href="https://wa.me/573233207532"
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={handleWhatsAppClick}
                         className="w-full py-5 text-white text-lg font-black rounded-2xl flex items-center justify-center transition-all duration-300 hover:scale-[1.02]"
                         style={{
                           background: 'linear-gradient(145deg, #8c1e1e, #741818)',
@@ -279,6 +365,7 @@ const GetInvolved: React.FC = () => {
                     href="https://www.paypal.com/ncp/payment/QXKY6ZSGJ8UEA"
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={handlePaypalClick}
                     className="w-full py-6 text-white text-xl font-black rounded-2xl transition-all duration-300 hover:scale-[1.02] mt-20 flex justify-center items-center"
                     style={{
                       background: '#1e1b18',
@@ -302,68 +389,85 @@ const GetInvolved: React.FC = () => {
 
             </div>
           ) : (
-            <div className="neu-raised-lg p-10 md:p-24 animate-neu-fade-in relative overflow-hidden" style={{ borderRadius: '36px' }}>
+            <div className="neu-raised-lg p-6 md:p-10 lg:p-12 animate-neu-fade-in relative overflow-hidden" style={{ borderRadius: '28px' }}>
               <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-samval-guinda via-samval-light to-stone-800"></div>
 
-              <div className="max-w-4xl mx-auto">
-                <div className="text-center mb-20">
-                  <div className="inline-flex p-6 neu-pressed mb-10" style={{ borderRadius: '24px' }}>
-                    <Hand size={48} className="text-samval-guinda" strokeWidth={1} />
+              <div className="max-w-3xl mx-auto">
+                <div className="text-center mb-8">
+                  <div className="inline-flex p-4 neu-pressed mb-5" style={{ borderRadius: '18px' }}>
+                    <Hand size={34} className="text-samval-guinda" strokeWidth={1.25} />
                   </div>
-                  <h2 className="text-5xl lg:text-7xl font-black text-stone-800 mb-6 tracking-tighter leading-none">{t('get_involved_page.volunteer_form.title')}</h2>
-                  <p className="text-xl lg:text-2xl text-stone-500 font-medium max-w-2xl mx-auto">{t('get_involved_page.volunteer_form.subtitle')}</p>
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-stone-800 mb-3 tracking-tighter leading-none">{t('get_involved_page.volunteer_form.title')}</h2>
+                  <p className="text-base lg:text-lg text-stone-500 font-medium max-w-2xl mx-auto leading-relaxed">{t('get_involved_page.volunteer_form.subtitle')}</p>
                 </div>
 
-                <form className="space-y-12">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                    <div className="space-y-4">
-                      <label className="block text-[11px] font-black text-stone-400 uppercase tracking-[0.3em] ml-2">{t('get_involved_page.volunteer_form.area_label')}</label>
-                      <select className="neu-input w-full !py-5 !px-6 !text-base font-bold text-stone-600">
-                        <option>{t('get_involved_page.volunteer_form.area_options.eng')}</option>
-                        <option>{t('get_involved_page.volunteer_form.area_options.edu')}</option>
-                        <option>{t('get_involved_page.volunteer_form.area_options.soc')}</option>
-                        <option>{t('get_involved_page.volunteer_form.area_options.health')}</option>
-                        <option>{t('get_involved_page.volunteer_form.area_options.comms')}</option>
+                <form className="space-y-5" onSubmit={handleVolunteerSubmit}>
+                  <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div className="space-y-2">
+                      <label className="block text-[10px] font-black text-stone-400 uppercase tracking-[0.2em] ml-2">{t('get_involved_page.volunteer_form.area_label')}</label>
+                      <select required name="area" className="neu-input w-full !py-3.5 !px-5 !text-sm font-bold text-stone-600">
+                        <option value="engineering">{t('get_involved_page.volunteer_form.area_options.eng')}</option>
+                        <option value="education">{t('get_involved_page.volunteer_form.area_options.edu')}</option>
+                        <option value="social_impact">{t('get_involved_page.volunteer_form.area_options.soc')}</option>
+                        <option value="health">{t('get_involved_page.volunteer_form.area_options.health')}</option>
+                        <option value="communications">{t('get_involved_page.volunteer_form.area_options.comms')}</option>
                       </select>
                     </div>
-                    <div className="space-y-4">
-                      <label className="block text-[11px] font-black text-stone-400 uppercase tracking-[0.3em] ml-2">{t('get_involved_page.volunteer_form.name_label')}</label>
+                    <div className="space-y-2">
+                      <label className="block text-[10px] font-black text-stone-400 uppercase tracking-[0.2em] ml-2">{t('get_involved_page.volunteer_form.name_label')}</label>
                       <div className="relative">
-                        <Users2 className="absolute left-5 top-1/2 -translate-y-1/2 text-stone-400" size={18} />
-                        <input type="text" className="neu-input w-full !py-5 !pl-14 !pr-6 !text-base font-bold" placeholder={t('get_involved_page.volunteer_form.name_placeholder')} />
+                        <Users2 className="absolute left-4 top-1/2 -translate-y-1/2 text-stone-400" size={17} />
+                        <input required name="name" type="text" className="neu-input w-full !py-3.5 !pl-12 !pr-5 !text-sm font-bold" placeholder={t('get_involved_page.volunteer_form.name_placeholder')} />
                       </div>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                    <div className="space-y-4">
-                      <label className="block text-[11px] font-black text-stone-400 uppercase tracking-[0.3em] ml-2">{t('get_involved_page.volunteer_form.contact_label')}</label>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div className="space-y-2">
+                      <label className="block text-[10px] font-black text-stone-400 uppercase tracking-[0.2em] ml-2">{t('get_involved_page.volunteer_form.contact_label')}</label>
                       <div className="relative">
-                        <Smartphone className="absolute left-5 top-1/2 -translate-y-1/2 text-stone-400" size={18} />
-                        <input type="text" className="neu-input w-full !py-5 !pl-14 !pr-6 !text-base font-bold" placeholder={t('get_involved_page.volunteer_form.contact_placeholder')} />
+                        <Smartphone className="absolute left-4 top-1/2 -translate-y-1/2 text-stone-400" size={17} />
+                        <input required name="contact" type="text" className="neu-input w-full !py-3.5 !pl-12 !pr-5 !text-sm font-bold" placeholder={t('get_involved_page.volunteer_form.contact_placeholder')} />
                       </div>
                     </div>
-                    <div className="space-y-4">
-                      <label className="block text-[11px] font-black text-stone-400 uppercase tracking-[0.3em] ml-2">{t('get_involved_page.volunteer_form.availability_label')}</label>
+                    <div className="space-y-2">
+                      <label className="block text-[10px] font-black text-stone-400 uppercase tracking-[0.2em] ml-2">{t('get_involved_page.volunteer_form.availability_label')}</label>
                       <div className="relative">
-                        <Sparkles className="absolute left-5 top-1/2 -translate-y-1/2 text-stone-400" size={18} />
-                        <input type="text" className="neu-input w-full !py-5 !pl-14 !pr-6 !text-base font-bold" placeholder={t('get_involved_page.volunteer_form.availability_placeholder')} />
+                        <Sparkles className="absolute left-4 top-1/2 -translate-y-1/2 text-stone-400" size={17} />
+                        <input required name="availability" type="text" className="neu-input w-full !py-3.5 !pl-12 !pr-5 !text-sm font-bold" placeholder={t('get_involved_page.volunteer_form.availability_placeholder')} />
                       </div>
                     </div>
                   </div>
 
-                  <div className="pt-16">
-                    <button className="w-full py-8 text-white font-black text-lg uppercase tracking-[0.4em] flex items-center justify-center transition-all duration-300 hover:scale-[1.01]"
+                  <div className="pt-2">
+                    <button type="submit" disabled={volunteerStatus === 'loading'} className="w-full py-4 text-white font-black text-sm uppercase tracking-[0.24em] flex items-center justify-center transition-all duration-300 hover:scale-[1.01] disabled:opacity-60 disabled:cursor-not-allowed"
                       style={{
                         background: '#1e1b18',
-                        borderRadius: '24px',
+                        borderRadius: '18px',
                         boxShadow: '8px 8px 16px #c4b8ac, -8px -8px 16px #f0e8e0'
                       }}
                     >
-                      <span>{t('get_involved_page.volunteer_form.submit_btn')}</span>
+                      <span>{volunteerStatus === 'loading' ? 'Enviando...' : t('get_involved_page.volunteer_form.submit_btn')}</span>
                     </button>
-                    <p className="text-center mt-10 text-stone-400 font-bold text-sm tracking-wide">
-                      {t('footer.tagline')}
+                    <div className="mt-2">
+                      <TurnstileWidget
+                        action="volunteer"
+                        onAvailabilityChange={setTurnstileRequired}
+                        onTokenChange={setTurnstileToken}
+                        resetKey={turnstileResetKey}
+                      />
+                    </div>
+                    {volunteerStatus === 'error' && (
+                      <div className="mt-6 p-4 rounded-xl text-sm font-bold text-red-900 bg-red-100 border border-red-200">
+                        {volunteerErrorMessage}
+                      </div>
+                    )}
+                    <p className="text-center mt-4 text-stone-500 font-bold text-xs leading-relaxed max-w-2xl mx-auto">
+                      <Trans
+                        i18nKey="get_involved_page.volunteer_form.privacy_notice"
+                        components={{ 0: <a href="/privacidad" className="text-samval-guinda hover:underline" /> }}
+                      />
                     </p>
                   </div>
                 </form>

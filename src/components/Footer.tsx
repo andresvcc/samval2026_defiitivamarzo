@@ -2,6 +2,7 @@ import React from 'react';
 import { Facebook, Twitter, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { openCookiePreferences } from '../utils/analytics';
 
 const Footer: React.FC = () => {
   const { t } = useTranslation();
@@ -101,7 +102,7 @@ const Footer: React.FC = () => {
                 <div className="neu-dark-flat w-8 h-8 flex items-center justify-center shrink-0">
                   <Mail size={14} className="text-samval-accent" />
                 </div>
-                <span className="text-stone-400">contact@samval.org</span>
+                <span className="text-stone-400">info@samval.org</span>
               </li>
             </ul>
           </div>
@@ -111,9 +112,12 @@ const Footer: React.FC = () => {
           style={{ borderTop: '1px solid #2a2622' }}
         >
           <p>&copy; {new Date().getFullYear()} {t('navbar.title')}. {t('footer.rights')}</p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 mt-4 md:mt-0">
             <Link to="/privacidad" className="hover:text-stone-300 transition-colors">{t('footer.privacy')}</Link>
             <Link to="/terminos" className="hover:text-stone-300 transition-colors">{t('footer.terms')}</Link>
+            <button type="button" onClick={openCookiePreferences} className="hover:text-stone-300 transition-colors">
+              {t('footer.cookie_settings')}
+            </button>
           </div>
         </div>
       </div>

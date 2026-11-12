@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import CookieConsentBanner from './components/CookieConsentBanner';
 import Home from './pages/Home';
 import About from './pages/About';
 import SocialPrograms from './pages/SocialPrograms';
@@ -13,13 +14,8 @@ import TermsOfUse from './pages/TermsOfUse';
 import Impact from './pages/Impact';
 import Resources from './pages/Resources';
 import Success from './pages/Success';
-import AdminLayout from './components/admin/AdminLayout';
-import Login from './pages/admin/Login';
-import Dashboard from './pages/admin/Dashboard';
-import Photos from './pages/admin/Photos';
-import Financials from './pages/admin/Financials';
-import Partners from './pages/admin/Partners';
-import Team from './pages/admin/Team';
+import { useGsapPageAnimations } from './hooks/useGsapPageAnimations';
+import { trackPageView } from './utils/analytics';
 
 // ScrollToTop component to reset scroll on route change
 const ScrollToTop = () => {
@@ -48,6 +44,8 @@ const App: React.FC = () => {
   return (
     <Router>
       <ScrollToTop />
+      <AnalyticsRouteTracker />
+      <PageAnimations />
       <div className="flex flex-col min-h-screen font-sans">
         <Navbar />
         <main className="flex-grow">
@@ -65,22 +63,28 @@ const App: React.FC = () => {
             <Route path="/terminos" element={<TermsOfUse />} />
             <Route path="/gracias" element={<Success />} />
 
-            {/* Admin Routes */}
-            <Route path="/admin/login" element={<Login />} />
-            <Route path="/admin" element={<AdminLayout />}>
-              <Route index element={<Dashboard />} />
-              <Route path="dashboard" element={<Dashboard />} />
-              <Route path="photos" element={<Photos />} />
-              <Route path="financials" element={<Financials />} />
-              <Route path="partners" element={<Partners />} />
-              <Route path="team" element={<Team />} />
-            </Route>
           </Routes>
         </main>
         <Footer />
       </div>
+      <CookieConsentBanner />
     </Router>
   );
+};
+
+const AnalyticsRouteTracker = () => {
+  const { pathname, search, hash } = useLocation();
+
+  useEffect(() => {
+    trackPageView(`${pathname}${search}${hash}`);
+  }, [pathname, search, hash]);
+
+  return null;
+};
+
+const PageAnimations = () => {
+  useGsapPageAnimations();
+  return null;
 };
 
 export default App;

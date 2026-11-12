@@ -1,29 +1,109 @@
 {
     "seo": {
         "home": {
-            "title": "Stiftung SAMVAL | Technologische Innovation mit sozialer Wirkung",
-            "description": "Wir stärken gefährdete Gebiete durch STEAM-Bildung, Robotik und KI. Erfahren Sie mehr über unsere sozialen Projekte in der Sierra Nevada."
+            "title": "SAMVAL Stiftung - Ethno-relevante Robotik in Kolumbien",
+            "description": "Eine wegweisende Plattform für kulturell verankerte Robotik in Lateinamerika. Wir vermitteln informatisches Denken in indigenen Sprachen und unterstützen territoriale Transformation."
         },
         "about": {
-            "title": "Über uns | Stiftung SAMVAL - Territoriale Technologie",
-            "description": "Erfahren Sie mehr über die Geschichte, Mission und Vision der Stiftung SAMVAL. Hochwertiges Engineering im Dienste der Gemeinschaft."
+            "title": "Über uns | SAMVAL Stiftung",
+            "description": "Erfahren Sie, wie wir hochwertige STEAM-Bildung gemeinsam mit lokalen und indigenen Führungspersonen in Kolumbien entwickeln."
         },
         "projects": {
-            "title": "Soziale Projekte | SAMVAL Impact Ecosystem",
-            "description": "Entdecken Sie unsere Initiativen: Internationale Medizinische Mission, Arhuaco-Robotik und BiblioBurro 2.0. Territoriale Innovation."
+            "title": "Soziale Projekte | SAMVAL Impact-Ökosystem",
+            "description": "Entdecken Sie unsere Initiativen: Internationale Medizinmission, Arhuaco-Robotik und die Community-Offline-Bibliothek. Innovation aus dem Territorium heraus."
         },
         "services": {
-            "title": "Tech-Services | Zweckorientierte Softwareentwicklung",
-            "description": "Webentwicklung, KI und Senior Consulting. Mit der Beauftragung unserer Dienstleistungen finanzieren Sie direkt die digitale Inklusion in Kolumbien."
+            "title": "Tech Services | Softwareentwicklung mit Wirkung",
+            "description": "Webentwicklung, KI und Senior Consulting. Wer unsere Leistungen beauftragt, finanziert direkt digitale Inklusion in Kolumbien."
         },
         "contact": {
             "title": "Kontakt | Werden Sie Teil der SAMVAL-Transformation",
-            "description": "Kontaktieren Sie uns für Partnerschaften, Spenden oder Tech-Dienstleistungen. Mit Sitz in Barranquilla, tätig in ganz Kolumbien."
+            "description": "Kontaktieren Sie uns für Partnerschaften, Spenden oder Technologieleistungen. Wir sitzen in Barranquilla und arbeiten in ganz Kolumbien."
+        },
+        "impact": {
+            "title": "Unsere Wirkung | SAMVAL Stiftung",
+            "description": "Nachweise unserer Wirkung in ländlicher STEAM-Bildung und Robotik in der Sierra Nevada und in San Basilio de Palenque."
+        },
+        "resources": {
+            "title": "Ressourcen | SAMVAL Stiftung",
+            "description": "Laden Sie pädagogische Leitfäden und Module herunter, die Technologievermittlung mit Respekt vor lokaler Kultur verbinden."
+        },
+        "get_involved": {
+            "title": "Spenden und investieren | SAMVAL Stiftung",
+            "description": "Investieren Sie mit steuerlichen Vorteilen in soziale Wirkung. Unterstützen Sie STEAM-Bildung für benachteiligte Gemeinschaften in Kolumbien."
+        },
+        "privacy": {
+            "title": "Datenschutzerklärung | SAMVAL Stiftung",
+            "description": "Erfahren Sie, wie wir personenbezogene Daten verarbeiten und welche Rechte Sie als betroffene Person haben."
+        },
+        "terms": {
+            "title": "Nutzungsbedingungen | SAMVAL Stiftung",
+            "description": "Bedingungen für die Nutzung der Website der SAMVAL Stiftung."
+        }
+    },
+    "success_page": {
+        "common": {
+            "response_time_label": "Geschätzte Antwortzeit",
+            "home_action": "Zur Startseite"
+        },
+        "contacto": {
+            "tag": "Nachricht erhalten",
+            "title": "Vielen Dank für Ihre Nachricht",
+            "subtitle": "Wir haben Ihre Nachricht erhalten und sie befindet sich nun in unserem Follow-up-Kanal.",
+            "description": "Vielen Dank, dass Sie SAMVAL kontaktiert haben. Wir prüfen die von Ihnen geteilten Informationen und antworten mit einer klaren Orientierung entsprechend Ihrem Anliegen.",
+            "next_title": "Was wir jetzt tun",
+            "steps": [
+                "Wir prüfen Ihre Kontaktdaten und den Grund Ihrer Nachricht.",
+                "Die passende Person aus unserem Team wird Ihre Anfrage ansehen.",
+                "Wir antworten per E-Mail oder Telefon mit dem nächsten Schritt."
+            ],
+            "response_time": "In der Regel innerhalb von 1 bis 2 Werktagen.",
+            "secondary_action": "Weitere Nachricht senden"
+        },
+        "servicios": {
+            "tag": "Anfrage erhalten",
+            "title": "Vielen Dank für Ihre Angebotsanfrage",
+            "subtitle": "Ihre Anfrage zu unseren Technologieleistungen wurde erfolgreich erfasst.",
+            "description": "Wir analysieren den Kontext Ihres Projekts, um mit einer nützlichen, realistischen technischen Orientierung zu antworten, die zur sozialen Wirkung von SAMVAL passt.",
+            "next_title": "Nächste Schritte",
+            "steps": [
+                "Wir prüfen den Umfang und die Angaben, die Sie geteilt haben.",
+                "Wir identifizieren den passendsten technischen Ansatz für Ihren Bedarf.",
+                "Wir kontaktieren Sie, um Anforderungen, Zeitplan und einen ersten Vorschlag zu klären."
+            ],
+            "response_time": "In der Regel innerhalb von 1 bis 3 Werktagen.",
+            "secondary_action": "Leistungen ansehen"
+        },
+        "donacion": {
+            "tag": "Unterstützung erhalten",
+            "title": "Vielen Dank für Ihre Unterstützung",
+            "subtitle": "Ihr Beitrag hilft, STEAM-Bildung mit territorialem Ansatz zu stärken.",
+            "description": "Jeder Beitrag stärkt Programme, die Technologie, Kultur und Chancen für Gemeinschaften verbinden, die historisch weniger Zugang zu digitaler Bildung hatten.",
+            "next_title": "Wie Ihr Beitrag wirkt",
+            "steps": [
+                "Wir erfassen Ihre Unterstützung in unserem institutionellen Follow-up.",
+                "Wir verbinden sie mit Bildungs- und Innovationsinitiativen in den Territorien.",
+                "Wir teilen weiterhin Fortschritte über die Wirkung, die wir gemeinsam aufbauen."
+            ],
+            "response_time": "Fortschritte werden über unsere institutionellen Kanäle geteilt.",
+            "secondary_action": "Möglichkeiten ansehen"
+        },
+        "voluntariado": {
+            "tag": "Bewerbung erhalten",
+            "title": "Vielen Dank, dass Sie mitmachen möchten",
+            "subtitle": "Wir haben Ihr Interesse am Freiwilligeneinsatz erhalten und schätzen Ihre Bereitschaft, beizutragen.",
+            "description": "Wir prüfen Ihr Profil, Ihr Interessengebiet und Ihre Verfügbarkeit, um zu erkennen, wo Ihre Erfahrung in unserer Bildungs- und Territorialarbeit den größten Wert schaffen kann.",
+            "next_title": "Was wir prüfen",
+            "steps": [
+                "Wir prüfen den Bereich, in dem Sie mitarbeiten möchten.",
+                "Wir gleichen Ihre Verfügbarkeit mit den aktuellen Bedürfnissen des Teams ab.",
+                "Wir kontaktieren Sie, wenn sich eine passende Möglichkeit ergibt."
+            ],
+            "response_time": "In der Regel innerhalb von 3 bis 5 Werktagen.",
+            "secondary_action": "Bewerbung bearbeiten"
         }
     },
     "navbar": {
-        "open_menu": "Menü öffnen",
-        "close_menu": "Menü schließen",
         "title": "SAMVAL STIFTUNG",
         "tagline": "Technologie, die das Territorium respektiert",
         "home": "Startseite",
@@ -32,7 +112,9 @@
         "services": "Tech-Dienstleistungen",
         "contact": "Kontakt",
         "request_software": "Software anfordern",
-        "donate": "Spenden"
+        "donate": "Spenden",
+        "impact": "Wirkung",
+        "resources": "Ressourcen"
     },
     "social_feed": {
         "tag": "@fundacionsamval",
@@ -58,7 +140,7 @@
         "mission_card_title": "Bildungszweck",
         "mission_card_desc": "Wir entwerfen Brücken zwischen fortschrittlicher Technologie und lokalem Wissen, um Gemeinschaften zu stärken.",
         "vision_card_title": "Lokale Wirkung",
-        "vision_card_desc": "Wir implementieren digitale Infrastrukturen und Lösungen, die die territoriale Kultur respektieren und fördern.",
+        "vision_card_desc": "Unser Ziel für 2030 ist es, die Reichweite transformativer Bildung zu erweitern, die Innovation, Territorium und Frieden verbindet, mit dem Anspruch, mehr als 100.000 Menschen positiv zu erreichen.",
         "values_card_title": "Soziales Engagement",
         "values_card_desc": "Jede entwickelte Software finanziert Robotik- und Programmierungsprogramme in der Sierra Nevada.",
         "impact_title": "Messbare Wirkung",
@@ -81,7 +163,26 @@
         "cta_bottom_title": "Jede Codezeile unterstützt einen Traum in der Sierra Nevada",
         "cta_bottom_desc": "Bereit, Teil der digitalen Transformation mit sozialer Wirkung zu sein?",
         "cta_donate_now": "Jetzt spenden",
-        "cta_volunteer": "Freiwilliger werden"
+        "cta_volunteer": "Freiwilliger werden",
+        "hero_positioning": "Eine wegweisende Plattform für kulturell verankerte Robotik in Lateinamerika: Wir verbinden Bildungsroboter mit indigenen Sprachen und Weltbildern.",
+        "unique_tag": "WAS UNS EINZIGARTIG MACHT",
+        "unique_title": "Wir sind kein weiteres Robotikprogramm",
+        "unique_subtitle": "SAMVAL entwickelt Bildungstechnologie gemeinsam mit den Gemeinschaften, nicht von außen übergestülpt.",
+        "unique_1_title": "Programmieren in indigenen Sprachen",
+        "unique_1_desc": "Wir schaffen Lernerfahrungen, in denen Arhuaco- und Palenquero-Kinder Bildungsroboter in Iku und Palenquero programmieren. Technologie spricht ihre Sprache.",
+        "unique_2_title": "Gemeinsam entwickelte Bildungsrobotik",
+        "unique_2_desc": "Jedes Lernmodul wird mit der Gemeinschaft gestaltet. Die Roboteraufgaben integrieren ihr Weltbild, ihre Erzählungen und ihr Territorium statt generischer Lehrpläne.",
+        "unique_3_title": "Ethno-relevante Robotik",
+        "unique_3_desc": "Wir schaffen eine neue Bildungskategorie, die physische Robotik, kulturelle Identität und informatisches Denken für ethnische Gemeinschaften verbindet.",
+        "complement_tag": "WESENTLICHE ERGÄNZUNG",
+        "complement_title": "Dort, wo große Programme nicht ankommen",
+        "complement_desc": "Nationale Programme können Labore installieren und Geräte liefern. Keines passt Inhalte wirklich an Sprache, Weltbild und Identität ethnischer Gemeinschaften an.",
+        "complement_1_title": "Kulturelle Relevanz",
+        "complement_1_desc": "Unsere Methodik integriert indigene Weltbilder in STEM-Aufgaben. Wir übersetzen nicht nur: Wir entwickeln gemeinsam mit der Gemeinschaft.",
+        "complement_2_title": "Vertrauen der Gemeinschaft",
+        "complement_2_desc": "Jahre der Arbeit vor Ort haben uns etwas gegeben, das kein zentralisiertes Programm kaufen kann: das Vertrauen traditioneller Autoritäten.",
+        "complement_3_title": "Echte Kontinuität",
+        "complement_3_desc": "Wir veranstalten keine viertägigen Camps. Wir begleiten langfristig und bilden lokale Führungspersonen aus, die Wirkung vervielfachen."
     },
     "about_page": {
         "hero_tag": "UNSERE DNA",
@@ -117,7 +218,10 @@
         },
         "cta_final_title": "Möchten Sie mehr wissen?",
         "cta_final_desc": "Wir sind bereit Ihnen zu erzählen, wie Ihr Unternehmen ein Verbündeter der Technologie mit Seele sein kann.",
-        "cta_final_btn": "Mit uns sprechen"
+        "cta_final_btn": "Mit uns sprechen",
+        "alliances_title": "Netzwerk von Partnern",
+        "alliances_desc": "Transformation in den Territorien gelingt nicht allein. Wir bauen Bildungsökosysteme mit Organisationen auf, die unsere technologische Vision teilen.",
+        "alliances_badge": "Ethno-relevante Robotik"
     },
     "social_programs_page": {
         "tag": "IMPACT-ÖKOSYSTEM",
@@ -130,30 +234,30 @@
             "p1_impact": "Ganzheitliche Versorgung vor Ort",
             "p2_title": "Arhuaco-Robotik",
             "p2_cat": "URSPRÜNGLICHE BILDUNG",
-            "p2_desc": "Wir bringen Technologie in die Sierra Nevada de Santa Marta. Wir setzen Thymio-Roboter ein, um Programmierung unter Respektierung von Kultur und Territorium zu lehren.",
+            "p2_desc": "Wir bringen Technologie in die Sierra Nevada de Santa Marta. Wir setzen Bildungsroboter ein, um Programmierung unter Respektierung von Kultur und Territorium zu lehren.",
             "p2_impact": "Ländliche STEAM-Bildung",
-            "p3_title": "BiblioBurro 2.0",
-            "p3_cat": "OFFLINE-KI",
-            "p3_desc": "Wir installieren Server mit offline arbeitenden multimodalen KI-Modellen, die als intelligente Tutoren in Gebieten ohne Internet fungieren.",
-            "p3_impact": "KI im Dienste des ländlichen Raums"
+            "p3_title": "Community-Offline-Bibliothek",
+            "p3_cat": "BILDUNGSBIBLIOTHEK",
+            "p3_desc": "Wir prüfen Offline-Lernlösungen, damit Gemeinschaften ohne stabile Internetverbindung Zugang zu ausgewählten Bildungsinhalten und pädagogischer Begleitung erhalten können.",
+            "p3_impact": "Offline-Lernen für ländliche Gebiete"
         },
         "testimonials_title": "Stimmen aus dem Territorium",
         "testimonials": {
-            "t1_quote": "Unsere Kinder mitten in den Bergen Thymio-Roboter programmieren zu sehen, ist ein Traum. Die Technologie nimmt uns nicht unsere Identität; sie hilft uns, sie zu zeigen.",
+            "t1_quote": "Unsere Kinder mitten in den Bergen Bildungsroboter programmieren zu sehen, ist ein Traum. Die Technologie nimmt uns nicht unsere Identität; sie hilft uns, sie zu zeigen.",
             "t1_author": "Arhuaco-Anführer",
             "t1_role": "Sierra Nevada",
-            "t2_quote": "Die Offline-KI von BiblioBurro hat es Jugendlichen ohne Internet ermöglicht, sofort mit globalem Wissen zu interagieren.",
+            "t2_quote": "Die Community-Offline-Bibliothek soll Jugendlichen mit begrenzter Konnektivität Bildungsinhalte näherbringen und dabei Tempo und Bedürfnisse jeder Gemeinschaft respektieren.",
             "t2_author": "Landlehrer",
             "t2_role": "Magdalena"
         }
     },
     "tech_services_page": {
         "hero_title": "Senior Technologische Lösungen",
-        "hero_desc": "Wir entwickeln Weltklasse-Software, die die soziale Entwicklung Kolumbiens finanziert.",
+        "hero_desc": "Wir entwickeln hochwertige Technologielösungen, die soziale Entwicklung in Kolumbien unterstützen.",
         "why_title": "Warum Sie uns wählen sollten?",
         "why_list": {
             "senior_team": "Senior Engineering Team mit Erfahrung auf dem US-amerikanischen und europäischen Markt.",
-            "social_impact": "100 % unserer Gewinne werden in soziale Projekte reinvestiert.",
+            "social_impact": "Wir reinvestieren Überschüsse aus unseren Dienstleistungen in soziale und Bildungsprogramme.",
             "agile_methodology": "Kontinuierliche Lieferung, transparente Kommunikation und hochwertiger Code.",
             "tax_benefits": "Spendenbescheinigungen für die Inanspruchnahme von Dienstleistungen mit sozialer Wirkung."
         },
@@ -258,7 +362,7 @@
             "title": "STEAM-Ausbildungsprojekt: Arhuaco-Gemeinschaft",
             "description": "Ein umfassendes <1>12-wöchiges</1> Programm zur Stärkung der Kompetenzen in Naturwissenschaften, Technik, Ingenieurwesen, Kunst und Mathematik für 30 Kinder in der Sierra Nevada (Vereda Don Diego).",
             "details": {
-                "equipment": "<0>Ausrüstung:</0> 30 Thymio Wireless Roboter.",
+                "equipment": "<0>Ausrüstung:</0> 30 drahtlose Bildungsroboter.",
                 "capacity": "<0>Kapazität:</0> 3 ausgebildete lokale Lehrer.",
                 "sustainability": "<0>Nachhaltigkeit:</0> Permanente Ausrüstung.",
                 "impact": "<0>Auswirkung:</0> 3 öffentliche Schulen profitiert."
@@ -283,7 +387,7 @@
         "breakdown": {
             "tech": {
                 "title": "TECHNOLOGIE (63 Mio.)",
-                "desc": "30 Thymio-Roboter, Erweiterungssätze und permanente Baumaterialien."
+                "desc": "30 Bildungsroboter, Erweiterungssätze und permanente Baumaterialien."
             },
             "talent": {
                 "title": "TALENT (105 Mio.)",
@@ -338,14 +442,15 @@
             "contact_placeholder": "+57 300...",
             "availability_label": "Wie viele Stunden pro Monat?",
             "availability_placeholder": "z.B. 10 Stunden",
-            "submit_btn": "Bewerbung absenden"
+            "submit_btn": "Bewerbung absenden",
+            "privacy_notice": "Mit dem Absenden dieses Formulars erlauben Sie SAMVAL, Ihre Daten zur Bearbeitung Ihrer Freiwilligenanfrage zu verwenden. Lesen Sie unsere <0>Datenschutzerklärung</0>."
         }
     },
     "contact_page": {
         "title": "Kontakt aufnehmen",
         "info_title": "Kontaktinformationen",
         "location_title": "Unser Hauptsitz",
-        "location_desc": "Km 25 Weg zur Sierra Nevada<br />Santa Marta, Magdalena, Kolumbien",
+        "location_desc": "Calle 104 #51B-154 Büro 17<br />Castellana Campestre<br />Barranquilla, Kolumbien",
         "phone_title": "Telefon / WhatsApp",
         "email_title": "E-Mail-Adressen",
         "form_title": "Schicken Sie uns eine Nachricht",
@@ -364,18 +469,76 @@
         "submit_btn": "Nachricht senden"
     },
     "privacy_page": {
-        "title": "Datenschutzrichtlinie",
-        "last_updated": "Zuletzt aktualisiert: 1. Januar 2024",
-        "p1": "Bei der SAMVAL Stiftung nehmen wir den Schutz Ihrer Daten sehr ernst. Diese Richtlinie beschreibt, wie wir Ihre Informationen sammeln und verwenden.",
-        "p2": "Wir sammeln personenbezogene Daten nur, wenn Sie diese freiwillig über unsere Kontakt- oder Spendenformulare angeben.",
-        "p3": "Ihre Daten werden ausschließlich für die Zwecke der Stiftung verwendet und niemals ohne Ihre ausdrückliche Zustimmung an Dritte weitergegeben."
+        "title": "Richtlinie zur Verarbeitung personenbezogener Daten",
+        "intro": "Diese Richtlinie erklärt, wie die SAMVAL Stiftung personenbezogene Daten erhebt, nutzt, speichert und schützt, die über Formulare, Spenden, Freiwilligenarbeit, Partnerschaften und Kontaktkanäle eingehen.",
+        "validity": "Gültig seit Januar 2026 | Gesetz 1581 von 2012",
+        "last_updated": "Zuletzt aktualisiert: Januar 2026",
+        "responsible_title": "1. Identifikation des Verantwortlichen",
+        "responsible_content": "Die <0>SAMVAL Stiftung</0>, identifiziert mit NIT 901.036.033-0, mit Sitz in Calle 104 #51B-154 Ofi 17, Castellana Campestre, Barranquilla, Kolumbien, und erreichbar unter <1>info@samval.org</1>, handelt als Verantwortliche für die Verarbeitung personenbezogener Daten.",
+        "legal_basis_title": "2. Rechtsgrundlagen der Verarbeitung",
+        "legal_basis_intro": "SAMVAL verarbeitet personenbezogene Daten nur, wenn eine gültige Grundlage dafür besteht:",
+        "legal_basis_list": [
+            "Vorherige, ausdrückliche und informierte Genehmigung der betroffenen Person, sofern erforderlich.",
+            "Erfüllung gesetzlicher, buchhalterischer, steuerlicher, administrativer oder regulatorischer Pflichten.",
+            "Verwaltung vorvertraglicher, vertraglicher, spendenbezogener, freiwilliger, partnerschaftlicher oder dienstleistungsbezogener Beziehungen.",
+            "Institutionelles berechtigtes Interesse, um Anfragen zu beantworten, die Sicherheit der Website zu schützen und Servicekanäle zu verbessern, unter Wahrung der Rechte der betroffenen Personen."
+        ],
+        "data_collected_title": "3. Daten, die wir erheben können",
+        "data_collected_intro": "Je nach verwendetem Formular oder Kanal kann die SAMVAL Stiftung folgende Datenkategorien erhalten:",
+        "data_collected_list": [
+            "Identifikations- und Kontaktdaten: Vorname, Nachname, E-Mail-Adresse, Telefonnummer, Land, Stadt, Unternehmen oder Organisation.",
+            "Daten zu Anfragen, Nachrichten, Interessen an Freiwilligenarbeit, Partnerschaften, Technologiedienstleistungen oder Teilnahme an Programmen.",
+            "Daten, die zur Verwaltung von Spenden, Bescheinigungen, Belegen, Buchhaltungsprozessen oder gesetzlich vorgeschriebenen Berichten erforderlich sind.",
+            "Grundlegende technische Navigationsdaten wie IP-Adresse, Gerät, Browser, besuchte Seiten und Interaktionsereignisse, wenn Messinstrumente eingesetzt werden.",
+            "Bilder, Erfahrungsberichte oder audiovisuelle Aufzeichnungen von Aktivitäten, nur wenn eine Genehmigung oder eine andere gültige Grundlage für die institutionelle Nutzung vorliegt."
+        ],
+        "purposes_title": "4. Zwecke der Verarbeitung",
+        "purposes_intro": "Personenbezogene Daten können für folgende institutionelle Zwecke verarbeitet werden:",
+        "purposes_list": [
+            "Beantwortung von Anfragen über Kontakt-, Service-, Freiwilligen- oder Partnerschaftsformulare.",
+            "Verwaltung von Spenden, Ausstellung von Bescheinigungen, sofern zutreffend, und Erfüllung buchhalterischer, steuerlicher und administrativer Pflichten.",
+            "Kommunikation von Fortschritten, Berichten, Aufrufen und Ergebnissen im Zusammenhang mit sozialen und Bildungsprogrammen.",
+            "Koordination von Aktivitäten mit Partnern, Freiwilligen, Begünstigten, Lieferanten sowie öffentlichen oder privaten Einrichtungen.",
+            "Erstellung statistischer oder wirkungsbezogener Analysen mit aggregierten oder anonymisierten Informationen, wann immer möglich."
+        ],
+        "minors_title": "5. Daten von Kindern und Jugendlichen",
+        "minors_content": "Wenn SAMVAL an Aktivitäten mit Kindern oder Jugendlichen beteiligt ist, werden deren Daten mit verstärktem Schutz verarbeitet, unter Wahrung ihres Wohls und, sofern zutreffend, mit Genehmigung von Eltern, Sorgeberechtigten, gesetzlichen Vertretern oder berechtigten Partnerinstitutionen.",
+        "third_parties_title": "6. Auftragsverarbeiter, Anbieter und Übermittlungen",
+        "third_parties_content": "SAMVAL kann Technologieanbieter, Formularplattformen, CRM-Systeme, Webhosting, E-Mail, Analytik, Zahlungsanbieter, Kommunikationstools und administrative Dienste einsetzen. Diese Dritten dürfen Informationen nur zur Bereitstellung der erforderlichen Dienste verarbeiten. Einige Anbieter können Daten außerhalb Kolumbiens speichern oder verarbeiten; SAMVAL bemüht sich daher, Dienste mit angemessenen Sicherheits- und Datenschutzmaßnahmen zu nutzen.",
+        "cookies_title": "7. Cookies, Analytik und Messung",
+        "cookies_content": "Die Website kann Cookies oder ähnliche Technologien verwenden, die für den Betrieb, die Verkehrsmessung, die Navigationsanalyse, die Verbesserung von Inhalten und das Conversion-Tracking erforderlich sind. Diese Tools können technische oder statistische Daten erzeugen, die helfen, die Leistung der Website und die Wirksamkeit institutioneller Kampagnen zu bewerten.",
+        "images_title": "8. Bilder, Erfahrungsberichte und Aktivitätsinhalte",
+        "images_content": "Fotos, Videos, Erfahrungsberichte oder Geschichten von Begünstigten, Freiwilligen, Partnern oder Teilnehmenden werden für institutionelle, informative oder rechenschaftsbezogene Zwecke verwendet, wenn eine Genehmigung oder eine andere gültige Grundlage für die Veröffentlichung besteht. Bei Aktivitäten mit Minderjährigen wendet SAMVAL verstärkte Schutzkriterien an.",
+        "rights_title": "9. Rechte der betroffenen Personen",
+        "rights_intro": "Nach den geltenden kolumbianischen Vorschriften können betroffene Personen folgende Rechte ausüben:",
+        "rights_list": [
+            "Ihre personenbezogenen Daten einsehen, aktualisieren, berichtigen oder deren Löschung beantragen.",
+            "Einen Nachweis der für die Datenverarbeitung erteilten Genehmigung verlangen.",
+            "Über die Nutzung ihrer personenbezogenen Daten informiert werden.",
+            "Die Genehmigung widerrufen oder Löschung verlangen, sofern keine gesetzliche, buchhalterische, vertragliche oder steuerliche Pflicht zur Aufbewahrung der Informationen besteht.",
+            "Beschwerden bei der Superintendencia de Industria y Comercio einreichen, wenn dies angebracht ist."
+        ],
+        "procedure_title": "10. Verfahren für Anfragen und Beschwerden",
+        "procedure_content": "Anfragen, Beschwerden oder Auskünfte zu personenbezogenen Daten können an <1>info@samval.org</1> gesendet werden. SAMVAL antwortet innerhalb der Fristen, die im Gesetz 1581 von 2012 und den dazugehörigen Vorschriften festgelegt sind.",
+        "security_title": "11. Sicherheit und Aufbewahrung",
+        "security_content": "Die SAMVAL Stiftung setzt angemessene administrative, technische und organisatorische Maßnahmen ein, um Informationen vor unbefugtem Zugriff, Verlust, Veränderung oder Missbrauch zu schützen. Daten werden aufbewahrt, solange der Zweck besteht, der ihre Erhebung gerechtfertigt hat, solange dies zur Erfüllung gesetzlicher, buchhalterischer oder steuerlicher Pflichten erforderlich ist oder während der durch die geltenden Vorschriften vorgeschriebenen Fristen. Wenn Daten nicht mehr benötigt werden, werden sie je nach Fall gelöscht, anonymisiert oder sicher archiviert."
     },
     "terms_page": {
         "title": "Nutzungsbedingungen",
-        "last_updated": "Zuletzt aktualisiert: 1. Januar 2024",
-        "p1": "Durch den Zugriff auf und die Nutzung dieser Website erklären Sie sich mit den folgenden Geschäftsbedingungen einverstanden.",
-        "p2": "Alle Inhalte auf dieser Website sind Eigentum der SAMVAL Stiftung und durch Gesetze zum geistigen Eigentum geschützt.",
-        "p3": "Die unbefugte Nutzung von Materialien auf dieser Website ist strengstens untersagt."
+        "intro": "Diese Bedingungen regeln den Zugang zur und die Nutzung der Website der SAMVAL Stiftung, ihrer Formulare, Inhalte, Spendenkanäle und institutionellen Informationsseiten.",
+        "last_updated": "Zuletzt aktualisiert: Januar 2026",
+        "validity": "Zuletzt aktualisiert: Januar 2026",
+        "acceptance_title": "Annahme der Bedingungen",
+        "acceptance_content": "Durch den Zugriff auf die Website der <0>SAMVAL Stiftung</0> (NIT 901.036.033-0) und deren Nutzung erklären Sie sich mit diesen Nutzungsbedingungen einverstanden. Wenn Sie mit einem Teil dieser Bedingungen nicht einverstanden sind, nutzen Sie die Website bitte nicht.",
+        "property_title": "Geistiges Eigentum",
+        "property_content": "Die auf dieser Website veröffentlichten Texte, Grafiken, Logos, Symbole, Bilder, Inhalte, Designs, Codes und sonstigen Materialien gehören der SAMVAL Stiftung oder werden mit Genehmigung verwendet. Vervielfältigung, Verbreitung, Änderung oder kommerzielle Nutzung erfordert eine vorherige schriftliche Genehmigung.",
+        "donation_title": "Spenden und Transaktionen",
+        "donation_content1": "Spenden über diese Website sind freiwillig und unterstützen die sozialen, Bildungs- und Technologieprogramme der SAMVAL Stiftung. Sofern zutreffend, kann die Stiftung Spendenbescheinigungen nach den geltenden kolumbianischen Vorschriften ausstellen.",
+        "donation_content2": "Spenden stellen keinen Kauf von Waren oder Dienstleistungen dar und sind grundsätzlich nicht erstattungsfähig. Bei einem bestätigten Fehler in der Zahlungsabwicklung kann die spendende Person an info@samval.org schreiben, um eine Prüfung des Falls zu beantragen.",
+        "exemption_title": "Haftungsbeschränkung",
+        "exemption_content": "Die SAMVAL Stiftung bemüht sich, klare und aktuelle Informationen bereitzustellen, garantiert jedoch nicht, dass die Website frei von Fehlern, Unterbrechungen oder gelegentlich veralteten Inhalten ist. Die veröffentlichten Informationen dienen institutionellen und informativen Zwecken und stellen keine rechtliche, steuerliche, medizinische, finanzielle oder professionelle Beratung dar.",
+        "jurisdiction_title": "Gerichtsstand und anwendbares Recht",
+        "jurisdiction_content": "Diese Nutzungsbedingungen unterliegen den Gesetzen der Republik Kolumbien. Streitigkeiten werden von den zuständigen Gerichten in Barranquilla, Atlántico, Kolumbien entschieden."
     },
     "footer": {
         "desc": "Senior Software Engineering, das die technologische und soziale Entwicklung in Kolumbiens Territorien finanziert.",
@@ -384,7 +547,41 @@
             "contact": "Kontakt",
             "legal": "Rechtliches"
         },
-        "rights": "Alle Rechte vorbehalten."
+        "rights": "Alle Rechte vorbehalten.",
+        "tagline": "Innovation, die das Territorium respektiert",
+        "mission": "Unsere Mission ist es, den Zugang zu Wissenschaft und Technologie in benachteiligten Gemeinschaften zu demokratisieren.",
+        "foundation_title": "Stiftung",
+        "tech_title": "Tech Services",
+        "contact_title": "Kontakt",
+        "links": {
+            "about": "Über uns",
+            "programs": "Soziale Programme",
+            "impact": "Unsere Wirkung",
+            "volunteer": "Freiwilligenarbeit"
+        },
+        "services": {
+            "web": "Webentwicklung",
+            "ai": "KI und Daten",
+            "consulting": "Cloud-Beratung",
+            "cases": "Erfolgsgeschichten"
+        },
+        "privacy": "Datenschutzerklärung",
+        "terms": "Nutzungsbedingungen",
+        "cookie_settings": "Cookie-Einstellungen"
+    },
+    "cookie_banner": {
+        "title": "Datenschutzeinstellungen",
+        "description": "Wir verwenden notwendige Cookies für Spracheinstellungen und den Betrieb der Website. Mit Ihrer Zustimmung verwenden wir auch Google Analytics, um Besuche zu messen und Inhalte zu verbessern.",
+        "privacy_link": "Datenschutzerklärung ansehen",
+        "necessary_label": "Notwendige Cookies",
+        "necessary_description": "Speichern grundlegende Einstellungen wie die Sprache und ermöglichen den korrekten Betrieb der Website.",
+        "always_active": "Immer aktiv",
+        "analytics_label": "Analytik",
+        "analytics_description": "Erlaubt uns, Besuche, aufgerufene Seiten und Conversions aggregiert zu messen, um die Website zu verbessern.",
+        "settings": "Einstellungen",
+        "reject": "Ablehnen",
+        "accept": "Analytik akzeptieren",
+        "save": "Speichern"
     },
     "admin": {
         "login": {
@@ -392,7 +589,7 @@
             "email": "E-Mail",
             "password": "Passwort",
             "btn": "Anmelden",
-            "error": "Ungültige Anmeldedaten (Demo: admin@samval.org / admin123)",
+            "error": "Ungültige Anmeldedaten",
             "logging_in": "Anmeldung..."
         },
         "layout": {
@@ -480,5 +677,104 @@
             "mobile": "Mobile-Bild",
             "ai": "KI-Bild"
         }
+    },
+    "impact_page": {
+        "tag": "WIRKUNGSNACHWEISE",
+        "title": "Unsere Wirkung",
+        "subtitle": "Reale Daten, reale Gemeinschaften und Geschichten, die verändern.",
+        "metrics_title": "Kumulative Wirkungszahlen",
+        "metric_1": "Kinder und Jugendliche",
+        "metric_1_value": "1.200+",
+        "metric_1_desc": "Schülerinnen und Schüler aus ethnischen Gemeinschaften nahmen an unseren STEAM-Programmen teil",
+        "metric_2": "Gemeinschaften",
+        "metric_2_value": "8",
+        "metric_2_desc": "indigene und afro-kolumbianische Gemeinschaften wurden direkt begleitet",
+        "metric_3": "Schulungsstunden",
+        "metric_3_value": "4.500+",
+        "metric_3_desc": "Stunden Robotik- und Programmierbildung wurden durchgeführt",
+        "metric_4": "Ausgebildete Lehrkräfte",
+        "metric_4_value": "85",
+        "metric_4_desc": "ländliche Lehrkräfte wurden in kulturell verankerter STEAM-Methodik geschult",
+        "map_title": "Territoriale Präsenz",
+        "map_desc": "Wir arbeiten mit Gemeinschaften, Bildungseinrichtungen und lokalen Partnern in Gebieten, in denen Technologie Chancen erweitern kann, ohne kulturelle Identität zu verdrängen.",
+        "map_location_1": "Sierra Nevada de Santa Marta",
+        "map_location_1_desc": "Arhuaco-Gemeinschaften — Programmierung in Iku, Bildungsrobotik verbunden mit dem Gesetz des Ursprungs.",
+        "map_location_2": "San Basilio de Palenque",
+        "map_location_2_desc": "Die erste afro-kolumbianische Gemeinschaft mit Robotikmodulen in Palenquero. Roboter, die Palenquero sprechen.",
+        "map_location_3": "Barranquilla",
+        "map_location_3_desc": "Verwaltungssitz und Entwicklungslabor. Partnerschaften mit lokalen Universitäten.",
+        "cases_title": "Geschichten der Transformation",
+        "case_1_title": "Von der Sierra zum Code: Digitales Iku",
+        "case_1_desc": "In der Sierra Nevada de Santa Marta lernten Arhuaco-Kinder, Bildungsroboter mithilfe von Konzepten aus ihrem Gesetz des Ursprungs zu programmieren. Älteste der Gemeinschaft halfen bei der Gestaltung der Aufgaben und integrierten ihr Weltbild in jedes Modul. Das Ergebnis: Kinder, die Technologie als Erweiterung ihrer Kultur und nicht als Bedrohung verstehen.",
+        "case_1_quote": "Der Roboter versteht unsere Art, über das Territorium zu denken.",
+        "case_1_author": "Arhuaco-Mamo, Sierra Nevada",
+        "case_2_title": "Palenque programmiert: Roboter in Palenquero",
+        "case_2_desc": "In San Basilio de Palenque, der ersten freien Schwarzen Gemeinschaft Amerikas, programmieren Kinder in Palenquero, einer kreolischen Sprache, die in staatlichen STEM-Programmen nicht vertreten ist. SAMVAL entwickelte die Module gemeinsam mit lokalen Führungspersonen und integrierte Musik, Tanz und mündliche Tradition in die Robotikaufgaben.",
+        "case_2_quote": "Hier tanzt der Roboter auch Champeta.",
+        "case_2_author": "Schüler, San Basilio de Palenque",
+        "timeline_title": "Unser Weg",
+        "timeline": [
+            {
+                "year": "2024",
+                "event": "Treffen der Gründungsmitglieder in der Schweiz, um die Umsetzung sozial wirksamer Technologien zu vereinbaren, die SAMVAL heute realisiert."
+            },
+            {
+                "year": "2024",
+                "event": "Offizielle Gründung der SAMVAL Stiftung am 18. Juli 2024."
+            },
+            {
+                "year": "2025",
+                "event": "Besuch in der Sierra Nevada. Einführung von Programmiersprachen in indigenen Sprachen."
+            },
+            {
+                "year": "2026",
+                "event": "Anerkennung im kolumbianischen Sondersteuerregime (ESAL), wodurch Transparenz, messbare Wirkung und steuerliche Vorteile für Spender und strategische Partner gestärkt werden."
+            }
+        ],
+        "report_title": "Wirkungsbericht",
+        "report_desc": "Wir konsolidieren Daten, Methodik und Erfahrungsberichte, um einen überprüfbaren Wirkungsbericht zu veröffentlichen.",
+        "report_btn": "Bericht in Vorbereitung",
+        "report_note": "Die dargestellten Zahlen beruhen auf internen Aufzeichnungen und von SAMVAL dokumentierten Fällen. Der vollständige Bericht wird Methodik, Quellen und Empfehlungen enthalten.",
+        "territory_tag": "DOKUMENTIERTE PRÄSENZ",
+        "territory_title": "Territorien und Arbeitsfelder",
+        "axis_1": "STEAM-Bildung",
+        "axis_2": "Lokale Partnerschaften",
+        "axis_3": "Wirkungsverfolgung"
+    },
+    "resources_page": {
+        "tag": "PÄDAGOGISCHE BIBLIOTHEK",
+        "title": "Bildungsressourcen",
+        "subtitle": "Leitfäden, Module und offene Werkzeuge, damit kulturell verankerte Robotik replizierbar wird.",
+        "guides_title": "Pädagogische Leitfäden",
+        "guide_1_title": "Leitfaden Bildungsrobotik + indigenes Weltbild",
+        "guide_1_desc": "Ein 20-seitiger Leitfaden, der Bildungsrobotik mit dem Arhuaco-Gesetz des Ursprungs verbindet. Entwickelt für Lehrkräfte in ethnischen Gemeinschaften.",
+        "guide_1_status": "In Entwicklung — Veröffentlichung Q2 2026",
+        "guide_2_title": "Vier-Sitzungen-Modul: Palenque STEAM",
+        "guide_2_desc": "Ein an San Basilio de Palenque angepasstes pädagogisches Modul mit Robotikaktivitäten in der Sprache Palenquero.",
+        "guide_2_status": "In Entwicklung — Veröffentlichung Q3 2026",
+        "guide_3_title": "Robotikhandbuch für ländliche Lehrkräfte",
+        "guide_3_desc": "Ein praxisnaher Leitfaden für Lehrkräfte ohne vorherige Technologieerfahrung. Enthält Aktivitäten, die ohne Internet funktionieren.",
+        "guide_3_status": "In Entwicklung — Veröffentlichung Q4 2026",
+        "modules_title": "Module nach Gemeinschaft",
+        "module_arahuaco_title": "Arhuaco-Modul (Iku)",
+        "module_arahuaco_desc": "Programmierkonzepte verbunden mit dem Gesetz des Ursprungs. Roboteraufgaben auf Basis natürlicher Zyklen und heiligen Territoriums.",
+        "module_palenquero_title": "Palenquero-Modul",
+        "module_palenquero_desc": "Robotik in der kreolischen Sprache Palenquero. Aufgaben, die afro-kolumbianische Musik, Tanz und mündliche Tradition integrieren.",
+        "license_text": "Alle Materialien werden unter der Creative-Commons-Lizenz BY-NC-SA 4.0 veröffentlicht. Nutzen, teilen und adaptieren Sie sie mit Namensnennung.",
+        "coming_soon": "Demnächst"
+    },
+    "alliances_section": {
+        "tag": "PARTNERSCHAFTEN UND NETZWERK",
+        "title": "Unser Ökosystem",
+        "subtitle": "Wir bauen Brücken zwischen globaler Innovation und lokalen Gemeinschaften.",
+        "badge": "Ethno-relevante Robotik",
+        "badge_desc": "Schöpfer der ersten kulturell integrierten Kategorie pädagogischer Robotik in Lateinamerika.",
+        "aspirational_title": "Strategische Partnerschaften im Aufbau",
+        "alliance_1": "Code.org NAIPI",
+        "alliance_1_desc": "Globale Informatikinitiative für indigene Völker. SAMVAL strebt eine regionale Partnerschaft in Kolumbien an.",
+        "alliance_2": "Red STEM Latinoamérica — Siemens Stiftung",
+        "alliance_2_desc": "Mehr als 200 Institutionen in 14 Ländern. Die Bewerbung von SAMVAL läuft für 2026.",
+        "alliance_3": "WRO Colombia",
+        "alliance_3_desc": "Ein Weg zu internationalen Robotikwettbewerben für fortgeschrittene SAMVAL-Begünstigte."
     }
 }

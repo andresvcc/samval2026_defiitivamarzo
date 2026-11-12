@@ -28,6 +28,9 @@ const TermsOfUse: React.FC = () => {
                     <h1 className="text-4xl md:text-5xl font-black text-stone-800 mb-4">
                         {t('terms_page.title')}
                     </h1>
+                    <p className="text-lg text-stone-600 max-w-3xl mx-auto mb-5">
+                        {t('terms_page.intro')}
+                    </p>
                     <p className="text-sm text-stone-400 font-bold uppercase tracking-widest">
                         {t('terms_page.validity', { defaultValue: t('terms_page.last_updated') })}
                     </p>
@@ -79,7 +82,7 @@ const TermsOfUse: React.FC = () => {
                 {/* Legal Footer */}
                 <div className="mt-12 neu-pressed p-8 text-center">
                     <p className="text-sm text-stone-400 font-medium italic">
-                        Fundación SAMVAL — NIT: 901.036.033-0 · Barranquilla, Colombia
+                        Fundación SAMVAL — NIT: 901.036.033-0 · Calle 104 #51B-154 Ofi 17, Castellana Campestre, Barranquilla, Colombia · info@samval.org
                     </p>
                 </div>
             </div>

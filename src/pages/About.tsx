@@ -4,9 +4,20 @@ import { Target, Users, BookOpen, Rocket, CheckCircle2, Clock, MapPin, Calendar,
 import { useTranslation, Trans } from 'react-i18next';
 import SEO from '../components/SEO';
 import InstagramFeed from '../components/InstagramFeed';
+import { trackConversion } from '../utils/conversions';
 
 const About: React.FC = () => {
   const { t } = useTranslation();
+
+  const trackWhatsApp = (label: string) => {
+    trackConversion('whatsapp', {
+      label,
+      buttonLocation: label,
+      contactMethod: 'whatsapp',
+      destination: 'https://wa.me/573233207532',
+      pageSection: label.includes('hero') ? 'hero' : 'final_cta',
+    });
+  };
 
   return (
     <div className="min-h-screen" style={{ background: '#e0d6cc' }}>
@@ -41,6 +52,7 @@ const About: React.FC = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-5">
               <a href="https://wa.me/573233207532" target="_blank" rel="noopener noreferrer"
+                onClick={() => trackWhatsApp('about_hero_whatsapp')}
                 className="group inline-flex items-center justify-center px-8 py-4 text-white font-bold rounded-2xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
                 style={{
                   background: 'linear-gradient(145deg, #8c1e1e, #6e1515)',
@@ -193,6 +205,7 @@ const About: React.FC = () => {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-6">
             <a href="https://wa.me/573233207532" target="_blank" rel="noopener noreferrer"
+              onClick={() => trackWhatsApp('about_final_whatsapp')}
               className="group px-10 py-5 text-white font-black rounded-2xl flex items-center justify-center text-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
               style={{
                 background: 'linear-gradient(145deg, #8c1e1e, #6e1515)',

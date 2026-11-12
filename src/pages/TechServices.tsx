@@ -2,10 +2,15 @@
 import React, { useState } from 'react';
 import { Code, Smartphone, Cpu, Cloud, CheckCircle, ArrowRight, BarChart3, ShieldCheck, Zap } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import SEO from '../components/SEO';
+import TurnstileWidget from '../components/TurnstileWidget';
+import { submitTechServicesForm } from '../services/samvalApi';
+import { trackConversion } from '../utils/conversions';
 
 const TechServices: React.FC = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -15,10 +20,14 @@ const TechServices: React.FC = () => {
     phone: '',
     message: '',
     consentData: false,
-    consentComms: false
+    consentComms: false,
+    website: '',
   });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const [turnstileRequired, setTurnstileRequired] = useState(false);
+  const [turnstileResetKey, setTurnstileResetKey] = useState(0);
+  const [turnstileToken, setTurnstileToken] = useState('');
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.checked });
@@ -36,61 +45,34 @@ const TechServices: React.FC = () => {
       setStatus('error');
       return;
     }
+    if (turnstileRequired && !turnstileToken) {
+      setErrorMessage('Completa la verificación anti-spam para continuar.');
+      setStatus('error');
+      return;
+    }
 
     setStatus('loading');
-    
-    const portalId = '51241676';
-    const formId = '3ac4b906-6c2d-403b-9e71-a2c7ab1b87c0';
-    const apiUrl = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`;
-
-    const payload = {
-      fields: [
-        { name: 'company', value: formData.company },
-        { name: 'firstname', value: formData.firstName },
-        { name: 'lastname', value: formData.lastName },
-        { name: 'email', value: formData.email },
-        { name: 'phone', value: formData.phone },
-        { name: 'message', value: formData.message }
-      ],
-      context: {
-        pageUri: window.location.href,
-        pageName: "Solicitud de Cotización — SAMVAL"
-      },
-      legalConsentOptions: {
-        consent: {
-          consentToProcess: formData.consentData,
-          text: 'Acepto que SAMVAL almacene y trate mis datos personales.',
-          communications: [
-            {
-              value: formData.consentComms,
-              subscriptionTypeId: 999,
-              text: 'Acepto recibir otras comunicaciones de SAMVAL.'
-            }
-          ]
-        }
-      }
-    };
 
     try {
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+      await submitTechServicesForm(formData, turnstileToken);
+      trackConversion('tech_services', {
+        label: 'tech_services_form_submitted',
+        contactMethod: 'samval_backend',
+        formType: 'tech_services_quote',
+        pageSection: 'quote_form',
+        serviceName: 'tech_services',
+        metadata: {
+          marketing_consent: formData.consentComms,
+        },
       });
-      
-      if (response.ok) {
-        setStatus('success');
-        setFormData({ firstName: '', lastName: '', company: '', email: '', phone: '', message: '', consentData: false, consentComms: false });
-        setTimeout(() => setStatus('idle'), 5000);
-      } else {
-        const err = await response.json().catch(() => ({}));
-        setErrorMessage(err.message || 'Intenta de nuevo en unos momentos.');
-        setStatus('error');
-      }
+      setStatus('success');
+      setFormData({ firstName: '', lastName: '', company: '', email: '', phone: '', message: '', consentData: false, consentComms: false, website: '' });
+      navigate('/gracias?tipo=servicios');
     } catch (error) {
       console.error('Error submitting form:', error);
-      setErrorMessage('Error de conexión. Verifica tu red e intenta de nuevo.');
+      setErrorMessage(error instanceof Error ? error.message : 'Error de conexión. Verifica tu red e intenta de nuevo.');
       setStatus('error');
+      setTurnstileResetKey((value) => value + 1);
     }
   };
 
@@ -138,24 +120,24 @@ const TechServices: React.FC = () => {
       {/* Why Choose Us */}
       <div className="py-20" style={{ background: '#e0d6cc' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-stone-800 mb-10 max-w-4xl">
+            {t('tech_services_page.why_title')}
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl font-bold text-stone-800 mb-8">{t('tech_services_page.why_title')}</h2>
-              <div className="space-y-4">
-                {[
-                  t('tech_services_page.why_list.senior_team'),
-                  t('tech_services_page.why_list.social_impact'),
-                  t('tech_services_page.why_list.agile_methodology'),
-                  t('tech_services_page.why_list.tax_benefits')
-                ].map((item, i) => (
-                  <div key={i} className="flex items-start neu-flat p-4" style={{ borderRadius: '14px' }}>
-                    <div className="neu-icon-pressed w-8 h-8 shrink-0 mr-4 text-samval-guinda" style={{ borderRadius: '10px' }}>
-                      <CheckCircle size={16} />
-                    </div>
-                    <p className="text-stone-600 font-medium text-sm mt-1">{item}</p>
+            <div className="space-y-4">
+              {[
+                t('tech_services_page.why_list.senior_team'),
+                t('tech_services_page.why_list.social_impact'),
+                t('tech_services_page.why_list.agile_methodology'),
+                t('tech_services_page.why_list.tax_benefits')
+              ].map((item, i) => (
+                <div key={i} className="flex items-start neu-flat p-4" style={{ borderRadius: '14px' }}>
+                  <div className="neu-icon-pressed w-8 h-8 shrink-0 mr-4 text-samval-guinda" style={{ borderRadius: '10px' }}>
+                    <CheckCircle size={16} />
                   </div>
-                ))}
-              </div>
+                  <p className="text-stone-600 font-medium text-sm mt-1">{item}</p>
+                </div>
+              ))}
             </div>
             <div className="relative h-80 overflow-hidden neu-raised-lg">
               <img src="https://picsum.photos/id/3/800/600" alt="Equipo de desarrollo" className="object-cover w-full h-full" style={{ borderRadius: '28px' }} />
@@ -276,18 +258,28 @@ const TechServices: React.FC = () => {
       </div>
 
       {/* Quote Form */}
-      <div className="py-20 flex justify-center" id="cotizar" style={{ background: '#1e1b18' }}>
+      <div className="py-10 sm:py-14 flex justify-center" id="cotizar" style={{ background: '#1e1b18' }}>
         <div className="w-full max-w-[720px] px-4 sm:px-6 lg:px-8">
-          <div className="relative font-sans rounded-[16px] p-8 sm:p-10 w-full overflow-hidden" style={{ background: '#701610', fontFamily: '"DM Sans", sans-serif' }}>
+          <div className="relative font-sans rounded-[16px] p-5 sm:p-6 w-full overflow-hidden" style={{ background: '#701610', fontFamily: '"DM Sans", sans-serif' }}>
             <div className="absolute top-[-60px] right-[-60px] w-[200px] h-[200px] rounded-full pointer-events-none" style={{ background: 'rgba(193, 139, 138, 0.12)' }}></div>
             
             <div className="text-[11px] tracking-[2px] uppercase font-medium mb-2" style={{ color: '#C18B8A' }}>Fundación SAMVAL</div>
-            <div className="text-[26px] font-bold text-white mb-8 leading-tight" style={{ fontFamily: '"Playfair Display", serif' }}>
+            <div className="text-[24px] font-bold text-white mb-5 leading-tight" style={{ fontFamily: '"Playfair Display", serif' }}>
               Solicite una <span style={{ color: '#C18B8A' }}>Cotización</span>
             </div>
 
             <form onSubmit={handleSubmit} className="relative z-10">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+              <input
+                type="text"
+                name="website"
+                value={formData.website}
+                onChange={handleChange}
+                tabIndex={-1}
+                autoComplete="off"
+                className="hidden"
+                aria-hidden="true"
+              />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
                 {/* Nombre de la empresa */}
                 <div className="flex flex-col gap-1.5 sm:col-span-2">
                   <label className="text-[11px] font-medium tracking-[1px] uppercase" style={{ color: 'rgba(255, 255, 255, 0.55)' }}>Nombre de la empresa</label>
@@ -297,7 +289,7 @@ const TechServices: React.FC = () => {
                     value={formData.company}
                     onChange={handleChange}
                     placeholder="Nombre de su empresa u organización..."
-                    className="w-full bg-white/5 border border-white/15 rounded-[10px] px-4 py-3 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#C18B8A] focus:bg-[#c18b8a]/10 placeholder:text-white/30"
+                    className="w-full bg-white/5 border border-white/15 rounded-[10px] px-4 py-2.5 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#C18B8A] focus:bg-[#c18b8a]/10 placeholder:text-white/30"
                   />
                 </div>
 
@@ -311,7 +303,7 @@ const TechServices: React.FC = () => {
                     onChange={handleChange}
                     placeholder="Su nombre..."
                     required
-                    className="w-full bg-white/5 border border-white/15 rounded-[10px] px-4 py-3 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#C18B8A] focus:bg-[#c18b8a]/10 placeholder:text-white/30"
+                    className="w-full bg-white/5 border border-white/15 rounded-[10px] px-4 py-2.5 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#C18B8A] focus:bg-[#c18b8a]/10 placeholder:text-white/30"
                   />
                 </div>
                 
@@ -324,7 +316,7 @@ const TechServices: React.FC = () => {
                     onChange={handleChange}
                     placeholder="Sus apellidos..."
                     required
-                    className="w-full bg-white/5 border border-white/15 rounded-[10px] px-4 py-3 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#C18B8A] focus:bg-[#c18b8a]/10 placeholder:text-white/30"
+                    className="w-full bg-white/5 border border-white/15 rounded-[10px] px-4 py-2.5 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#C18B8A] focus:bg-[#c18b8a]/10 placeholder:text-white/30"
                   />
                 </div>
 
@@ -338,7 +330,7 @@ const TechServices: React.FC = () => {
                     onChange={handleChange}
                     placeholder="correo@empresa.com"
                     required
-                    className="w-full bg-white/5 border border-white/15 rounded-[10px] px-4 py-3 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#C18B8A] focus:bg-[#c18b8a]/10 placeholder:text-white/30"
+                    className="w-full bg-white/5 border border-white/15 rounded-[10px] px-4 py-2.5 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#C18B8A] focus:bg-[#c18b8a]/10 placeholder:text-white/30"
                   />
                 </div>
 
@@ -352,7 +344,7 @@ const TechServices: React.FC = () => {
                     onChange={handleChange}
                     placeholder="+57 300 000 0000"
                     required
-                    className="w-full bg-white/5 border border-white/15 rounded-[10px] px-4 py-3 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#C18B8A] focus:bg-[#c18b8a]/10 placeholder:text-white/30"
+                    className="w-full bg-white/5 border border-white/15 rounded-[10px] px-4 py-2.5 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#C18B8A] focus:bg-[#c18b8a]/10 placeholder:text-white/30"
                   />
                 </div>
 
@@ -365,13 +357,13 @@ const TechServices: React.FC = () => {
                     onChange={handleChange}
                     placeholder="Dinos qué necesitas..."
                     required
-                    className="w-full bg-white/5 border border-white/15 rounded-[10px] px-4 py-3 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#C18B8A] focus:bg-[#c18b8a]/10 placeholder:text-white/30 resize-y min-h-[100px] leading-[1.5]"
+                    className="w-full bg-white/5 border border-white/15 rounded-[10px] px-4 py-2.5 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#C18B8A] focus:bg-[#c18b8a]/10 placeholder:text-white/30 resize-y min-h-[76px] leading-[1.45]"
                   ></textarea>
                 </div>
 
                 {/* GDPR */}
-                <div className="flex flex-col gap-3 sm:col-span-2 mt-1 p-4 rounded-[10px] border border-white/10" style={{ background: 'rgba(0,0,0,0.2)' }}>
-                  <p className="text-[12px] leading-[1.6] mb-1" style={{ color: 'rgba(255,255,255,0.45)' }}>
+                <div className="flex flex-col gap-2 sm:col-span-2 mt-1 p-3 rounded-[10px] border border-white/10" style={{ background: 'rgba(0,0,0,0.2)' }}>
+                  <p className="text-[11px] leading-[1.45] mb-0" style={{ color: 'rgba(255,255,255,0.45)' }}>
                     SAMVAL se compromete a proteger y respetar tu privacidad, y solo usaremos tu información personal para administrar tu cuenta y proporcionar los productos y servicios que nos solicitaste.
                   </p>
                   
@@ -385,7 +377,7 @@ const TechServices: React.FC = () => {
                       className="mt-[2px] w-[16px] min-w-[16px] h-[16px] cursor-pointer bg-transparent border-none appearance-auto p-0"
                       style={{ accentColor: '#C18B8A' }}
                     />
-                    <label htmlFor="consentComms" className="text-[12px] leading-[1.5] cursor-pointer font-normal" style={{ color: 'rgba(255,255,255,0.6)', textTransform: 'none', letterSpacing: '0' }}>
+                    <label htmlFor="consentComms" className="text-[11px] leading-[1.4] cursor-pointer font-normal" style={{ color: 'rgba(255,255,255,0.6)', textTransform: 'none', letterSpacing: '0' }}>
                       Acepto recibir otras comunicaciones de SAMVAL.
                     </label>
                   </div>
@@ -401,13 +393,13 @@ const TechServices: React.FC = () => {
                       className="mt-[2px] w-[16px] min-w-[16px] h-[16px] cursor-pointer bg-transparent border-none appearance-auto p-0"
                       style={{ accentColor: '#C18B8A' }}
                     />
-                    <label htmlFor="consentData" className="text-[12px] leading-[1.5] cursor-pointer font-normal" style={{ color: 'rgba(255,255,255,0.6)', textTransform: 'none', letterSpacing: '0' }}>
+                    <label htmlFor="consentData" className="text-[11px] leading-[1.4] cursor-pointer font-normal" style={{ color: 'rgba(255,255,255,0.6)', textTransform: 'none', letterSpacing: '0' }}>
                       Acepto que SAMVAL almacene y trate mis datos personales. <span className="text-[#C18B8A] ml-0.5 text-[12px]">*</span>
                     </label>
                   </div>
 
-                  <p className="text-[12px] leading-[1.6] mt-2 mb-0" style={{ color: 'rgba(255,255,255,0.45)' }}>
-                    Puedes darte de baja en cualquier momento. Consulta nuestra <a href="https://www.samval.org/privacidad" target="_blank" rel="noreferrer" className="no-underline hover:underline transition-all" style={{ color: 'rgba(193,139,138,0.7)' }}>Política de privacidad</a>.
+                  <p className="text-[11px] leading-[1.45] mt-1 mb-0" style={{ color: 'rgba(255,255,255,0.45)' }}>
+                    Puedes darte de baja en cualquier momento. Consulta nuestra <a href="/privacidad" className="no-underline hover:underline transition-all" style={{ color: 'rgba(193,139,138,0.7)' }}>Política de privacidad</a>.
                   </p>
                 </div>
               </div>
@@ -417,16 +409,26 @@ const TechServices: React.FC = () => {
                   ¡Solicitud enviada con éxito! Nos pondremos en contacto contigo pronto.
                 </div>
               ) : (
-                <button
-                  type="submit"
-                  disabled={status === 'loading'}
-                  className="w-full mt-5 p-[14px] bg-white text-[14px] font-semibold border-none rounded-[10px] cursor-pointer tracking-[0.5px] transition-all duration-200 hover:bg-[#f6f6f6] active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center"
-                  style={{ color: '#701610' }}
-                >
-                  {status === 'loading' ? (
-                    <><span className="inline-block w-3 h-3 border-2 border-t-[#C18B8A] rounded-full animate-spin mr-2" style={{ borderColor: 'rgba(193, 139, 138, 0.4)',  borderTopColor: '#C18B8A' }}></span>Enviando a HubSpot...</>
-                  ) : 'Enviar'}
-                </button>
+                <>
+                  <button
+                    type="submit"
+                    disabled={status === 'loading'}
+                    className="w-full mt-3 p-[12px] bg-white text-[14px] font-semibold border-none rounded-[10px] cursor-pointer tracking-[0.5px] transition-all duration-200 hover:bg-[#f6f6f6] active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center"
+                    style={{ color: '#701610' }}
+                  >
+                    {status === 'loading' ? (
+                      <><span className="inline-block w-3 h-3 border-2 border-t-[#C18B8A] rounded-full animate-spin mr-2" style={{ borderColor: 'rgba(193, 139, 138, 0.4)',  borderTopColor: '#C18B8A' }}></span>Enviando...</>
+                    ) : 'Enviar'}
+                  </button>
+                  <div className="mt-2">
+                    <TurnstileWidget
+                      action="tech-services"
+                      onAvailabilityChange={setTurnstileRequired}
+                      onTokenChange={setTurnstileToken}
+                      resetKey={turnstileResetKey}
+                    />
+                  </div>
+                </>
               )}
 
               {status === 'error' && (
@@ -435,8 +437,8 @@ const TechServices: React.FC = () => {
                 </div>
               )}
 
-              <div className="mt-5 text-[11px] text-center" style={{ color: 'rgba(255, 255, 255, 0.25)' }}>
-                Protegido por HubSpot reCAPTCHA · <a href="https://www.samval.org/privacidad" target="_blank" rel="noreferrer" className="no-underline hover:underline" style={{ color: 'rgba(193,139,138,0.7)' }}>Política de privacidad</a>
+              <div className="mt-3 text-[11px] text-center" style={{ color: 'rgba(255, 255, 255, 0.25)' }}>
+                Protegido por validación anti-spam · <a href="/privacidad" className="no-underline hover:underline" style={{ color: 'rgba(193,139,138,0.7)' }}>Política de privacidad</a>
               </div>
             </form>
           </div>
