@@ -22,6 +22,8 @@
         }
     },
     "navbar": {
+        "open_menu": "Menü öffnen",
+        "close_menu": "Menü schließen",
         "title": "SAMVAL STIFTUNG",
         "tagline": "Technologie, die das Territorium respektiert",
         "home": "Startseite",

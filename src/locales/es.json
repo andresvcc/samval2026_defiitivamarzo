@@ -42,6 +42,8 @@
         }
     },
     "navbar": {
+        "open_menu": "Abrir menú",
+        "close_menu": "Cerrar menú",
         "title": "FUNDACIÓN SAMVAL",
         "tagline": "Tecnología que respeta el territorio",
         "home": "Inicio",

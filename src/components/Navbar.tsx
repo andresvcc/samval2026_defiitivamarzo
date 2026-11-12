@@ -42,7 +42,7 @@ const Navbar: React.FC = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-2">
+          <div className="hidden xl:flex items-center space-x-2">
             {[
               { path: '/', label: t('navbar.home') },
               { path: '/nosotros', label: t('navbar.about') },
@@ -68,12 +68,12 @@ const Navbar: React.FC = () => {
 
           <div className="flex items-center gap-3">
             {/* Language Switcher */}
-            <div className="hidden md:block">
+            <div className="hidden xl:block">
               <LanguageSwitcher />
             </div>
 
             {/* CTAs */}
-            <div className="hidden lg:flex items-center space-x-3">
+            <div className="hidden xl:flex items-center space-x-3">
               <Link
                 to="/servicios-tech"
                 className="flex items-center space-x-1.5 px-5 py-2.5 text-sm font-bold text-samval-guinda rounded-xl transition-all duration-200 neu-flat hover:shadow-none"
@@ -93,10 +93,14 @@ const Navbar: React.FC = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center gap-3">
+          <div className="xl:hidden flex items-center gap-3">
             <LanguageSwitcher />
             <button
+              type="button"
               onClick={toggleMenu}
+              aria-label={t(isOpen ? 'navbar.close_menu' : 'navbar.open_menu')}
+              aria-expanded={isOpen}
+              aria-controls="mobile-navigation"
               className="neu-icon w-10 h-10 text-stone-500 hover:text-stone-700 transition-all"
             >
               {isOpen ? <X size={20} /> : <Menu size={20} />}
@@ -107,7 +111,7 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden absolute w-full animate-neu-fade-in"
+        <div id="mobile-navigation" className="xl:hidden absolute w-full max-h-[calc(100dvh-5rem)] overflow-y-auto animate-neu-fade-in"
           style={{
             background: '#e0d6cc',
             boxShadow: '0 12px 24px #c4b8ac'

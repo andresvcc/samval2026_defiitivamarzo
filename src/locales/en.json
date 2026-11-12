@@ -22,6 +22,8 @@
         }
     },
     "navbar": {
+        "open_menu": "Open menu",
+        "close_menu": "Close menu",
         "title": "SAMVAL FOUNDATION",
         "tagline": "Technology that respects the territory",
         "home": "Home",

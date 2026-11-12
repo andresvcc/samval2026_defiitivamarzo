@@ -7,6 +7,8 @@ Sitio web oficial de la Fundación SAMVAL para el Desarrollo Social y Tecnológi
 - **React** + **TypeScript**
 - **Vite** - Build tool
 - **Tailwind CSS** - Estilos
+- El CSS se compila con PostCSS durante el build y se sirve desde el mismo dominio;
+  no depende del CDN de Tailwind ni genera estilos en el navegador.
 - **React Router** - Navegación
 - **i18next** - Internacionalización (Español/Inglés)
 - **Lucide React** - Iconos
@@ -41,16 +43,17 @@ samval2026/
 └── package.json        # Dependencias
 ```
 
-## 🌐 Despliegue en Hostinger
+## 🌐 Producción en Dokploy
 
-1. Compila el proyecto:
-   ```bash
-   npm run build
-   ```
+`samval.org` y `www.samval.org` se sirven desde la aplicación `samvalprod`
+del proyecto `web` en Dokploy. El build de producción genera `dist/`, incluido
+el CSS estático con nombre versionado en `dist/assets/`.
 
-2. Sube el contenido de `dist/` a `public_html/` en Hostinger
-
-3. ¡Listo! El sitio estará en vivo
+Para comprobar los estilos, bloquear `cdn.tailwindcss.com` en el navegador y
+revisar la portada y el menú a 360, 390, 768, 820, 1024, 1280 y 1440 píxeles.
+El logo debe conservar su tamaño y los enlaces deben ser accesibles sin
+desplazamiento horizontal. Comprobar también abrir el menú y navegar a Contacto
+en móvil y tablet. Repetir con los cuatro idiomas disponibles.
 
 ## 📧 Formulario de Cotizaciones
 
