@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { BarChart, MapPin, Users, BookOpen, Clock, ChevronRight, Download, Activity, Globe } from 'lucide-react';
+import { BarChart, MapPin, Users, BookOpen, Clock, Download, Activity, Globe, GraduationCap, Handshake, Building2 } from 'lucide-react';
 import SEO from '../components/SEO';
 
 const Impact: React.FC = () => {
@@ -14,9 +14,9 @@ const Impact: React.FC = () => {
   ];
 
   const mapLocations = [
-    { nameKey: 'impact_page.map_location_1', descKey: 'impact_page.map_location_1_desc' },
-    { nameKey: 'impact_page.map_location_2', descKey: 'impact_page.map_location_2_desc' },
-    { nameKey: 'impact_page.map_location_3', descKey: 'impact_page.map_location_3_desc' },
+    { nameKey: 'impact_page.map_location_1', descKey: 'impact_page.map_location_1_desc', icon: GraduationCap },
+    { nameKey: 'impact_page.map_location_2', descKey: 'impact_page.map_location_2_desc', icon: Users },
+    { nameKey: 'impact_page.map_location_3', descKey: 'impact_page.map_location_3_desc', icon: Building2 },
   ];
 
   const timeline = t('impact_page.timeline', { returnObjects: true }) as Array<{ year: string, event: string }>;
@@ -106,12 +106,42 @@ const Impact: React.FC = () => {
                    ))}
                  </div>
               </div>
-              <div className="lg:w-2/3 neu-dark-pressed p-4 md:p-8 rounded-[32px] min-h-[500px] flex items-center justify-center relative">
-                 {/* Decorative abstract map representation for now */}
+              <div className="lg:w-2/3 neu-dark-pressed p-5 md:p-8 rounded-[32px] min-h-[500px] relative overflow-hidden">
                  <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at center, #801b1b 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
-                 <div className="relative z-10 flex flex-col items-center justify-center">
-                    <Globe size={100} className="text-samval-accent/50 mb-6" />
-                    <p className="text-stone-500 font-bold uppercase tracking-[0.2em]">Mapa Interactivo en Construcción</p>
+                 <div className="absolute right-0 top-0 w-72 h-72 bg-samval-guinda/10 rounded-full blur-[90px]"></div>
+                 <div className="relative z-10 h-full flex flex-col">
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-8">
+                      <div>
+                        <p className="text-[10px] font-black uppercase tracking-[0.25em] text-samval-accent mb-3">{t('impact_page.territory_tag')}</p>
+                        <h3 className="text-3xl md:text-4xl font-black text-white">{t('impact_page.territory_title')}</h3>
+                      </div>
+                      <div className="neu-dark-raised w-20 h-20 flex items-center justify-center text-samval-accent shrink-0" style={{ borderRadius: '24px' }}>
+                        <Globe size={38} />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                      {mapLocations.map((loc, idx) => (
+                        <div key={idx} className="neu-dark-raised p-5" style={{ borderRadius: '20px' }}>
+                          <loc.icon size={24} className="text-samval-accent mb-4" />
+                          <h4 className="text-white font-black text-base mb-2">{t(loc.nameKey)}</h4>
+                          <p className="text-stone-400 text-sm leading-relaxed">{t(loc.descKey)}</p>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="mt-auto grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      {[
+                        { icon: BookOpen, labelKey: 'impact_page.axis_1' },
+                        { icon: Handshake, labelKey: 'impact_page.axis_2' },
+                        { icon: BarChart, labelKey: 'impact_page.axis_3' },
+                      ].map((axis, idx) => (
+                        <div key={idx} className="flex items-center gap-3 rounded-2xl px-4 py-4" style={{ background: 'rgba(255,255,255,0.04)' }}>
+                          <axis.icon size={18} className="text-samval-accent shrink-0" />
+                          <span className="text-xs font-black uppercase tracking-wider text-stone-300">{t(axis.labelKey)}</span>
+                        </div>
+                      ))}
+                    </div>
                  </div>
               </div>
            </div>
@@ -185,9 +215,9 @@ const Impact: React.FC = () => {
           <p className="text-xl text-stone-400 mb-10 max-w-2xl mx-auto">
             {t('impact_page.report_desc')}
           </p>
-          <button className="neu-dark-pressed px-12 py-5 text-stone-500 font-bold uppercase tracking-widest rounded-2xl cursor-not-allowed mb-6 opacity-70">
+          <div className="inline-flex items-center justify-center neu-dark-pressed px-10 py-5 text-stone-400 font-bold uppercase tracking-widest rounded-2xl mb-6">
             {t('impact_page.report_btn')}
-          </button>
+          </div>
           <p className="text-sm text-stone-500 max-w-xl mx-auto italic">
             {t('impact_page.report_note')}
           </p>

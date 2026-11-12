@@ -1,164 +1,353 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Heart, Code, Users } from 'lucide-react';
+import { Menu, X, Heart, Code, Globe } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from './LanguageSwitcher';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [renderMobileMenu, setRenderMobileMenu] = useState(false);
+  const menuPanelRef = useRef<HTMLDivElement>(null);
+  const menuContentRef = useRef<HTMLDivElement>(null);
+  const menuIconRef = useRef<HTMLSpanElement>(null);
   const location = useLocation();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
-  const toggleMenu = () => setIsOpen(!isOpen);
+  const closeMenu = () => setIsOpen(false);
+  const toggleMenu = () => setIsOpen((open) => !open);
 
-  const isActive = (path: string) =>
-    location.pathname === path
-      ? 'text-samval-guinda font-bold'
-      : 'text-stone-500 hover:text-samval-guinda';
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') closeMenu();
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen]);
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (isOpen) {
+      setRenderMobileMenu(true);
+      return;
+    }
+
+    if (reduceMotion || !menuPanelRef.current) {
+      setRenderMobileMenu(false);
+      return;
+    }
+
+    let cancelled = false;
+    import('gsap').then(({ gsap }) => {
+      if (cancelled || !menuPanelRef.current) return;
+
+      gsap.to(menuPanelRef.current, {
+        autoAlpha: 0,
+        y: -14,
+        duration: 0.22,
+        ease: 'power2.in',
+        onComplete: () => setRenderMobileMenu(false)
+      });
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!renderMobileMenu) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) return;
+
+    let cancelled = false;
+    let cleanup: (() => void) | undefined;
+
+    import('gsap').then(({ gsap }) => {
+      if (cancelled || !menuPanelRef.current) return;
+
+      const items = menuContentRef.current?.querySelectorAll('[data-mobile-menu-item]') ?? [];
+      const ctx = gsap.context(() => {
+        gsap.fromTo(
+          menuPanelRef.current,
+          { autoAlpha: 0, y: -18 },
+          { autoAlpha: 1, y: 0, duration: 0.34, ease: 'power3.out' }
+        );
+
+        gsap.fromTo(
+          items,
+          { autoAlpha: 0, y: 16 },
+          { autoAlpha: 1, y: 0, duration: 0.42, stagger: 0.045, ease: 'power3.out', delay: 0.08 }
+        );
+      }, menuPanelRef);
+
+      cleanup = () => ctx.revert();
+    });
+
+    return () => {
+      cancelled = true;
+      cleanup?.();
+    };
+  }, [renderMobileMenu]);
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion || !menuIconRef.current) return;
+
+    let cancelled = false;
+    import('gsap').then(({ gsap }) => {
+      if (cancelled || !menuIconRef.current) return;
+
+      gsap.fromTo(
+        menuIconRef.current,
+        { rotate: isOpen ? -90 : 90, scale: 0.86 },
+        { rotate: 0, scale: 1, duration: 0.24, ease: 'back.out(1.8)' }
+      );
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [isOpen]);
+
+  const navLinks = [
+    { path: '/', label: t('navbar.home') },
+    { path: '/nosotros', label: t('navbar.about') },
+    { path: '/impacto', label: t('navbar.impact') },
+    { path: '/recursos', label: t('navbar.resources') },
+    { path: '/proyectos', label: t('navbar.projects') },
+    { path: '/servicios-tech', label: t('navbar.services') },
+    { path: '/contacto', label: t('navbar.contact') },
+  ];
+
+  const languages = [
+    { code: 'es', label: 'ES' },
+    { code: 'en', label: 'EN' },
+    { code: 'fr', label: 'FR' },
+    { code: 'de', label: 'DE' },
+  ];
 
   return (
-    <nav className="sticky top-0 z-50 w-full transition-all duration-300"
+    <>
+    <nav className={`sticky top-0 w-full transition-all duration-300 ${isOpen ? 'z-[120]' : 'z-50'}`}
       style={{
-        background: '#e0d6cc',
-        boxShadow: '0 4px 12px #c4b8ac, 0 -2px 8px #f0e8e0'
+        background: 'rgba(224, 214, 204, 0.96)',
+        backdropFilter: 'blur(18px)',
+        boxShadow: '0 10px 28px rgba(92, 71, 56, 0.16)'
       }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+      <div className="w-full px-4 sm:px-6 lg:px-8 2xl:px-10">
+        <div className="flex justify-between items-center h-16 lg:h-[74px] 2xl:h-20 gap-3">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3">
-            <div className="neu-icon w-12 h-12 p-2">
+          <Link
+            to="/"
+            className="group flex items-center gap-3 min-w-0 shrink-0 rounded-2xl pr-2 transition-all duration-200 hover:opacity-90"
+          >
+            <div className="w-11 h-11 lg:w-12 lg:h-12 p-2 shrink-0 rounded-2xl flex items-center justify-center bg-[#e0d6cc]"
+              style={{
+                boxShadow: '5px 5px 11px #c4b8ac, -5px -5px 11px #f0e8e0'
+              }}
+            >
               <img
                 src="https://i.ibb.co/DDs8DDfy/SAMVALLOGO.png"
                 alt="SAMVAL Logo"
                 className="h-full w-auto object-contain"
               />
             </div>
-            <div className="flex flex-col">
-              <span className="text-xl font-bold text-[#801b1b] leading-none">{t('navbar.title')}</span>
-              <span className="text-[10px] sm:text-xs text-stone-400 font-medium tracking-tight">{t('navbar.tagline')}</span>
+            <div className="flex flex-col min-w-0">
+              <span className="text-base sm:text-lg xl:text-xl font-black text-[#801b1b] leading-none truncate">{t('navbar.title')}</span>
+              <span className="hidden sm:block max-w-[220px] lg:max-w-none text-[10px] xl:text-xs text-stone-500 font-semibold truncate">{t('navbar.tagline')}</span>
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-2">
-            {[
-              { path: '/', label: t('navbar.home') },
-              { path: '/nosotros', label: t('navbar.about') },
-              { path: '/impacto', label: t('navbar.impact') },
-              { path: '/recursos', label: t('navbar.resources') },
-              { path: '/proyectos', label: t('navbar.projects') },
-              { path: '/servicios-tech', label: t('navbar.services') },
-              { path: '/contacto', label: t('navbar.contact') },
-            ].map(link => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 ${
-                  location.pathname === link.path
-                    ? 'text-samval-guinda neu-pressed-sm'
-                    : 'text-stone-500 hover:text-samval-guinda hover:bg-stone-200/30'
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
+          {/* Wide Desktop Navigation */}
+          <div className="hidden 2xl:flex items-center justify-center flex-1 min-w-0 px-4">
+            <div className="flex max-w-full items-center justify-center gap-1 overflow-x-auto px-2 py-2">
+              {navLinks.map(link => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`shrink-0 px-3 py-2 rounded-xl text-[13px] font-bold transition-all duration-200 ${
+                    location.pathname === link.path
+                      ? 'text-samval-guinda neu-pressed-sm'
+                      : 'text-stone-600 hover:text-samval-guinda hover:bg-[#eadfd4]'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 lg:gap-3 shrink-0">
             {/* Language Switcher */}
-            <div className="hidden md:block">
+            <div className="hidden lg:block">
               <LanguageSwitcher />
             </div>
 
             {/* CTAs */}
-            <div className="hidden lg:flex items-center space-x-3">
+            <div className="hidden lg:flex items-center gap-2">
               <Link
                 to="/servicios-tech"
-                className="flex items-center space-x-1.5 px-5 py-2.5 text-sm font-bold text-samval-guinda rounded-xl transition-all duration-200 neu-flat hover:shadow-none"
-                style={{ fontSize: '13px' }}
+                className="flex items-center gap-1.5 px-4 py-2.5 text-[13px] font-black text-samval-guinda rounded-xl transition-all duration-200 bg-[#e0d6cc] hover:text-samval-dark whitespace-nowrap"
+                style={{
+                  boxShadow: '4px 4px 9px #c4b8ac, -4px -4px 9px #f0e8e0'
+                }}
               >
                 <Code size={15} />
                 <span>{t('navbar.request_software')}</span>
               </Link>
               <Link
                 to="/donar"
-                className="neu-btn-primary flex items-center space-x-1.5 !py-2.5 !px-5 !text-sm !rounded-xl"
+                className="neu-btn-primary flex items-center gap-1.5 !py-2.5 !px-5 !text-sm !rounded-xl whitespace-nowrap"
               >
                 <Heart size={15} className="fill-current" />
                 <span>{t('navbar.donate')}</span>
               </Link>
             </div>
-          </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center gap-3">
-            <LanguageSwitcher />
-            <button
-              onClick={toggleMenu}
-              className="neu-icon w-10 h-10 text-stone-500 hover:text-stone-700 transition-all"
-            >
-              {isOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
+            {/* Compact Menu Button */}
+            <div className="lg:hidden flex items-center gap-2">
+              <button
+                onClick={toggleMenu}
+                className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-all bg-[#e0d6cc] ${
+                  isOpen ? 'text-samval-guinda' : 'text-stone-500 hover:text-samval-guinda'
+                }`}
+                style={{
+                  boxShadow: isOpen
+                    ? 'inset 3px 3px 7px #c4b8ac, inset -3px -3px 7px #f0e8e0'
+                    : '4px 4px 9px #c4b8ac, -4px -4px 9px #f0e8e0'
+                }}
+                aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
+                aria-expanded={isOpen}
+              >
+                <span ref={menuIconRef} className="flex items-center justify-center">
+                  {isOpen ? <X size={20} /> : <Menu size={20} />}
+                </span>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Mobile Menu */}
-      {isOpen && (
-        <div className="md:hidden absolute w-full animate-neu-fade-in"
-          style={{
-            background: '#e0d6cc',
-            boxShadow: '0 12px 24px #c4b8ac'
-          }}
-        >
-          <div className="px-4 pt-4 pb-8 space-y-2">
-            {[
-              { path: '/', label: t('navbar.home') },
-              { path: '/nosotros', label: t('navbar.about') },
-              { path: '/impacto', label: t('navbar.impact') },
-              { path: '/recursos', label: t('navbar.resources') },
-              { path: '/proyectos', label: t('navbar.projects') },
-              { path: '/servicios-tech', label: t('navbar.services') },
-              { path: '/contacto', label: t('navbar.contact') },
-            ].map(link => (
+        {/* Medium Desktop Navigation */}
+        <div className="hidden lg:flex 2xl:hidden items-center justify-center pb-3">
+          <div className="flex max-w-full items-center justify-center gap-1 xl:gap-1.5 overflow-x-auto px-2 py-2">
+            {navLinks.map(link => (
               <Link
                 key={link.path}
                 to={link.path}
-                onClick={toggleMenu}
-                className={`block px-5 py-3.5 rounded-xl text-base font-bold transition-all ${
+                className={`shrink-0 px-3 xl:px-4 py-2 rounded-xl text-[13px] xl:text-sm font-bold transition-all duration-200 ${
                   location.pathname === link.path
-                    ? 'neu-pressed-sm text-samval-guinda'
-                    : 'text-stone-600 hover:bg-stone-200/30'
+                    ? 'text-samval-guinda neu-pressed-sm'
+                    : 'text-stone-600 hover:text-samval-guinda hover:bg-[#eadfd4]'
                 }`}
               >
                 {link.label}
               </Link>
             ))}
-
-            <div className="pt-6 space-y-3">
-              <Link
-                to="/servicios-tech"
-                onClick={toggleMenu}
-                className="flex items-center justify-center w-full px-6 py-4 neu-raised-sm text-samval-guinda font-bold text-sm"
-              >
-                <Code size={18} className="mr-2" />
-                {t('navbar.request_software').toUpperCase()}
-              </Link>
-              <Link
-                to="/donar"
-                onClick={toggleMenu}
-                className="flex items-center justify-center w-full px-6 py-4 neu-btn-primary !rounded-xl !text-base"
-              >
-                <Heart size={18} className="mr-2 fill-current" />
-                {t('navbar.donate').toUpperCase()}
-              </Link>
-            </div>
           </div>
         </div>
-      )}
+      </div>
+
     </nav>
+
+    {/* Mobile Menu Dialog */}
+    {renderMobileMenu && (
+      <div
+        ref={menuPanelRef}
+        className="lg:hidden fixed inset-x-0 top-16 bottom-0 z-[90] overflow-y-auto"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menú principal"
+        style={{
+          background: 'rgba(224, 214, 204, 0.99)',
+          backdropFilter: 'blur(18px)'
+        }}
+      >
+        <div ref={menuContentRef} className="min-h-full px-4 pt-5 pb-8">
+          <div className="mb-5 h-px w-full bg-stone-900/10 shadow-[0_1px_0_rgba(255,255,255,0.45)]" />
+          <div
+            data-mobile-menu-item
+            className="mb-5 flex items-center justify-between gap-2 rounded-2xl px-3 py-2"
+            style={{
+              boxShadow: 'inset 4px 4px 9px #c4b8ac, inset -4px -4px 9px #f0e8e0'
+            }}
+          >
+            <Globe size={18} className="shrink-0 text-stone-500" />
+            <div className="flex items-center gap-1.5">
+              {languages.map(lang => (
+                <button
+                  key={lang.code}
+                  onClick={() => i18n.changeLanguage(lang.code)}
+                  className={`min-w-10 rounded-lg px-3 py-2 text-xs font-black transition-all ${
+                    i18n.language.startsWith(lang.code)
+                      ? 'bg-samval-guinda text-white'
+                      : 'text-stone-500 hover:text-samval-guinda'
+                  }`}
+                >
+                  {lang.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            {navLinks.map(link => (
+              <Link
+                key={link.path}
+                to={link.path}
+                onClick={closeMenu}
+                data-mobile-menu-item
+                className={`block rounded-2xl px-5 py-4 text-lg font-black transition-all ${
+                  location.pathname === link.path
+                    ? 'neu-pressed-sm text-samval-guinda'
+                    : 'text-stone-700 hover:bg-[#eadfd4] hover:text-samval-guinda'
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+
+          <div className="mt-8 space-y-3">
+            <Link
+              to="/servicios-tech"
+              onClick={closeMenu}
+              data-mobile-menu-item
+              className="flex w-full items-center justify-center rounded-2xl bg-[#e0d6cc] px-6 py-4 text-sm font-black text-samval-guinda"
+              style={{
+                boxShadow: '5px 5px 10px #c4b8ac, -5px -5px 10px #f0e8e0'
+              }}
+            >
+              <Code size={18} className="mr-2" />
+              {t('navbar.request_software').toUpperCase()}
+            </Link>
+            <Link
+              to="/donar"
+              onClick={closeMenu}
+              data-mobile-menu-item
+              className="neu-btn-primary flex w-full items-center justify-center !rounded-2xl !px-6 !py-4 !text-base"
+            >
+              <Heart size={18} className="mr-2 fill-current" />
+              {t('navbar.donate').toUpperCase()}
+            </Link>
+          </div>
+        </div>
+      </div>
+    )}
+    </>
   );
 };
 

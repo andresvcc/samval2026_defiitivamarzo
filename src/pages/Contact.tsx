@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { useTranslation, Trans } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import SEO from '../components/SEO';
+import TurnstileWidget from '../components/TurnstileWidget';
+import { submitContactForm } from '../services/samvalApi';
+import { trackConversion } from '../utils/conversions';
 
 const Contact: React.FC = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     empresa: '',
     correo: '',
@@ -14,10 +19,14 @@ const Contact: React.FC = () => {
     pais: '',
     estado: '',
     ciudad: '',
-    mensaje: ''
+    mensaje: '',
+    website: '',
   });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const [turnstileRequired, setTurnstileRequired] = useState(false);
+  const [turnstileResetKey, setTurnstileResetKey] = useState(0);
+  const [turnstileToken, setTurnstileToken] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -35,56 +44,28 @@ const Contact: React.FC = () => {
       setStatus('error');
       return;
     }
+    if (turnstileRequired && !turnstileToken) {
+      setErrorMessage('Completa la verificación anti-spam para continuar.');
+      setStatus('error');
+      return;
+    }
 
     setStatus('loading');
 
-    const portalId = '51241676';
-    const formId = '29e4165e-7246-465c-809e-93a666df2c80';
-    const apiUrl = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`;
-
-    const payload = {
-      fields: [
-        { name: 'company', value: formData.empresa },
-        { name: 'email', value: formData.correo },
-        { name: 'firstname', value: formData.nombre },
-        { name: 'lastname', value: formData.apellidos },
-        { name: 'mobilephone', value: formData.movil },
-        { name: 'country', value: formData.pais },
-        { name: 'state', value: formData.estado },
-        { name: 'city', value: formData.ciudad },
-        { name: 'message', value: formData.mensaje }
-      ],
-      context: {
-        pageUri: window.location.href,
-        pageName: 'Formulario de Contacto — SAMVAL'
-      },
-      legalConsentOptions: {
-        legitimateInterest: {
-          value: true,
-          subscriptionTypeId: 999,
-          legalBasis: 'LEAD',
-          text: 'SAMVAL necesita la información de contacto que nos proporcionas para ponernos en contacto contigo acerca de nuestros productos y servicios.'
-        }
-      }
-    };
-
     try {
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+      await submitContactForm(formData, turnstileToken);
+      trackConversion('contact', {
+        label: 'contact_form_submitted',
+        contactMethod: 'samval_backend',
+        formType: 'contact',
+        pageSection: 'contact_form',
       });
-
-      if (response.ok) {
-        setStatus('success');
-      } else {
-        const err = await response.json().catch(() => ({}));
-        setErrorMessage(err.message || 'Intenta de nuevo en unos momentos.');
-        setStatus('error');
-      }
+      setStatus('success');
+      navigate('/gracias?tipo=contacto');
     } catch (error) {
-      setErrorMessage('Error de conexión. Verifica tu red e intenta de nuevo.');
+      setErrorMessage(error instanceof Error ? error.message : 'Error de conexión. Verifica tu red e intenta de nuevo.');
       setStatus('error');
+      setTurnstileResetKey((value) => value + 1);
     }
   };
 
@@ -125,23 +106,33 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-stone-800 mb-1">{t('contact_page.email_title')}</h3>
-                  <p className="text-stone-500 text-sm">info@samval.org<br />proyectos@samval.org</p>
+                  <p className="text-stone-500 text-sm">info@samval.org</p>
                 </div>
               </div>
             </div>
           </div>
 
           {/* New Custom Contact Form */}
-          <div className="relative font-sans rounded-2xl p-8 sm:p-10 w-full overflow-hidden" style={{ background: '#701610', fontFamily: '"DM Sans", sans-serif' }}>
+          <div className="relative font-sans rounded-2xl p-5 sm:p-6 w-full overflow-hidden" style={{ background: '#701610', fontFamily: '"DM Sans", sans-serif' }}>
             <div className="absolute top-[-60px] right-[-60px] w-[200px] h-[200px] rounded-full pointer-events-none" style={{ background: 'rgba(193, 139, 138, 0.12)' }}></div>
             
             <div className="text-[11px] tracking-[2px] uppercase font-medium mb-2" style={{ color: '#C18B8A' }}>Fundación SAMVAL</div>
-            <div className="text-[26px] font-bold text-white mb-8 leading-tight" style={{ fontFamily: '"Playfair Display", serif' }}>
+            <div className="text-[24px] font-bold text-white mb-5 leading-tight" style={{ fontFamily: '"Playfair Display", serif' }}>
               Ponte en <span style={{ color: '#C18B8A' }}>Contacto</span>
             </div>
 
             <form onSubmit={handleSubmit} className="relative z-10" style={{ opacity: status === 'success' ? 0.4 : 1, pointerEvents: status === 'success' ? 'none' : 'auto' }}>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+              <input
+                type="text"
+                name="website"
+                value={formData.website}
+                onChange={handleChange}
+                tabIndex={-1}
+                autoComplete="off"
+                className="hidden"
+                aria-hidden="true"
+              />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
                 {/* Nombre de la empresa */}
                 <div className="flex flex-col gap-1.5 sm:col-span-2">
                   <label className="text-[11px] font-medium tracking-[1px] uppercase" style={{ color: 'rgba(255, 255, 255, 0.55)' }}>Nombre de la empresa</label>
@@ -152,7 +143,7 @@ const Contact: React.FC = () => {
                     onChange={handleChange}
                     placeholder="Nombre de su empresa u organización..."
                     autoComplete="organization"
-                    className="w-full bg-white/5 border border-white/15 rounded-[10px] px-4 py-3 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#C18B8A] focus:bg-[#c18b8a]/10 placeholder:text-white/30"
+                    className="w-full bg-white/5 border border-white/15 rounded-[10px] px-4 py-2.5 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#C18B8A] focus:bg-[#c18b8a]/10 placeholder:text-white/30"
                   />
                 </div>
 
@@ -166,7 +157,7 @@ const Contact: React.FC = () => {
                     onChange={handleChange}
                     placeholder="correo@empresa.com"
                     autoComplete="email"
-                    className="w-full bg-white/5 border border-white/15 rounded-[10px] px-4 py-3 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#C18B8A] focus:bg-[#c18b8a]/10 placeholder:text-white/30"
+                    className="w-full bg-white/5 border border-white/15 rounded-[10px] px-4 py-2.5 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#C18B8A] focus:bg-[#c18b8a]/10 placeholder:text-white/30"
                   />
                 </div>
 
@@ -180,7 +171,7 @@ const Contact: React.FC = () => {
                     onChange={handleChange}
                     placeholder="Su nombre..."
                     autoComplete="given-name"
-                    className="w-full bg-white/5 border border-white/15 rounded-[10px] px-4 py-3 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#C18B8A] focus:bg-[#c18b8a]/10 placeholder:text-white/30"
+                    className="w-full bg-white/5 border border-white/15 rounded-[10px] px-4 py-2.5 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#C18B8A] focus:bg-[#c18b8a]/10 placeholder:text-white/30"
                   />
                 </div>
                 
@@ -193,7 +184,7 @@ const Contact: React.FC = () => {
                     onChange={handleChange}
                     placeholder="Sus apellidos..."
                     autoComplete="family-name"
-                    className="w-full bg-white/5 border border-white/15 rounded-[10px] px-4 py-3 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#C18B8A] focus:bg-[#c18b8a]/10 placeholder:text-white/30"
+                    className="w-full bg-white/5 border border-white/15 rounded-[10px] px-4 py-2.5 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#C18B8A] focus:bg-[#c18b8a]/10 placeholder:text-white/30"
                   />
                 </div>
 
@@ -207,7 +198,7 @@ const Contact: React.FC = () => {
                     onChange={handleChange}
                     placeholder="+57 300 000 0000"
                     autoComplete="tel"
-                    className="w-full bg-white/5 border border-white/15 rounded-[10px] px-4 py-3 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#C18B8A] focus:bg-[#c18b8a]/10 placeholder:text-white/30"
+                    className="w-full bg-white/5 border border-white/15 rounded-[10px] px-4 py-2.5 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#C18B8A] focus:bg-[#c18b8a]/10 placeholder:text-white/30"
                   />
                 </div>
                 
@@ -220,7 +211,7 @@ const Contact: React.FC = () => {
                     onChange={handleChange}
                     placeholder="Colombia"
                     autoComplete="country-name"
-                    className="w-full bg-white/5 border border-white/15 rounded-[10px] px-4 py-3 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#C18B8A] focus:bg-[#c18b8a]/10 placeholder:text-white/30"
+                    className="w-full bg-white/5 border border-white/15 rounded-[10px] px-4 py-2.5 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#C18B8A] focus:bg-[#c18b8a]/10 placeholder:text-white/30"
                   />
                 </div>
 
@@ -234,7 +225,7 @@ const Contact: React.FC = () => {
                     onChange={handleChange}
                     placeholder="Magdalena"
                     autoComplete="address-level1"
-                    className="w-full bg-white/5 border border-white/15 rounded-[10px] px-4 py-3 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#C18B8A] focus:bg-[#c18b8a]/10 placeholder:text-white/30"
+                    className="w-full bg-white/5 border border-white/15 rounded-[10px] px-4 py-2.5 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#C18B8A] focus:bg-[#c18b8a]/10 placeholder:text-white/30"
                   />
                 </div>
                 
@@ -247,7 +238,7 @@ const Contact: React.FC = () => {
                     onChange={handleChange}
                     placeholder="Santa Marta"
                     autoComplete="address-level2"
-                    className="w-full bg-white/5 border border-white/15 rounded-[10px] px-4 py-3 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#C18B8A] focus:bg-[#c18b8a]/10 placeholder:text-white/30"
+                    className="w-full bg-white/5 border border-white/15 rounded-[10px] px-4 py-2.5 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#C18B8A] focus:bg-[#c18b8a]/10 placeholder:text-white/30"
                   />
                 </div>
 
@@ -259,12 +250,12 @@ const Contact: React.FC = () => {
                     value={formData.mensaje}
                     onChange={handleChange}
                     placeholder="Dinos qué necesitas..."
-                    className="w-full bg-white/5 border border-white/15 rounded-[10px] px-4 py-3 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#C18B8A] focus:bg-[#c18b8a]/10 placeholder:text-white/30 resize-y min-h-[96px] leading-[1.5]"
+                    className="w-full bg-white/5 border border-white/15 rounded-[10px] px-4 py-2.5 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#C18B8A] focus:bg-[#c18b8a]/10 placeholder:text-white/30 resize-y min-h-[76px] leading-[1.45]"
                   ></textarea>
                 </div>
 
                 {/* GDPR Text */}
-                <p className="sm:col-span-2 text-[12px] leading-[1.7] p-[1rem_1.25rem] rounded-[10px] bg-black/20 border border-white/5" style={{ color: 'rgba(255,255,255,0.4)' }}>
+                <p className="sm:col-span-2 text-[11px] leading-[1.45] p-3 rounded-[10px] bg-black/20 border border-white/5" style={{ color: 'rgba(255,255,255,0.4)' }}>
                   SAMVAL necesita la información de contacto que nos proporcionas para ponernos en contacto contigo
                   acerca de nuestros productos y servicios. Puedes darte de baja de estas comunicaciones en cualquier
                   momento. Para obtener más información sobre cómo darte de baja, así como nuestras prácticas de
@@ -275,17 +266,27 @@ const Contact: React.FC = () => {
 
             <div className="relative z-10">
               {status !== 'success' && (
-                <button
-                  type="button"
-                  onClick={handleSubmit}
-                  disabled={status === 'loading'}
-                  className="w-full mt-5 p-[14px] bg-white text-[14px] font-semibold border-none rounded-[10px] cursor-pointer tracking-[0.5px] transition-all duration-200 hover:bg-[#f6f6f6] active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center"
-                  style={{ color: '#701610' }}
-                >
-                  {status === 'loading' ? (
-                    <><span className="inline-block w-3 h-3 border-2 border-t-[#C18B8A] rounded-full animate-spin mr-2" style={{ borderColor: 'rgba(193, 139, 138, 0.4)', borderTopColor: '#C18B8A' }}></span>Enviando...</>
-                  ) : 'Enviar'}
-                </button>
+                <>
+                  <button
+                    type="button"
+                    onClick={handleSubmit}
+                    disabled={status === 'loading'}
+                    className="w-full mt-3 p-[12px] bg-white text-[14px] font-semibold border-none rounded-[10px] cursor-pointer tracking-[0.5px] transition-all duration-200 hover:bg-[#f6f6f6] active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center"
+                    style={{ color: '#701610' }}
+                  >
+                    {status === 'loading' ? (
+                      <><span className="inline-block w-3 h-3 border-2 border-t-[#C18B8A] rounded-full animate-spin mr-2" style={{ borderColor: 'rgba(193, 139, 138, 0.4)', borderTopColor: '#C18B8A' }}></span>Enviando...</>
+                    ) : 'Enviar'}
+                  </button>
+                  <div className="mt-2">
+                    <TurnstileWidget
+                      action="contact"
+                      onAvailabilityChange={setTurnstileRequired}
+                      onTokenChange={setTurnstileToken}
+                      resetKey={turnstileResetKey}
+                    />
+                  </div>
+                </>
               )}
 
               {status === 'success' && (
@@ -300,8 +301,8 @@ const Contact: React.FC = () => {
                 </div>
               )}
 
-              <div className="mt-5 text-[11px] text-center" style={{ color: 'rgba(255, 255, 255, 0.25)' }}>
-                Protegido por HubSpot reCAPTCHA · <a href="/privacidad" className="hover:underline" style={{ color: 'rgba(193, 139, 138, 0.7)' }}>Política de privacidad</a>
+              <div className="mt-3 text-[11px] text-center" style={{ color: 'rgba(255, 255, 255, 0.25)' }}>
+                Protegido por validación anti-spam · <a href="/privacidad" className="hover:underline" style={{ color: 'rgba(193, 139, 138, 0.7)' }}>Política de privacidad</a>
               </div>
             </div>
           </div>

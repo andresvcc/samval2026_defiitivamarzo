@@ -47,8 +47,8 @@ const SocialPrograms: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-20">
           {projects.map((project, idx) => (
-            <div key={idx} className="neu-raised-lg overflow-hidden group hover:scale-[1.02] transition-all duration-500">
-              <div className="relative h-64 sm:h-56 overflow-hidden" style={{ borderRadius: '28px 28px 0 0' }}>
+            <div key={idx} className="neu-raised-lg overflow-hidden group hover:scale-[1.02] transition-all duration-500 flex flex-col h-full">
+              <div className="relative h-64 sm:h-56 overflow-hidden shrink-0" style={{ borderRadius: '28px 28px 0 0' }}>
                 <img
                   src={project.image}
                   alt={project.title}
@@ -58,15 +58,15 @@ const SocialPrograms: React.FC = () => {
                   {project.category}
                 </div>
               </div>
-              <div className="p-8">
-                <h3 className="text-2xl font-black text-stone-800 mb-4 tracking-tight leading-tight">{project.title}</h3>
-                <p className="text-stone-500 text-lg leading-relaxed mb-8">
+              <div className="p-8 flex flex-col flex-1">
+                <h3 className="text-2xl font-black text-stone-800 mb-4 tracking-tight leading-tight min-h-[64px] flex items-start">{project.title}</h3>
+                <p className="text-stone-500 text-lg leading-relaxed mb-8 flex-1">
                   {project.description}
                 </p>
-                <div className="pt-6" style={{ borderTop: '1px solid #d0c6bb' }}>
-                  <p className="text-sm font-black text-samval-guinda uppercase tracking-widest flex items-center">
-                    <Users size={20} className="mr-3" />
-                    {project.impact}
+                <div className="pt-6 mt-auto" style={{ borderTop: '1px solid #d0c6bb' }}>
+                  <p className="text-sm font-black text-samval-guinda uppercase tracking-widest flex items-start min-h-[44px]">
+                    <Users size={20} className="mr-3 mt-0.5 shrink-0" />
+                    <span className="leading-relaxed">{project.impact}</span>
                   </p>
                 </div>
               </div>

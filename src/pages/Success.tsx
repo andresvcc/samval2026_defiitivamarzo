@@ -1,79 +1,136 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Heart, CheckCircle, ArrowRight } from 'lucide-react';
+import React, { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Heart, CheckCircle, ArrowRight, ArrowLeft, Mail, Code, HandHeart, Home } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import SEO from '../components/SEO';
+import { trackConversion } from '../utils/conversions';
+
+const successTypes = {
+  contacto: {
+    icon: Mail,
+    secondaryPath: '/contacto',
+  },
+  servicios: {
+    icon: Code,
+    secondaryPath: '/servicios-tech#cotizar',
+  },
+  donacion: {
+    icon: Heart,
+    secondaryPath: '/donar',
+  },
+  voluntariado: {
+    icon: HandHeart,
+    secondaryPath: '/voluntariado',
+  },
+} as const;
+
+type SuccessType = keyof typeof successTypes;
+
+const isSuccessType = (value: string): value is SuccessType => value in successTypes;
 
 const Success: React.FC = () => {
   const navigate = useNavigate();
-  const [countdown, setCountdown] = useState(7);
+  const location = useLocation();
+  const { t } = useTranslation();
+  const rawType = new URLSearchParams(location.search).get('tipo') || 'donacion';
+  const type: SuccessType = isSuccessType(rawType) ? rawType : 'donacion';
+  const config = successTypes[type];
+  const Icon = config.icon;
+  const steps = t(`success_page.${type}.steps`, { returnObjects: true }) as string[];
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCountdown((prev) => {
-        if (prev <= 1) {
-          clearInterval(timer);
-          navigate('/');
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [navigate]);
+    trackConversion('thank_you_view', {
+      label: type,
+      pageSection: 'thank_you',
+      thankYouType: type,
+    });
+  }, [type]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center pt-20 pb-24 px-4" style={{ background: '#e0d6cc' }}>
+    <div className="min-h-screen flex items-center justify-center pt-24 pb-20 px-4" style={{ background: '#e0d6cc' }}>
       <SEO 
-        title="Gracias por tu aporte | SAMVAL" 
-        description="Página de agradecimiento por donaciones y suscripciones en SAMVAL." 
+        title={`${t(`success_page.${type}.title`)} | SAMVAL`}
+        description={t(`success_page.${type}.subtitle`)}
       />
       
-      <div className="max-w-xl w-full text-center">
-        <div className="neu-raised-lg p-12 md:p-16 animate-neu-fade-in relative overflow-hidden" style={{ borderRadius: '36px' }}>
-          {/* Decorative Background */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-samval-guinda/10 rounded-full blur-[80px] -mr-32 -mt-32"></div>
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-samval-accent/10 rounded-full blur-[80px] -ml-32 -mb-32"></div>
+      <div className="max-w-3xl w-full">
+        <article className="neu-raised-lg p-6 sm:p-8 md:p-10 animate-neu-fade-in relative overflow-hidden" style={{ borderRadius: '28px' }}>
+          <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-samval-guinda via-samval-light to-stone-800"></div>
 
-          <div className="relative z-10 flex flex-col items-center">
-            {/* Icon Banner */}
-            <div className="inline-flex p-6 neu-pressed mb-10 text-samval-guinda relative" style={{ borderRadius: '28px' }}>
-              <div className="absolute -top-2 -right-2">
-                <CheckCircle className="text-samval-accent bg-[#e0d6cc] rounded-full" size={24} />
+          <div className="relative z-10">
+            <div className="flex flex-col sm:flex-row sm:items-start gap-5 text-left">
+              <div className="inline-flex self-start p-4 neu-pressed text-samval-guinda relative shrink-0" style={{ borderRadius: '22px' }}>
+                <div className="absolute -top-2 -right-2">
+                  <CheckCircle className="text-samval-accent bg-[#e0d6cc] rounded-full" size={22} />
+                </div>
+                <Icon size={42} strokeWidth={1.5} />
               </div>
-              <Heart size={56} strokeWidth={1.5} className="animate-pulse" />
+
+              <div>
+                <div className="text-[11px] font-black uppercase tracking-[0.24em] text-samval-guinda mb-3">
+                  {t(`success_page.${type}.tag`)}
+                </div>
+                <h1 className="text-3xl md:text-5xl font-black text-stone-800 tracking-tighter leading-none">
+                  {t(`success_page.${type}.title`)}
+                </h1>
+                <p className="mt-4 text-lg md:text-xl text-stone-600 font-bold leading-relaxed">
+                  {t(`success_page.${type}.subtitle`)}
+                </p>
+              </div>
             </div>
 
-            {/* Titles */}
-            <h1 className="text-4xl md:text-5xl font-black text-stone-800 mb-6 tracking-tighter leading-none">
-              ¡Infinitas Gracias!
-            </h1>
-            <p className="text-lg md:text-xl text-stone-500 font-medium mb-10 leading-relaxed">
-              Tu aporte ha sido procesado correctamente. Gracias a tu contribución, seguimos transformando vidas a través de la educación STEAM.
+            <p className="mt-7 text-base md:text-lg text-stone-600 leading-relaxed font-medium text-left">
+              {t(`success_page.${type}.description`)}
             </p>
 
-            {/* Redirection Info */}
-            <div className="w-full neu-pressed p-6 mb-10 flex flex-col items-center justify-center space-y-3" style={{ borderRadius: '24px' }}>
-              <div className="text-sm font-bold text-stone-400 uppercase tracking-widest">
-                Redirigiendo al inicio en
-              </div>
-              <div className="text-5xl font-black text-samval-guinda">
-                {countdown}
-              </div>
-              <div className="text-xs text-stone-400 font-medium">segundos</div>
+            <div className="mt-8 border-y border-stone-300/70 py-6">
+              <h2 className="text-sm font-black uppercase tracking-[0.2em] text-stone-500 mb-5">
+                {t(`success_page.${type}.next_title`)}
+              </h2>
+              <ol className="space-y-4">
+                {steps.map((step, index) => (
+                  <li key={step} className="flex gap-4 text-left">
+                    <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-samval-guinda text-xs font-black text-white">
+                      {index + 1}
+                    </span>
+                    <span className="text-sm md:text-base font-bold leading-relaxed text-stone-700">
+                      {step}
+                    </span>
+                  </li>
+                ))}
+              </ol>
             </div>
 
-            {/* Manual Button */}
-            <button 
-              onClick={() => navigate('/')}
-              className="group inline-flex items-center justify-center space-x-3 w-full py-5 text-stone-600 font-black text-sm uppercase tracking-[0.2em] transition-all duration-300 hover:text-stone-800 neu-raised"
-              style={{ borderRadius: '20px' }}
-            >
-              <span>Volver ahora mismo</span>
-              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-            </button>
+            <div className="mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-left">
+              <span className="text-[11px] font-black uppercase tracking-[0.2em] text-stone-400">
+                {t('success_page.common.response_time_label')}
+              </span>
+              <span className="text-sm md:text-base font-black text-samval-guinda">
+                {t(`success_page.${type}.response_time`)}
+              </span>
+            </div>
+
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <button
+                onClick={() => navigate('/')}
+                className="group inline-flex items-center justify-center gap-2 w-full py-4 px-5 text-white font-black text-[11px] uppercase tracking-[0.12em] leading-snug transition-all duration-300 hover:scale-[1.01]"
+                style={{ borderRadius: '16px', background: '#701610' }}
+              >
+                <Home size={16} className="shrink-0" />
+                <span className="min-w-0 text-center">{t('success_page.common.home_action')}</span>
+                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              </button>
+              <button
+                onClick={() => navigate(config.secondaryPath)}
+                className="group inline-flex items-center justify-center gap-2 w-full py-4 px-5 text-stone-600 font-black text-[11px] uppercase tracking-[0.12em] leading-snug transition-all duration-300 hover:text-stone-800 neu-raised-sm"
+                style={{ borderRadius: '16px' }}
+              >
+                <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+                <span className="min-w-0 text-center">{t(`success_page.${type}.secondary_action`)}</span>
+              </button>
+            </div>
           </div>
-        </div>
+        </article>
       </div>
     </div>
   );

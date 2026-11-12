@@ -72,7 +72,7 @@ const SEO: React.FC<SEOProps> = ({ page, title, description }) => {
             "url": "https://samval.org",
             "logo": "https://samval.org/logo.png",
             "description": descContent || "Organización No Gubernamental especializada en robótica etnopertinente y educación STEAM para comunidades indígenas y afrocolombianas en Colombia.",
-            "knowsAbout": ["Robótica Etnopertinente", "Educación STEAM Indígena", "Thymio", "Arhuaco", "Palenquero"],
+            "knowsAbout": ["Robótica Etnopertinente", "Educación STEAM Indígena", "Robots Educativos", "Arhuaco", "Palenquero"],
             "areaServed": "Colombia"
         };
         
