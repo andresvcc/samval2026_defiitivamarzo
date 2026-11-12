@@ -1,199 +1,136 @@
-# 🌟 Fundación SAMVAL - Sitio Web Oficial
+# Samval.org — web institucional
 
-Sitio web oficial de la Fundación SAMVAL para el Desarrollo Social y Tecnológico.
+Fuente vigente de **https://samval.org** y **https://www.samval.org**.
 
-## 🚀 Tecnologías
+| Dato | Ubicación vigente |
+| --- | --- |
+| Repositorio | [andresvcc/samval2026_defiitivamarzo](https://github.com/andresvcc/samval2026_defiitivamarzo) |
+| Rama de trabajo y publicación | `main`, única rama permanente |
+| Checkout del workspace | `/home/tito/samval/frontends/samval-org` |
+| Dokploy | Proyecto `web`, aplicación `samvalprod` |
+| Application ID | `W5qKam62sre2XQVf0q0eu` |
+| Publicación | Push a `main` → build del `Dockerfile` en Dokploy → despliegue → salud |
+| Salud pública | https://samval.org/api/health |
 
-- **React** + **TypeScript**
-- **Vite** - Build tool
-- **Tailwind CSS** - Estilos
-- **React Router** - Navegación
-- **i18next** - Internacionalización (Español/Inglés)
-- **Lucide React** - Iconos
+El frontend usa React, TypeScript, Vite y Tailwind; el servidor Node sirve la
+web, los formularios y los eventos propios. Los idiomas son `es`, `en`, `fr`
+y `de`. La landing de `central.samval.org` tiene su propio repositorio,
+`Samval-colombia/samval-landing-central`.
 
-## 📦 Instalación
+## Empezar un cambio
 
 ```bash
-# Instalar dependencias
-npm install
+cd /home/tito/samval/frontends/samval-org
+git pull --ff-only
+npm ci
+```
 
-# Ejecutar en desarrollo
+En otro equipo, clonar el repositorio de la tabla en una carpeta `samval-org`.
+Usar Node 22, como el `Dockerfile`. Este repositorio es independiente de los
+servicios que administra `samval-local`.
+
+Para desarrollar, abrir dos terminales:
+
+```bash
+# Terminal 1: API en http://127.0.0.1:8080
+npm start
+
+# Terminal 2: Vite en http://127.0.0.1:3001
 npm run dev
+```
 
-# Compilar para producción
+Vite dirige `/api` al backend local. Para comprobar el resultado de producción:
+
+```bash
 npm run build
+npm start
 ```
 
-## 📁 Estructura del Proyecto
+Abrir http://127.0.0.1:8080. `npm run preview` sólo sirve el frontend; la prueba
+de formularios y `/api` requiere el servidor Node.
 
-```
-samval2026/
-├── src/
-│   ├── components/      # Componentes reutilizables
-│   ├── pages/          # Páginas de la aplicación
-│   ├── locales/        # Traducciones (es/en)
-│   ├── services/       # Servicios (Instagram API)
-│   ├── data/           # Datos estáticos
-│   └── App.tsx         # Componente principal
-├── public/             # Archivos estáticos
-│   └── .htaccess       # Configuración Apache
-├── dist/               # Build de producción
-└── package.json        # Dependencias
-```
+## Dónde editar
 
-## 🌐 Despliegue en Dokploy
+| Cambio | Archivos |
+| --- | --- |
+| Páginas y navegación | `src/pages/`, `src/components/`, `src/App.tsx` |
+| Traducciones | `src/locales/{es,en,fr,de}.json` |
+| Estilos | `src/styles.css`, `tailwind.config.cjs`, `postcss.config.cjs` |
+| API y almacenamiento | `server/server.mjs` |
+| Correos de formularios | `server/email-templates/` |
+| Consentimiento y medición | `src/components/CookieConsentBanner.tsx`, `src/utils/` |
+| Compilación y runtime | `Dockerfile`, `vite.config.ts`, `package-lock.json` |
+| Documentación institucional | `docs/reference/` |
 
-La producción de `samval.org` y `www.samval.org` se ejecuta en la aplicación
-`web/samvalprod` de Dokploy. Estas fuentes se recuperaron del checkout de
-producción `430699112b5f78bd09717435f1144815450f3147` antes de aplicar el correctivo.
-El CSS de Tailwind se compila con PostCSS durante el build y se sirve desde el
-mismo dominio, sin depender del script CDN en los dispositivos de los visitantes.
+Tailwind se compila en el build. El HTML carga el CSS versionado de `/assets/`
+desde el mismo dominio. Mantener esta configuración al cambiar el diseño.
 
-El sitio ahora necesita backend para formularios y captura de eventos propios. No debe desplegarse solo como archivos estaticos si se quieren usar formularios.
+## Configuración y datos
 
-1. Compila el proyecto:
-   ```bash
-   npm run build
-   ```
+Copiar `.env.example` a `.env` sólo para configuración local. La producción
+recibe sus valores desde el Environment de Dokploy. Los archivos `.env*`
+privados están ignorados; no guardar ni imprimir secretos.
 
-2. Ejecuta el backend Node:
-   ```bash
-   npm start
-   ```
+| Grupo | Variables |
+| --- | --- |
+| Servidor | `SAMVAL_PORT`, `SAMVAL_STATIC_DIR`, `SAMVAL_DATA_DIR` |
+| Validación y entrega | `SAMVAL_ALLOWED_ORIGINS`, `SAMVAL_IP_HASH_SALT`, `SAMVAL_FORM_WEBHOOK_URL` |
+| Correo Brevo | `BREVO_API_KEY`, `BREVO_SENDER_EMAIL`, `BREVO_SENDER_NAME`, `BREVO_TO_EMAIL`, `BREVO_TO_NAME` |
+| Turnstile | `CLOUDFLARE_TURNSTILE_SITE_KEY`, `CLOUDFLARE_TURNSTILE_SECRET_KEY` |
+| Build del frontend | `VITE_SAMVAL_API_BASE_URL`, `VITE_GA_MEASUREMENT_ID` |
 
-3. En despliegue con Docker, el contenedor sirve el frontend y los endpoints `/api`.
+Las variables `VITE_*` llegan al navegador. Guardar las credenciales del
+servidor en variables sin ese prefijo. Turnstile publica únicamente el site key
+mediante `GET /api/config`. Las notificaciones por Brevo requieren su
+configuración; comprobar entregas sólo con un destinatario de prueba autorizado.
 
-## 📧 Formularios
+El servidor conserva solicitudes y eventos en JSONL dentro de `SAMVAL_DATA_DIR`.
+En producción, `/app/data` usa un volumen existente declarado explícitamente en
+Dokploy. Conservar ese montaje al publicar o revertir. El directorio local
+`data/` está ignorado por Git y por el build Docker.
 
-Los formularios ya no dependen de HubSpot. El frontend envia datos al backend propio:
+Los endpoints de escritura son `POST /api/forms/contact`,
+`POST /api/forms/tech-services`, `POST /api/forms/volunteer` y `POST /api/events`.
+El consentimiento de analítica se gestiona en el banner y en el pie de página.
 
-- `POST /api/forms/contact`
-- `POST /api/forms/tech-services`
-- `POST /api/forms/volunteer`
-- `POST /api/events`
+## Verificar y publicar
 
-El backend guarda registros JSONL en `SAMVAL_DATA_DIR`, aplica validacion basica, rate limit por IP hasheada, honeypot anti-spam y envia notificaciones por Brevo si las variables estan configuradas.
+1. Ejecutar `npm run build` y probar ese build con `npm start`.
+2. Comprobar portada, navegación y Contacto en móvil y tablet; revisar los
+   cuatro idiomas. Anchos de referencia: 360, 390, 768, 820, 1024, 1280, 1440
+   y 1920 píxeles.
+3. Bloquear `cdn.tailwindcss.com` en el navegador: el logo, el diseño y el menú
+   deben seguir funcionando, con cero solicitudes a ese dominio.
+4. Confirmar que el diff contiene sólo el cambio previsto y publicar en `main`.
+   Dokploy ejecuta el build y el despliegue automáticamente.
+5. Comprobar el SHA publicado, el estado `done`, el contenedor `healthy`,
+   `/api/health` y el CSS `/assets/*.css` con respuesta 200 y tipo `text/css`.
+   Revisar también `www.samval.org`.
 
-En desarrollo local, corre Vite y el backend en procesos separados:
-
-```bash
-npm run dev
-SAMVAL_PORT=8080 npm start
-```
-
-Vite proxya `/api` hacia `http://127.0.0.1:8080`.
-
-Variables de entorno relevantes:
-
-```bash
-VITE_SAMVAL_API_BASE_URL=/api
-SAMVAL_PORT=8080
-BREVO_API_KEY=
-BREVO_SENDER_EMAIL=
-BREVO_SENDER_NAME=Fundacion SAMVAL
-BREVO_TO_EMAIL=
-BREVO_TO_NAME=Fundacion SAMVAL
-CLOUDFLARE_TURNSTILE_SITE_KEY=
-CLOUDFLARE_TURNSTILE_SECRET_KEY=
-SAMVAL_DATA_DIR=./data
-SAMVAL_IP_HASH_SALT=change-me
-```
-
-`BREVO_TO_EMAIL` es el destinatario interno que recibe las solicitudes. Si no existe, el backend usa `BREVO_SENDER_EMAIL` como fallback.
-
-### Templates de email
-
-Los templates estan separados por tipo de formulario:
+La inspección habitual usa el MCP `samval-ops`:
 
 ```text
-server/email-templates/contact.mjs
-server/email-templates/techServices.mjs
-server/email-templates/volunteer.mjs
-server/email-templates/shared.mjs
-server/email-templates/index.mjs
+institutional_web_release environment=prod
 ```
 
-Cada template tiene variantes por idioma (`es`, `en`, `fr`, `de`). El frontend envia el idioma actual en el contexto del formulario y el backend usa ese idioma con fallback a espanol.
+Esta consulta sólo lee el origen, compara `main` con el commit desplegado y
+comprueba el contenedor y su volumen. Las credenciales del operador están fuera
+de Git. No se utilizan GitHub Actions ni publicaciones manuales por commit.
 
-### Cloudflare Turnstile
+Para revertir un cambio, hacer `git revert <commit>` en `main`, publicar y
+comprobar el nuevo despliegue por el mismo flujo. Mantener el volumen y el
+Environment. Si falla un build, consultar primero el log del despliegue en
+Dokploy y comprobar qué contenedor sigue sirviendo tráfico.
 
-Los formularios usan Cloudflare Turnstile cuando estas dos variables existen en el backend:
+## Diagnóstico rápido
 
-```bash
-CLOUDFLARE_TURNSTILE_SITE_KEY=
-CLOUDFLARE_TURNSTILE_SECRET_KEY=
-```
+| Síntoma | Primera comprobación |
+| --- | --- |
+| Página sin formato o logo enorme | El HTML debe enlazar `/assets/*.css`; comprobar su respuesta 200 y el build de Tailwind |
+| El push no aparece en la web | Origen y rama de la tabla, último SHA y estado del despliegue en Dokploy |
+| Formularios sin notificación | `/api/health`, `/api/config`, nombres de las variables de Brevo y recibo de entrega |
+| Cambio de estilos sin efecto | Abrir una sesión nueva y comprobar que el HTML referencia el asset versionado del último build |
 
-El frontend obtiene solo el `siteKey` desde `GET /api/config`. El `secretKey` nunca se expone al navegador. El backend valida cada formulario con `POST https://challenges.cloudflare.com/turnstile/v0/siteverify` antes de guardar la solicitud o enviar email por Brevo.
-
-## 📊 Google Analytics y consentimiento
-
-El sitio incluye una banner personalizada de consentimiento para analítica con Google Consent Mode v2. Por defecto, Google Analytics carga con consentimiento denegado y no envía pageviews hasta que el visitante acepta analítica.
-
-Configura el ID de medición de GA4 en una variable de entorno:
-
-```bash
-VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
-```
-
-Si esta variable no existe, el sitio usa por defecto el ID de medición configurado para SAMVAL.
-
-### Eventos GA4 disponibles
-
-Estos eventos se disparan solo cuando el visitante acepta cookies analíticas:
-
-| Evento | Cuándo se envía | Uso recomendado en GA4 |
-| --- | --- | --- |
-| `samval_contact` | Formulario general enviado correctamente | Evento clave |
-| `samval_tech_services` | Formulario de servicios tech enviado correctamente | Evento clave |
-| `samval_whatsapp` | Click en CTA de WhatsApp | Evento clave |
-| `samval_paypal_click` | Click en donación única por PayPal | Evento clave |
-| `samval_paypal_subscription` | Suscripción PayPal aprobada | Evento clave |
-| `samval_volunteer` | Formulario de voluntariado enviado | Evento clave |
-| `samval_thank_you_view` | Vista de la página `/gracias` | Evento clave opcional |
-
-Parámetros útiles añadidos a los eventos:
-
-- `page_path`, `page_location`, `page_title`
-- `site_language`
-- `page_section`
-- `button_location`
-- `form_type`
-- `contact_method`
-- `donation_type`
-- `service_name`
-- `thank_you_type`
-
-### Configuración recomendada en GA4
-
-1. En **Administrar > Eventos**, marca como eventos clave: `samval_contact`, `samval_tech_services`, `samval_whatsapp`, `samval_paypal_click`, `samval_paypal_subscription` y `samval_volunteer`.
-2. En **Administrar > Flujo de datos > Configurar ajustes de etiquetas**, define tráfico interno para excluir visitas propias.
-3. Vincula **Google Search Console** desde **Administrar > Vinculaciones de productos**.
-4. Para campañas externas, usa URLs con UTM, por ejemplo:
-
-```text
-https://www.samval.org/donar?utm_source=instagram&utm_medium=social&utm_campaign=donaciones_2026
-```
-
-5. Valida eventos en **Informes > Tiempo real** después de aceptar cookies analíticas.
-
-## 🎨 Características
-
-- ✅ Diseño responsive
-- ✅ Multiidioma (ES/EN/FR/DE)
-- ✅ SEO optimizado
-- ✅ Integración con Instagram
-- ✅ Banner de consentimiento para Google Analytics
-- ✅ Formularios de contacto
-- ✅ Animaciones suaves
-- ✅ Performance optimizado
-
-## 📄 Licencia
-
-© 2026 Fundación SAMVAL. Todos los derechos reservados.
-
-## 🔗 Enlaces
-
-- **Sitio Web**: [samval.org](https://samval.org)
-- **Instagram**: [@fundacionsamval](https://instagram.com/fundacionsamval)
-- **GitHub**: [jorgejime/samval2026](https://github.com/jorgejime/samval2026)
+La procedencia recuperada y los recibos operativos se conservan privadamente
+en `/home/tito/samval-recovery/institutional-web-source/`. Las versiones
+anteriores del código y de la documentación permanecen en el historial Git.
