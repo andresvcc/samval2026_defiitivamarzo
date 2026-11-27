@@ -115,7 +115,7 @@ privados están ignorados; no guardar ni imprimir secretos.
 | --- | --- |
 | Servidor | `SAMVAL_PORT`, `SAMVAL_STATIC_DIR`, `SAMVAL_DATA_DIR` |
 | Validación y entrega | `SAMVAL_ALLOWED_ORIGINS`, `SAMVAL_IP_HASH_SALT`, `SAMVAL_FORM_WEBHOOK_URL` |
-| Verificación de documentos (`/v`) | `SAMVAL_ADMIN_URL`: Admin (`https://<admin>`), llaves y estado públicos de documentos |
+| Verificación de documentos (`/v`) | `SAMVAL_VERIFIER_NATS_URL`, `SAMVAL_VERIFIER_NATS_PASSWORD` (secreta), `SAMVAL_VERIFIER_NATS_CA_PEM`; `SAMVAL_VERIFY_ORIGINS` sólo fuera de producción |
 | Correo Brevo | `BREVO_API_KEY`, `BREVO_SENDER_EMAIL`, `BREVO_SENDER_NAME`, `BREVO_TO_EMAIL`, `BREVO_TO_NAME` |
 | Turnstile | `CLOUDFLARE_TURNSTILE_SITE_KEY`, `CLOUDFLARE_TURNSTILE_SECRET_KEY` |
 | Build del frontend | `VITE_SAMVAL_API_BASE_URL`, `VITE_GA_MEASUREMENT_ID` |
@@ -135,10 +135,18 @@ Los endpoints de escritura son `POST /api/forms/contact`,
 El consentimiento de analítica se gestiona en el banner y en el pie de página.
 
 `/v` verifica el QR de los documentos de los colegios. El documento viaja en el
-fragmento y se comprueba en el navegador; el servidor sólo consulta la llave
-pública (`GET /api/document-keys/{colegio}/{kid}`) y si el número fue anulado
-o reemplazado (`GET /api/document-status/{colegio}/{número}`). La página lo quita
-de la URL y de la analítica.
+fragmento y la firma se comprueba en el navegador. Tras Turnstile (acción
+`verify`) la página envía a `POST /api/verify` sólo el colegio, el id de la llave
+y la huella de la versión firmada. El servidor (`server/document-verifier.mjs`)
+valida el token y pregunta a Admin por el NATS de gestión con la credencial
+`document-verifier`, que sólo puede publicar
+`samval.document.verification.v1.key` y `.status` y leer su buzón. No guarda
+copia, no registra el documento ni la IP en claro y responde igual si el
+colegio no existe. Límites: 20 consultas por IP cada 10 minutos, cuerpo JSON de
+4 KiB, 2 s de espera al bus, CORS sólo para `samval.org` y `www.samval.org`.
+En Cloudflare se recomienda además una regla de rate limiting para
+`POST /api/verify` (p. ej. 30 por minuto por IP, bloqueo 10 minutos).
+La página quita el fragmento de la URL y de la analítica.
 
 ## Verificar y publicar
 

@@ -1,26 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ShieldCheck, ShieldX, ShieldAlert, Loader2 } from 'lucide-react';
 import SEO from '../components/SEO';
-import { documentRows, verifyDocument } from '../utils/document-verification.mjs';
+import TurnstileWidget from '../components/TurnstileWidget';
+import { documentRows, parseFragment, verifyDocument } from '../utils/document-verification.mjs';
 
-type Outcome = Awaited<ReturnType<typeof verifyDocument>> | { status: 'checking' } | { status: 'missing' };
+type Outcome = Awaited<ReturnType<typeof verifyDocument>> | { status: 'checking' } | { status: 'missing' } | { status: 'challenge' };
+type Answer = { publicKey: string | null; state: null | 'annulled' | 'replaced'; version?: number };
 
 const API_BASE_URL = (import.meta.env.VITE_SAMVAL_API_BASE_URL || '/api').replace(/\/$/, '');
 
-// La llave pública del colegio; null si Samval no la tiene registrada, error si no se pudo consultar.
-const lookupKey = async (school: string, kid: string) => {
-  const response = await fetch(`${API_BASE_URL}/document-keys/${encodeURIComponent(school)}/${encodeURIComponent(kid)}`);
-  if (response.status === 404) return null;
-  if (!response.ok) throw new Error('document_key_unavailable');
-  return ((await response.json()) as { publicKey?: string }).publicKey ?? null;
-};
-
-// Versión vigente y anulación del número; null si no hay novedad, error si no se pudo consultar.
-const lookupStatus = async (school: string, number: string) => {
-  const response = await fetch(`${API_BASE_URL}/document-status/${encodeURIComponent(school)}/${encodeURIComponent(number)}`);
-  if (response.status === 404) return null;
-  if (!response.ok) throw new Error('document_status_unavailable');
-  return (await response.json()) as { version: number; annulled: boolean };
+// Una sola consulta por verificación, con el token de Turnstile: llave pública y estado por huella.
+const lookupWith = (token: string) => async (query: { school: string; kid: string; fingerprint: string }) => {
+  const response = await fetch(`${API_BASE_URL}/verify`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ ...query, token }),
+  });
+  if (!response.ok) throw new Error('document_verifier_unavailable');
+  return (await response.json()) as Answer;
 };
 
 const messages = {
@@ -32,28 +29,52 @@ const messages = {
 
 const VerifyDocument: React.FC = () => {
   const [outcome, setOutcome] = useState<Outcome>({ status: 'checking' });
+  const [challengeKey, setChallengeKey] = useState(0);
+  // El fragmento leído espera aquí el token de Turnstile; `run` descarta respuestas de un QR anterior.
+  const pending = useRef<{ hash: string; run: number } | null>(null);
+  const runs = useRef(0);
 
   useEffect(() => {
-    let current = 0;
-    const check = () => {
-      const hash = window.location.hash, run = ++current;
+    const read = () => {
+      const hash = window.location.hash, run = ++runs.current;
       // El documento sólo vive en el fragmento: se quita de la barra y del historial en cuanto se lee.
       if (hash) window.history.replaceState(window.history.state, '', window.location.pathname);
+      pending.current = null;
       if (!hash) { setOutcome({ status: 'missing' }); return; }
-      setOutcome({ status: 'checking' });
-      void verifyDocument(hash, lookupKey, lookupStatus).then(result => { if (run === current) setOutcome(result); });
+      if (!parseFragment(hash)) { setOutcome({ status: 'invalid' }); return; }
+      pending.current = { hash, run };
+      setOutcome({ status: 'challenge' });
+      setChallengeKey(value => value + 1);
     };
-    check();
+    read();
     // Otro QR abierto en la misma pestaña sólo cambia el fragmento.
-    window.addEventListener('hashchange', check);
-    return () => { current = -1; window.removeEventListener('hashchange', check); };
+    window.addEventListener('hashchange', read);
+    return () => { runs.current = -1; window.removeEventListener('hashchange', read); };
   }, []);
+
+  const consult = useCallback((token: string) => {
+    const job = pending.current;
+    if (!job) return;
+    pending.current = null;
+    setOutcome({ status: 'checking' });
+    void verifyDocument(job.hash, lookupWith(token)).then(result => { if (job.run === runs.current) setOutcome(result); });
+  }, []);
+  const onToken = useCallback((token: string) => { if (token) consult(token); }, [consult]);
+  // Sin Turnstile configurado (desarrollo) se consulta sin token; en producción el servidor lo exige.
+  const onAvailability = useCallback((enabled: boolean) => { if (!enabled) consult(''); }, [consult]);
 
   return (
     <div className="min-h-screen flex items-center justify-center pt-24 pb-20 px-4" style={{ background: '#e0d6cc' }}>
       <SEO title="Verificar documento | SAMVAL" description="Verificación de documentos escolares firmados con Samval." />
       <meta name="robots" content="noindex" />
       <article className="neu-raised-lg w-full max-w-xl p-6 sm:p-8" style={{ borderRadius: '28px' }} aria-live="polite">
+        {outcome.status === 'challenge' && (
+          <>
+            <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-stone-700">Verificar documento</h1>
+            <p className="mt-3 mb-4 text-stone-600 font-medium">Confirme que es una persona para consultar el documento.</p>
+            <TurnstileWidget action="verify" onTokenChange={onToken} onAvailabilityChange={onAvailability} resetKey={challengeKey} />
+          </>
+        )}
         {outcome.status === 'checking' && (
           <div className="flex items-center gap-3 text-stone-600 font-bold">
             <Loader2 className="animate-spin" size={22} aria-hidden="true" /> Verificando el documento…
@@ -64,9 +85,7 @@ const VerifyDocument: React.FC = () => {
             ? { icon: ShieldX, tone: 'text-samval-guinda', title: 'Anulado', text: 'El colegio anuló este documento: ya no tiene validez.' }
             : outcome.replacedBy
               ? { icon: ShieldAlert, tone: 'text-amber-800', title: `Reemplazado por la versión ${outcome.replacedBy}`, text: 'Firmado por el colegio, pero hay una versión más reciente. Pida al colegio la vigente.' }
-              : { icon: ShieldCheck, tone: 'text-emerald-800', title: 'Documento auténtico', text: outcome.statusUnknown
-                ? 'Firmado por el colegio. No se pudo comprobar ahora si fue anulado. Compare estos datos con el papel.'
-                : 'Firmado por el colegio. Compare estos datos con el papel.' };
+              : { icon: ShieldCheck, tone: 'text-emerald-800', title: 'Documento auténtico', text: 'Firmado por el colegio. Compare estos datos con el papel.' };
           const Icon = verdict.icon;
           return (
             <>

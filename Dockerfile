@@ -22,6 +22,9 @@ ENV SAMVAL_DATA_DIR=/app/data
 
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/server ./server
+# Única dependencia de ejecución del servidor: el cliente NATS del verificador de /v (y su dependencia).
+COPY --from=build /app/node_modules/@nats-io ./node_modules/@nats-io
+COPY --from=build /app/node_modules/tweetnacl ./node_modules/tweetnacl
 COPY package.json ./
 
 RUN mkdir -p /app/data

@@ -1,7 +1,7 @@
 // Verifica en el navegador los documentos del agente escolar (formato v1, contrato en
 // samval-school-agent apps/school-agent-actix/docs/issued-documents.md). El QR lleva
 // `{base}#{base64url(resumen canónico)}.{base64url(firma Ed25519)}`; el fragmento nunca sale del
-// navegador: al servidor sólo se le pide la llave pública del colegio (`s`) con ese id (`i`).
+// navegador: al servidor sólo van el colegio (`s`), el id de la llave (`i`) y la huella del documento.
 
 const CONTEXT = new TextEncoder().encode('samval.issued-document.v1\0');
 const B64URL = /^[A-Za-z0-9_-]+$/;
@@ -34,45 +34,46 @@ export function parseFragment(hash) {
   return { canonical, signature, summary };
 }
 
-/**
- * `lookupKey(school, kid)` devuelve la llave pública en base64url, null si Samval no la conoce, o
- * lanza si no se pudo consultar. `lookupStatus(school, number)` devuelve `{version, annulled}`, null
- * si no hay novedad, o lanza. Resultado: `valid` (con el resumen, y `replacedBy` si hay una versión
- * más nueva o `statusUnknown` si no se pudo consultar el estado), `annulled` (con el resumen),
- * `invalid`, `unavailable` (no se pudo consultar ahora) o `unsupported` (el navegador no verifica
- * Ed25519). El estado sólo se consulta tras comprobar la firma.
- * @param {string} hash
- * @param {(school: string, kid: string) => Promise<string | null>} lookupKey
- * @param {(school: string, number: string) => Promise<{ version: number, annulled: boolean } | null>} [lookupStatus]
- * @param {SubtleCrypto} [subtle]
- */
-export async function verifyDocument(hash, lookupKey, lookupStatus = async () => null, subtle = globalThis.crypto?.subtle) {
-  const result = await verifySignature(hash, lookupKey, subtle);
-  if (result.status !== 'valid') return result;
-  let current;
-  try { current = await lookupStatus(result.summary.s, result.summary.n); } catch { return { ...result, statusUnknown: true }; }
-  if (current?.annulled) return { status: 'annulled', summary: result.summary };
-  return current?.version > result.summary.r ? { ...result, replacedBy: current.version } : result;
+const toBase64Url = bytes => btoa(String.fromCharCode(...bytes)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+
+/** Huella de la versión firmada: base64url de los 16 primeros bytes de SHA-256(resumen ‖ firma). */
+export async function documentFingerprint(canonical, signature, subtle = globalThis.crypto?.subtle) {
+  const bytes = new Uint8Array(canonical.length + signature.length);
+  bytes.set(canonical);
+  bytes.set(signature, canonical.length);
+  return toBase64Url(new Uint8Array(await subtle.digest('SHA-256', bytes)).subarray(0, 16));
 }
 
-async function verifySignature(hash, lookupKey, subtle) {
+/**
+ * `lookup({school, kid, fingerprint})` devuelve `{publicKey, state, version}` del verificador
+ * (`publicKey` null si Samval no conoce la llave; `state` null, 'annulled' o 'replaced'), o lanza si
+ * no se pudo consultar. Resultado: `valid` (con el resumen, y `replacedBy` si hay una versión más
+ * nueva), `annulled` (con el resumen), `invalid`, `unavailable` (no se pudo consultar ahora) o
+ * `unsupported` (el navegador no verifica Ed25519). El estado sólo cuenta si la firma es válida.
+ * @param {string} hash
+ * @param {(query: { school: string, kid: string, fingerprint: string }) => Promise<{ publicKey: string | null, state: null | 'annulled' | 'replaced', version?: number }>} lookup
+ * @param {SubtleCrypto} [subtle]
+ */
+export async function verifyDocument(hash, lookup, subtle = globalThis.crypto?.subtle) {
   const parsed = parseFragment(hash);
   if (!parsed) return { status: 'invalid' };
   const { canonical, signature, summary } = parsed;
-  let publicKey;
-  try { publicKey = await lookupKey(summary.s, summary.i); } catch { return { status: 'unavailable' }; }
-  const raw = publicKey ? fromBase64Url(publicKey) : null;
+  let answer;
+  try {
+    answer = await lookup({ school: summary.s, kid: summary.i, fingerprint: await documentFingerprint(canonical, signature, subtle) });
+  } catch { return { status: 'unavailable' }; }
+  const raw = answer?.publicKey ? fromBase64Url(answer.publicKey) : null;
   if (raw?.length !== 32) return { status: 'invalid' };
   const message = new Uint8Array(CONTEXT.length + canonical.length);
   message.set(CONTEXT);
   message.set(canonical, CONTEXT.length);
   let key;
   try { key = await subtle.importKey('raw', raw, { name: 'Ed25519' }, false, ['verify']); } catch { return { status: 'unsupported' }; }
-  try {
-    return await subtle.verify({ name: 'Ed25519' }, key, signature, message) ? { status: 'valid', summary } : { status: 'invalid' };
-  } catch {
-    return { status: 'invalid' };
-  }
+  let valid;
+  try { valid = await subtle.verify({ name: 'Ed25519' }, key, signature, message); } catch { valid = false; }
+  if (!valid) return { status: 'invalid' };
+  if (answer.state === 'annulled') return { status: 'annulled', summary };
+  return answer.state === 'replaced' && answer.version > summary.r ? { status: 'valid', summary, replacedBy: answer.version } : { status: 'valid', summary };
 }
 
 /** Nombre abreviado: el primero completo y las iniciales del resto («Ana M. N. P.»). */

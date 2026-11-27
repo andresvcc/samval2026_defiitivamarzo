@@ -4,7 +4,7 @@ import http from 'node:http';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createStaticSite } from './static-site.mjs';
-import { createDocumentKeyLookup, createDocumentStatusLookup, isDocumentKeyPath, isDocumentStatusPath } from './document-keys.mjs';
+import { createBusRequester, createDocumentVerifier, createVerifyRoute, PUBLIC_ORIGINS } from './document-verifier.mjs';
 import {
   buildFormNotificationEmail,
   buildSubmitterAutoresponderEmail,
@@ -502,10 +502,34 @@ const handleEventCapture = async (req, res) => {
 };
 
 const serveStatic = createStaticSite(STATIC_DIR);
-const lookupDocumentKey = createDocumentKeyLookup({ adminUrl: process.env.SAMVAL_ADMIN_URL });
-const lookupDocumentStatus = createDocumentStatusLookup({ adminUrl: process.env.SAMVAL_ADMIN_URL });
+const PRODUCTION = process.env.NODE_ENV === 'production';
+// Fuera de producción se puede probar /v desde otro origen local (SAMVAL_VERIFY_ORIGINS, separados por comas).
+const VERIFY_ORIGINS = !PRODUCTION && process.env.SAMVAL_VERIFY_ORIGINS
+  ? process.env.SAMVAL_VERIFY_ORIGINS.split(',').map((origin) => origin.trim()).filter(Boolean)
+  : PUBLIC_ORIGINS;
+const verifyDocumentRoute = createVerifyRoute(
+  createDocumentVerifier({
+    request: createBusRequester({
+      url: process.env.SAMVAL_VERIFIER_NATS_URL,
+      password: process.env.SAMVAL_VERIFIER_NATS_PASSWORD,
+      caPem: process.env.SAMVAL_VERIFIER_NATS_CA_PEM?.replace(/\\n/g, '\n'),
+    }),
+    validateToken: validateTurnstileToken,
+    requireChallenge: PRODUCTION,
+    origins: VERIFY_ORIGINS,
+    salt: IP_HASH_SALT,
+  }),
+  { origins: VERIFY_ORIGINS, clientIp: getClientIp }
+);
 
 const server = http.createServer(async (req, res) => {
+  if ((req.url || '').split('?')[0] === '/api/verify') {
+    await verifyDocumentRoute(req, res).catch(() => {
+      if (!res.headersSent) json(res, 500, { ok: false, error: 'Internal server error.' });
+    });
+    return;
+  }
+
   applyCorsHeaders(req, res);
 
   if (req.method === 'OPTIONS') {
@@ -530,13 +554,6 @@ const server = http.createServer(async (req, res) => {
           siteKey: TURNSTILE_ENABLED ? CLOUDFLARE_TURNSTILE_SITE_KEY : '',
         },
       });
-      return;
-    }
-
-    if (req.method === 'GET' && (isDocumentKeyPath(requestUrl.pathname) || isDocumentStatusPath(requestUrl.pathname))) {
-      const lookup = isDocumentKeyPath(requestUrl.pathname) ? lookupDocumentKey : lookupDocumentStatus;
-      const { status, body } = await lookup(requestUrl);
-      json(res, status, body);
       return;
     }
 
