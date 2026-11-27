@@ -10,7 +10,6 @@ export const routeLoaders = {
  '/impacto': () => import('./pages/Impact'),
  '/recursos': () => import('./pages/Resources'),
  '/gracias': () => import('./pages/Success'),
- '/v': () => import('./pages/VerifyDocument'),
 };
 
 export async function prepareRoute(pathname: string){
