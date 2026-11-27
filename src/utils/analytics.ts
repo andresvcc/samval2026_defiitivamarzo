@@ -136,7 +136,8 @@ export const trackPageView = (path: string, options: TrackPageViewOptions = {}) 
 
   window.gtag?.('event', 'page_view', {
     page_path: path,
-    page_location: window.location.href,
+    // /v lleva en el fragmento un documento firmado con datos del estudiante.
+    page_location: window.location.pathname === '/v' ? `${window.location.origin}/v` : window.location.href,
     page_title: document.title,
   });
 
