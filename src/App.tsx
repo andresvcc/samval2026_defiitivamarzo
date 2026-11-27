@@ -15,7 +15,6 @@ const TermsOfUse = lazy(routeLoaders['/terminos']);
 const Impact = lazy(routeLoaders['/impacto']);
 const Resources = lazy(routeLoaders['/recursos']);
 const Success = lazy(routeLoaders['/gracias']);
-const VerifyDocument = lazy(routeLoaders['/v']);
 import { trackPageView } from './utils/analytics';
 
 // ScrollToTop component to reset scroll on route change
@@ -62,7 +61,6 @@ const App: React.FC = () => {
             <Route path="/privacidad" element={<PrivacyPolicy />} />
             <Route path="/terminos" element={<TermsOfUse />} />
             <Route path="/gracias" element={<Success />} />
-            <Route path="/v" element={<VerifyDocument />} />
 
           </Routes></Suspense>
         </main>
@@ -77,8 +75,7 @@ const AnalyticsRouteTracker = () => {
   const { pathname, search, hash } = useLocation();
 
   useEffect(() => {
-    // El fragmento de /v es el documento firmado (datos del estudiante): nunca va a la analítica.
-    trackPageView(pathname === '/v' ? pathname : `${pathname}${search}${hash}`);
+    trackPageView(`${pathname}${search}${hash}`);
   }, [pathname, search, hash]);
 
   return null;
