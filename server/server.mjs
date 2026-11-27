@@ -4,7 +4,7 @@ import http from 'node:http';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createStaticSite } from './static-site.mjs';
-import { createDocumentKeyLookup, isDocumentKeyPath } from './document-keys.mjs';
+import { createDocumentKeyLookup, createDocumentStatusLookup, isDocumentKeyPath, isDocumentStatusPath } from './document-keys.mjs';
 import {
   buildFormNotificationEmail,
   buildSubmitterAutoresponderEmail,
@@ -502,7 +502,8 @@ const handleEventCapture = async (req, res) => {
 };
 
 const serveStatic = createStaticSite(STATIC_DIR);
-const lookupDocumentKey = createDocumentKeyLookup({ adminUrl: process.env.SAMVAL_DOCUMENT_KEYS_URL });
+const lookupDocumentKey = createDocumentKeyLookup({ adminUrl: process.env.SAMVAL_ADMIN_URL });
+const lookupDocumentStatus = createDocumentStatusLookup({ adminUrl: process.env.SAMVAL_ADMIN_URL });
 
 const server = http.createServer(async (req, res) => {
   applyCorsHeaders(req, res);
@@ -532,8 +533,9 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
-    if (req.method === 'GET' && isDocumentKeyPath(requestUrl.pathname)) {
-      const { status, body } = await lookupDocumentKey(requestUrl);
+    if (req.method === 'GET' && (isDocumentKeyPath(requestUrl.pathname) || isDocumentStatusPath(requestUrl.pathname))) {
+      const lookup = isDocumentKeyPath(requestUrl.pathname) ? lookupDocumentKey : lookupDocumentStatus;
+      const { status, body } = await lookup(requestUrl);
       json(res, status, body);
       return;
     }

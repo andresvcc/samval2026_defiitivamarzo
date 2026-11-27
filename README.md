@@ -115,7 +115,7 @@ privados están ignorados; no guardar ni imprimir secretos.
 | --- | --- |
 | Servidor | `SAMVAL_PORT`, `SAMVAL_STATIC_DIR`, `SAMVAL_DATA_DIR` |
 | Validación y entrega | `SAMVAL_ALLOWED_ORIGINS`, `SAMVAL_IP_HASH_SALT`, `SAMVAL_FORM_WEBHOOK_URL` |
-| Verificación de documentos (`/v`) | `SAMVAL_DOCUMENT_KEYS_URL`: registro de llaves de Admin (`https://<admin>/api/document-keys`) |
+| Verificación de documentos (`/v`) | `SAMVAL_ADMIN_URL`: Admin (`https://<admin>`), llaves y estado públicos de documentos |
 | Correo Brevo | `BREVO_API_KEY`, `BREVO_SENDER_EMAIL`, `BREVO_SENDER_NAME`, `BREVO_TO_EMAIL`, `BREVO_TO_NAME` |
 | Turnstile | `CLOUDFLARE_TURNSTILE_SITE_KEY`, `CLOUDFLARE_TURNSTILE_SECRET_KEY` |
 | Build del frontend | `VITE_SAMVAL_API_BASE_URL`, `VITE_GA_MEASUREMENT_ID` |
@@ -136,8 +136,9 @@ El consentimiento de analítica se gestiona en el banner y en el pie de página.
 
 `/v` verifica el QR de los documentos de los colegios. El documento viaja en el
 fragmento y se comprueba en el navegador; el servidor sólo consulta la llave
-pública (`GET /api/document-keys/{colegio}/{kid}`). La página lo quita de la URL
-y de la analítica.
+pública (`GET /api/document-keys/{colegio}/{kid}`) y si el número fue anulado
+o reemplazado (`GET /api/document-status/{colegio}/{número}`). La página lo quita
+de la URL y de la analítica.
 
 ## Verificar y publicar
 

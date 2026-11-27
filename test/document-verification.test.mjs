@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { abbreviatedName, documentRows, maskedIdentity, parseFragment, verifyDocument } from '../src/utils/document-verification.mjs';
-import { createDocumentKeyLookup } from '../server/document-keys.mjs';
+import { createDocumentKeyLookup, createDocumentStatusLookup } from '../server/document-keys.mjs';
 
 // Vector público v1 del agente escolar (apps/school-agent-actix/docs/contracts/issued-document-v1.vector.json).
 const VECTOR = {
@@ -57,7 +57,7 @@ test('the key lookup proxies only well-formed ids to Admin and caches found keys
     if (target.endsWith(`/${VECTOR.kid}`)) return new Response(JSON.stringify({ kid: VECTOR.kid, publicKey: VECTOR.publicKey, validFrom: 1 }));
     return new Response('{"code":"not_found"}', { status: 404 });
   };
-  const lookup = createDocumentKeyLookup({ adminUrl: 'https://admin.example.test/api/document-keys/', fetchImpl });
+  const lookup = createDocumentKeyLookup({ adminUrl: 'https://admin.example.test/', fetchImpl });
   const at = path => new URL(path, 'https://samval.org');
   assert.deepEqual(await lookup(at(`/api/document-keys/${school}/${VECTOR.kid}`)), { status: 200, body: { publicKey: VECTOR.publicKey } });
   assert.deepEqual(await lookup(at(`/api/document-keys/${school}/${VECTOR.kid}`)), { status: 200, body: { publicKey: VECTOR.publicKey } });
@@ -69,4 +69,40 @@ test('the key lookup proxies only well-formed ids to Admin and caches found keys
   assert.equal((await createDocumentKeyLookup({})(at(`/api/document-keys/${school}/${VECTOR.kid}`))).status, 503);
   const down = createDocumentKeyLookup({ adminUrl: 'https://admin.example.test', fetchImpl: async () => { throw new Error('down'); } });
   assert.equal((await down(at(`/api/document-keys/${school}/${VECTOR.kid}`))).status, 503);
+});
+
+test('a valid signature then says annulled or replaced by the current version, asking only after it verifies', async () => {
+  const asked = [];
+  const status = current => async (school, number) => { asked.push(`${school}/${number}`); return current; };
+  assert.deepEqual(await verifyDocument(hash, knownKey, status({ version: 1, annulled: true })),
+    { status: 'annulled', summary: parseFragment(hash).summary });
+  assert.equal((await verifyDocument(hash, knownKey, status({ version: 3, annulled: false }))).replacedBy, 3);
+  const same = await verifyDocument(hash, knownKey, status(null));
+  assert.equal(same.status, 'valid');
+  assert.equal(same.replacedBy, undefined);
+  assert.equal((await verifyDocument(hash, knownKey, async () => { throw new Error('down'); })).statusUnknown, true);
+  assert.deepEqual(asked, ['school-01/CER-2026-0001', 'school-01/CER-2026-0001', 'school-01/CER-2026-0001']);
+  await verifyDocument(`#${VECTOR.tamperedCanonical}.${VECTOR.signature}`, knownKey, status({ version: 1, annulled: true }));
+  assert.equal(asked.length, 3, 'a forged code never queries the status');
+});
+
+test('the status lookup proxies only well-formed numbers to Admin and never caches', async () => {
+  const school = '0b6f6f4e-1d2c-4a5b-8c9d-0e1f2a3b4c5d', calls = [];
+  const fetchImpl = async target => {
+    calls.push(target);
+    if (target.endsWith('/BOL-2026-0003')) return new Response(JSON.stringify({ number: 'BOL-2026-0003', version: 2, annulled: true }));
+    return new Response('{"code":"not_found"}', { status: 404 });
+  };
+  const lookup = createDocumentStatusLookup({ adminUrl: 'https://admin.example.test/', fetchImpl });
+  const at = path => new URL(path, 'https://samval.org');
+  for (let i = 0; i < 2; i++)
+    assert.deepEqual(await lookup(at(`/api/document-status/${school}/BOL-2026-0003`)), { status: 200, body: { version: 2, annulled: true } });
+  assert.deepEqual(calls, Array(2).fill(`https://admin.example.test/api/document-status/${school}/BOL-2026-0003`));
+  assert.equal((await lookup(at(`/api/document-status/${school}/CER-2026-0001`))).status, 404);
+  for (const path of [`/api/document-status/school-01/BOL-2026-0003`, `/api/document-status/${school}/..%2Fx`, `/api/document-status/${school}/Ana`])
+    assert.equal((await lookup(at(path))).status, 404, path);
+  assert.equal(calls.length, 3, 'malformed numbers never reach Admin');
+  assert.equal((await createDocumentStatusLookup({})(at(`/api/document-status/${school}/BOL-2026-0003`))).status, 503);
+  const odd = createDocumentStatusLookup({ adminUrl: 'https://admin.example.test', fetchImpl: async () => new Response('{"number":"X","version":2,"annulled":true}') });
+  assert.equal((await odd(at(`/api/document-status/${school}/BOL-2026-0003`))).status, 503);
 });

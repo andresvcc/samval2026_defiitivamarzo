@@ -36,10 +36,26 @@ export function parseFragment(hash) {
 
 /**
  * `lookupKey(school, kid)` devuelve la llave pública en base64url, null si Samval no la conoce, o
- * lanza si no se pudo consultar. Resultado: `valid` (con el resumen), `invalid`, `unavailable`
- * (no se pudo consultar ahora) o `unsupported` (el navegador no verifica Ed25519).
+ * lanza si no se pudo consultar. `lookupStatus(school, number)` devuelve `{version, annulled}`, null
+ * si no hay novedad, o lanza. Resultado: `valid` (con el resumen, y `replacedBy` si hay una versión
+ * más nueva o `statusUnknown` si no se pudo consultar el estado), `annulled` (con el resumen),
+ * `invalid`, `unavailable` (no se pudo consultar ahora) o `unsupported` (el navegador no verifica
+ * Ed25519). El estado sólo se consulta tras comprobar la firma.
+ * @param {string} hash
+ * @param {(school: string, kid: string) => Promise<string | null>} lookupKey
+ * @param {(school: string, number: string) => Promise<{ version: number, annulled: boolean } | null>} [lookupStatus]
+ * @param {SubtleCrypto} [subtle]
  */
-export async function verifyDocument(hash, lookupKey, subtle = globalThis.crypto?.subtle) {
+export async function verifyDocument(hash, lookupKey, lookupStatus = async () => null, subtle = globalThis.crypto?.subtle) {
+  const result = await verifySignature(hash, lookupKey, subtle);
+  if (result.status !== 'valid') return result;
+  let current;
+  try { current = await lookupStatus(result.summary.s, result.summary.n); } catch { return { ...result, statusUnknown: true }; }
+  if (current?.annulled) return { status: 'annulled', summary: result.summary };
+  return current?.version > result.summary.r ? { ...result, replacedBy: current.version } : result;
+}
+
+async function verifySignature(hash, lookupKey, subtle) {
   const parsed = parseFragment(hash);
   if (!parsed) return { status: 'invalid' };
   const { canonical, signature, summary } = parsed;

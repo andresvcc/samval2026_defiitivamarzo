@@ -15,6 +15,14 @@ const lookupKey = async (school: string, kid: string) => {
   return ((await response.json()) as { publicKey?: string }).publicKey ?? null;
 };
 
+// Versión vigente y anulación del número; null si no hay novedad, error si no se pudo consultar.
+const lookupStatus = async (school: string, number: string) => {
+  const response = await fetch(`${API_BASE_URL}/document-status/${encodeURIComponent(school)}/${encodeURIComponent(number)}`);
+  if (response.status === 404) return null;
+  if (!response.ok) throw new Error('document_status_unavailable');
+  return (await response.json()) as { version: number; annulled: boolean };
+};
+
 const messages = {
   invalid: { icon: ShieldX, tone: 'text-samval-guinda', title: 'No válido', text: 'Este código no corresponde a un documento firmado por un colegio registrado en Samval, o el documento fue alterado.' },
   unavailable: { icon: ShieldAlert, tone: 'text-stone-600', title: 'No se pudo comprobar ahora', text: 'Intente de nuevo en unos minutos. Esto no indica que el documento sea falso.' },
@@ -33,7 +41,7 @@ const VerifyDocument: React.FC = () => {
       if (hash) window.history.replaceState(window.history.state, '', window.location.pathname);
       if (!hash) { setOutcome({ status: 'missing' }); return; }
       setOutcome({ status: 'checking' });
-      void verifyDocument(hash, lookupKey).then(result => { if (run === current) setOutcome(result); });
+      void verifyDocument(hash, lookupKey, lookupStatus).then(result => { if (run === current) setOutcome(result); });
     };
     check();
     // Otro QR abierto en la misma pestaña sólo cambia el fragmento.
@@ -51,23 +59,33 @@ const VerifyDocument: React.FC = () => {
             <Loader2 className="animate-spin" size={22} aria-hidden="true" /> Verificando el documento…
           </div>
         )}
-        {outcome.status === 'valid' && (
-          <>
-            <div className="flex items-center gap-3 text-emerald-800">
-              <ShieldCheck size={36} aria-hidden="true" />
-              <h1 className="text-2xl sm:text-3xl font-black tracking-tight">Documento auténtico</h1>
-            </div>
-            <p className="mt-3 text-stone-600 font-medium">Firmado por el colegio. Compare estos datos con el papel.</p>
-            <dl className="mt-6 divide-y divide-stone-300/70 border-y border-stone-300/70">
-              {documentRows(outcome.summary).map(([label, value]) => (
-                <div key={label} className="grid grid-cols-[8.5rem_1fr] gap-3 py-2.5 text-sm sm:text-base">
-                  <dt className="font-black text-stone-500">{label}</dt>
-                  <dd className="font-bold text-stone-800 break-words">{value}</dd>
-                </div>
-              ))}
-            </dl>
-          </>
-        )}
+        {(outcome.status === 'valid' || outcome.status === 'annulled') && (() => {
+          const verdict = outcome.status === 'annulled'
+            ? { icon: ShieldX, tone: 'text-samval-guinda', title: 'Anulado', text: 'El colegio anuló este documento: ya no tiene validez.' }
+            : outcome.replacedBy
+              ? { icon: ShieldAlert, tone: 'text-amber-800', title: `Reemplazado por la versión ${outcome.replacedBy}`, text: 'Firmado por el colegio, pero hay una versión más reciente. Pida al colegio la vigente.' }
+              : { icon: ShieldCheck, tone: 'text-emerald-800', title: 'Documento auténtico', text: outcome.statusUnknown
+                ? 'Firmado por el colegio. No se pudo comprobar ahora si fue anulado. Compare estos datos con el papel.'
+                : 'Firmado por el colegio. Compare estos datos con el papel.' };
+          const Icon = verdict.icon;
+          return (
+            <>
+              <div className={`flex items-center gap-3 ${verdict.tone}`}>
+                <Icon size={36} aria-hidden="true" />
+                <h1 className="text-2xl sm:text-3xl font-black tracking-tight">{verdict.title}</h1>
+              </div>
+              <p className="mt-3 text-stone-600 font-medium">{verdict.text}</p>
+              <dl className="mt-6 divide-y divide-stone-300/70 border-y border-stone-300/70">
+                {documentRows(outcome.summary).map(([label, value]) => (
+                  <div key={label} className="grid grid-cols-[8.5rem_1fr] gap-3 py-2.5 text-sm sm:text-base">
+                    <dt className="font-black text-stone-500">{label}</dt>
+                    <dd className="font-bold text-stone-800 break-words">{value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </>
+          );
+        })()}
         {outcome.status in messages && (() => {
           const { icon: Icon, tone, title, text } = messages[outcome.status as keyof typeof messages];
           return (
